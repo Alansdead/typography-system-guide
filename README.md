@@ -22,4 +22,4 @@ A comprehensive interactive guide for implementing accessible typography in mobi
 
 ## Live Demo
 
-Visit the live demo at: https://Alansdead.github.io/typography-system-guide/
+Visit the live demo at:https://alansdead.github.io/typography-system-guidepography-system-guide/
