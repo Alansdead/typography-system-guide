@@ -456,6 +456,233 @@ tr:nth-child(even) {
 .platform-badge.android {
     background-color: var(--android-highlight-bg);
     color: var(--android-color);
+}/* Enhanced Accessibility Section Styles */
+
+/* WCAG Section */
+.wcag-section {
+    margin: 32px 0;
+    padding: 24px;
+    border: 2px solid #0070ff;
+    border-radius: 8px;
+    background-color: #f8f9ff;
+}
+
+.wcag-interpretation {
+    margin: 20px 0;
+    padding: 16px;
+    background-color: white;
+    border-radius: 6px;
+    border-left: 4px solid #28a745;
+}
+
+.assistive-tech-clarification {
+    margin: 24px 0;
+}
+
+.feature-card.acceptable {
+    border-left: 4px solid #28a745;
+    background-color: #f8fff9;
+}
+
+.feature-card.not-sufficient {
+    border-left: 4px solid #dc3545;
+    background-color: #fff8f8;
+}
+
+/* Scaling Research Tables */
+.scaling-research {
+    margin: 40px 0;
+    padding: 24px;
+    background-color: #f5f7f9;
+    border-radius: 8px;
+}
+
+.scaling-table {
+    margin: 20px 0;
+    font-size: 14px;
+}
+
+.scaling-table th {
+    background-color: #e9ecef;
+    font-weight: 600;
+    text-align: center;
+}
+
+.scaling-table td:nth-child(4),
+.scaling-table td:nth-child(5) {
+    text-align: center;
+    font-weight: 600;
+}
+
+.insight-box {
+    margin: 20px 0;
+    padding: 16px;
+    background-color: #fff3cd;
+    border: 1px solid #ffeaa7;
+    border-radius: 6px;
+    border-left: 4px solid #ffc107;
+}
+
+.insight-box h5 {
+    margin-bottom: 8px;
+    color: #856404;
+}
+
+/* Implementation Requirements */
+.implementation-requirements {
+    margin: 40px 0;
+}
+
+.requirement-list {
+    display: grid;
+    gap: 20px;
+    margin: 16px 0;
+}
+
+.requirement-item {
+    padding: 20px;
+    border: 1px solid var(--divider-color);
+    border-radius: 6px;
+    background-color: white;
+}
+
+.requirement-item h5 {
+    margin-bottom: 12px;
+    color: #28a745;
+    font-size: 16px;
+}
+
+/* Testing Guidelines */
+.testing-guidelines {
+    margin: 40px 0;
+    padding: 24px;
+    background-color: #fff9e6;
+    border-radius: 8px;
+    border-left: 4px solid #ffc107;
+}
+
+.checklist {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin: 20px 0;
+}
+
+@media (max-width: 768px) {
+    .checklist {
+        grid-template-columns: 1fr;
+    }
+}
+
+.checklist-section {
+    padding: 16px;
+    background-color: white;
+    border-radius: 6px;
+    border: 1px solid var(--divider-color);
+}
+
+.checklist-section h5 {
+    margin-bottom: 16px;
+    color: var(--ios-color);
+}
+
+.checklist-section label {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.checklist-section input[type="checkbox"] {
+    margin-right: 12px;
+    margin-top: 2px;
+    flex-shrink: 0;
+}
+
+/* WebView Section */
+.webview-section {
+    margin: 40px 0;
+    padding: 24px;
+    background-color: #f0fff8;
+    border-radius: 8px;
+    border-left: 4px solid var(--android-color);
+}
+
+.webview-requirements {
+    margin: 20px 0;
+}
+
+.webview-requirements h4 {
+    color: var(--android-color);
+    margin-bottom: 12px;
+}
+
+/* Best Practices Summary */
+.best-practices-summary {
+    margin: 40px 0;
+}
+
+.practices-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin: 20px 0;
+}
+
+.practice-card {
+    padding: 20px;
+    background-color: white;
+    border: 1px solid var(--divider-color);
+    border-radius: 6px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.practice-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.practice-card h4 {
+    color: var(--ios-color);
+    margin-bottom: 16px;
+    font-size: 18px;
+}
+
+.practice-card ul {
+    margin: 0;
+    padding-left: 20px;
+}
+
+.practice-card li {
+    margin-bottom: 8px;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .wcag-section,
+    .scaling-research,
+    .testing-guidelines,
+    .webview-section {
+        padding: 16px;
+        margin: 24px 0;
+    }
+    
+    .practices-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .scaling-table {
+        font-size: 12px;
+    }
+    
+    .scaling-table th,
+    .scaling-table td {
+        padding: 8px 4px;
+    }
 }
 
 /* Recommendations */
