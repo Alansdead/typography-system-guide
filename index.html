@@ -1,815 +1,454 @@
+<!DOCTYPE html>
 <html lang="en">
-
 <head>
-   <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Typography System Guide for iOS and Android - 2025</title>
-   <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Typography System Guide for iOS and Android - 2025</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
-   <div class="container">
-      <h1>Typography System Guide for iOS and Android</h1>
-      <p style="text-align: center; margin-bottom: 40px; color: var(--secondary-text);">Comprehensive guide for implementing accessible typography in mobile apps - 2025 Edition</p>
+    <div class="container">
+        <h1>Typography System Guide for iOS and Android</h1>
+        <p style="text-align: center; margin-bottom: 2.5rem; color: var(--secondary-text);">
+            Comprehensive guide for implementing accessible typography in mobile apps - 2025 Edition
+        </p>
 
-      <div class="tab-container">
-         <div class="tab active" data-tab="ios">iOS Typography</div>
-         <div class="tab" data-tab="android">Android Typography</div>
-         <div class="tab" data-tab="accessibility">Accessibility Guidelines</div>
-      </div>
+        <div class="tab-container" role="tablist" aria-label="Typography Platform Tabs">
+            <button class="tab active" role="tab" aria-selected="true" aria-controls="ios-content" id="tab-ios" tabindex="0" data-tab="ios">iOS Typography</button>
+            <button class="tab" role="tab" aria-selected="false" aria-controls="android-content" id="tab-android" tabindex="-1" data-tab="android">Android Typography</button>
+            <button class="tab" role="tab" aria-selected="false" aria-controls="accessibility-content" id="tab-accessibility" tabindex="-1" data-tab="accessibility">Accessibility Guidelines</button>
+        </div>
 
-      <!-- iOS Content -->
-      <div class="tab-content active" id="ios-content">
-         <div class="intro">
-            <h3>iOS Typography System</h3>
-            <p>iOS uses the San Francisco (SF) font family, which automatically switches between SF Pro Text for smaller sizes (≤ 19pt) and SF Pro Display for larger sizes (≥ 20pt). The system also provides Dynamic Type support for accessibility, allowing text to scale according to user preferences.</p>
-         </div>
-
-         <h3>iOS Default Typography Styles</h3>
-         <p>These are the standard text styles recommended by Apple's Human Interface Guidelines for iOS applications:</p>
-
-         <div class="typography-grid">
-            <div class="type-card">
-               <div class="type-example">
-                  <div class="ios-type-large-title">Large Title</div>
-               </div>
-               <div class="type-meta">
-                  <div><span class="type-label">Font:</span> SF Pro Display</div>
-                  <div><span class="type-label">Weight:</span> Bold</div>
-                  <div><span class="type-label">Size:</span> 36pt</div>
-                  <div><span class="type-label">Line height:</span> 48pt</div>
-                  <div><span class="type-label">Letter spacing:</span> 0</div>
-                  <div><span class="type-label">Case:</span> Original</div>
-               </div>
+        <!-- iOS Content -->
+        <div class="tab-content active" id="ios-content" role="tabpanel" aria-labelledby="tab-ios" tabindex="0">
+            <div class="intro">
+                <h3>iOS Typography System</h3>
+                <p>iOS uses the San Francisco (SF) font family, which automatically switches between SF Pro Text for smaller sizes (&le; 19pt) and SF Pro Display for larger sizes (&ge; 20pt). The system font is designed for clarity and legibility on Apple devices, and supports dynamic scaling for accessibility.</p>
             </div>
 
-            <div class="type-card">
-               <div class="type-example">
-                  <div class="ios-type-title-1">Title 1</div>
-               </div>
-               <div class="type-meta">
-                  <div><span class="type-label">Font:</span> SF Pro Display</div>
-                  <div><span class="type-label">Weight:</span> Bold</div>
-                  <div><span class="type-label">Size:</span> 24pt</div>
-                  <div><span class="type-label">Line height:</span> 32pt</div>
-                  <div><span class="type-label">Letter spacing:</span> 0</div>
-                  <div><span class="type-label">Case:</span> Original</div>
-               </div>
+            <h3>iOS Default Typography Styles</h3>
+            <p>These are the standard text styles recommended by Apple's Human Interface Guidelines for iOS applications:</p>
+
+            <div class="typography-grid">
+                <!-- All iOS type cards (see previous answer for full card markup) -->
+                <div class="type-card">
+                    <div class="type-example"><div class="ios-type-large-title">Large Title</div></div>
+                    <div class="type-meta">
+                        <div><span class="type-label">Font:</span> SF Pro Display</div>
+                        <div><span class="type-label">Weight:</span> Bold</div>
+                        <div><span class="type-label">Size:</span> 36pt</div>
+                        <div><span class="type-label">Line height:</span> 48pt</div>
+                        <div><span class="type-label">Letter spacing:</span> 0</div>
+                        <div><span class="type-label">Case:</span> Original</div>
+                    </div>
+                </div>
+                <!-- ...repeat for all iOS styles... -->
+                <div class="type-card"><div class="type-example"><div class="ios-type-title-1">Title 1</div></div>
+                    <div class="type-meta"><div><span class="type-label">Font:</span> SF Pro Display</div><div><span class="type-label">Weight:</span> Bold</div><div><span class="type-label">Size:</span> 24pt</div><div><span class="type-label">Line height:</span> 32pt</div><div><span class="type-label">Letter spacing:</span> 0</div><div><span class="type-label">Case:</span> Original</div></div>
+                </div>
+                <div class="type-card"><div class="type-example"><div class="ios-type-title-2">Title 2</div></div>
+                    <div class="type-meta"><div><span class="type-label">Font:</span> SF Pro Display</div><div><span class="type-label">Weight:</span> Regular</div><div><span class="type-label">Size:</span> 24pt</div><div><span class="type-label">Line height:</span> 32pt</div><div><span class="type-label">Letter spacing:</span> 0</div><div><span class="type-label">Case:</span> Original</div></div>
+                </div>
+                <div class="type-card"><div class="type-example"><div class="ios-type-title-3">Title 3</div></div>
+                    <div class="type-meta"><div><span class="type-label">Font:</span> SF Pro Display</div><div><span class="type-label">Weight:</span> Bold</div><div><span class="type-label">Size:</span> 18pt</div><div><span class="type-label">Line height:</span> 24pt</div><div><span class="type-label">Letter spacing:</span> 0</div><div><span class="type-label">Case:</span> Original</div></div>
+                </div>
+                <div class="type-card"><div class="type-example"><div class="ios-type-headline">Headline</div></div>
+                    <div class="type-meta"><div><span class="type-label">Font:</span> SF Pro Text</div><div><span class="type-label">Weight:</span> Regular</div><div><span class="type-label">Size:</span> 16pt</div><div><span class="type-label">Line height:</span> 32pt</div><div><span class="type-label">Letter spacing:</span> 0</div><div><span class="type-label">Case:</span> Original</div></div>
+                </div>
+                <div class="type-card"><div class="type-example"><div class="ios-type-body">Body</div></div>
+                    <div class="type-meta"><div><span class="type-label">Font:</span> SF Pro Text</div><div><span class="type-label">Weight:</span> Medium</div><div><span class="type-label">Size:</span> 17pt</div><div><span class="type-label">Line height:</span> 24pt</div><div><span class="type-label">Letter spacing:</span> 0</div><div><span class="type-label">Case:</span> Original</div></div>
+                </div>
+                <div class="type-card"><div class="type-example"><div class="ios-type-callout">Callout</div></div>
+                    <div class="type-meta"><div><span class="type-label">Font:</span> SF Pro Text</div><div><span class="type-label">Weight:</span> Regular</div><div><span class="type-label">Size:</span> 16pt</div><div><span class="type-label">Line height:</span> 28pt</div><div><span class="type-label">Letter spacing:</span> 0</div><div><span class="type-label">Case:</span> Original</div></div>
+                </div>
+                <div class="type-card"><div class="type-example"><div class="ios-type-footnote">Footnote</div></div>
+                    <div class="type-meta"><div><span class="type-label">Font:</span> SF Pro Text</div><div><span class="type-label">Weight:</span> Bold</div><div><span class="type-label">Size:</span> 14pt</div><div><span class="type-label">Line height:</span> 24pt</div><div><span class="type-label">Letter spacing:</span> 1.5pt</div><div><span class="type-label">Case:</span> Uppercase</div></div>
+                </div>
+                <div class="type-card"><div class="type-example"><div class="ios-type-subhead">Subhead</div></div>
+                    <div class="type-meta"><div><span class="type-label">Font:</span> SF Pro Text</div><div><span class="type-label">Weight:</span> Bold</div><div><span class="type-label">Size:</span> 12pt</div><div><span class="type-label">Line height:</span> 16pt</div><div><span class="type-label">Letter spacing:</span> 1.5pt</div><div><span class="type-label">Case:</span> Uppercase</div></div>
+                </div>
+                <div class="type-card"><div class="type-example"><div class="ios-type-caption-1">Caption 1</div></div>
+                    <div class="type-meta"><div><span class="type-label">Font:</span> SF Pro Text</div><div><span class="type-label">Weight:</span> Medium</div><div><span class="type-label">Size:</span> 12pt</div><div><span class="type-label">Line height:</span> 20pt</div><div><span class="type-label">Letter spacing:</span> 0</div><div><span class="type-label">Case:</span> Original</div></div>
+                </div>
+                <div class="type-card"><div class="type-example"><div class="ios-type-caption-2">Caption 2</div></div>
+                    <div class="type-meta"><div><span class="type-label">Font:</span> SF Pro Text</div><div><span class="type-label">Weight:</span> Regular</div><div><span class="type-label">Size:</span> 10pt</div><div><span class="type-label">Line height:</span> 16pt</div><div><span class="type-label">Letter spacing:</span> 0</div><div><span class="type-label">Case:</span> Original</div></div>
+                </div>
             </div>
 
-            <div class="type-card">
-               <div class="type-example">
-                  <div class="ios-type-title-2">Title 2</div>
-               </div>
-               <div class="type-meta">
-                  <div><span class="type-label">Font:</span> SF Pro Display</div>
-                  <div><span class="type-label">Weight:</span> Regular</div>
-                  <div><span class="type-label">Size:</span> 24pt</div>
-                  <div><span class="type-label">Line height:</span> 32pt</div>
-                  <div><span class="type-label">Letter spacing:</span> 0</div>
-                  <div><span class="type-label">Case:</span> Original</div>
-               </div>
+            <h3>Dynamic Type in iOS</h3>
+            <p>Apple's Dynamic Type allows users to choose their preferred text size across the iOS system. Implementing Dynamic Type in your app ensures that your text scales appropriately with the user's settings.</p>
+            <div class="type-scaling-example">
+                <h4>iOS Dynamic Type Example</h4>
+                <div class="scale-controls">
+                    <div>Text Size:</div>
+                    <input type="range" min="0" max="6" value="3" class="scale-slider" id="ios-scale-slider">
+                    <div class="scale-value" id="ios-scale-value">Large (Default)</div>
+                </div>
+                <div class="dynamic-type-example">
+                    <div class="dynamic-type-row"><div class="dynamic-type-name">Large Title</div><div class="scale-example ios-large-title">The quick brown fox jumps over the lazy dog</div></div>
+                    <div class="dynamic-type-row"><div class="dynamic-type-name">Title 1</div><div class="scale-example ios-title-1">The quick brown fox jumps over the lazy dog</div></div>
+                    <div class="dynamic-type-row"><div class="dynamic-type-name">Body</div><div class="scale-example ios-body">The quick brown fox jumps over the lazy dog</div></div>
+                    <div class="dynamic-type-row"><div class="dynamic-type-name">Caption 1</div><div class="scale-example ios-caption-1">The quick brown fox jumps over the lazy dog</div></div>
+                </div>
             </div>
-
-            <div class="type-card">
-               <div class="type-example">
-                  <div class="ios-type-title-3">Title 3</div>
-               </div>
-               <div class="type-meta">
-                  <div><span class="type-label">Font:</span> SF Pro Display</div>
-                  <div><span class="type-label">Weight:</span> Bold</div>
-                  <div><span class="type-label">Size:</span> 18pt</div>
-                  <div><span class="type-label">Line height:</span> 24pt</div>
-                  <div><span class="type-label">Letter spacing:</span> 0</div>
-                  <div><span class="type-label">Case:</span> Original</div>
-               </div>
-            </div>
-
-            <div class="type-card">
-               <div class="type-example">
-                  <div class="ios-type-headline">Headline</div>
-               </div>
-               <div class="type-meta">
-                  <div><span class="type-label">Font:</span> SF Pro Text</div>
-                  <div><span class="type-label">Weight:</span> Regular</div>
-                  <div><span class="type-label">Size:</span> 16pt</div>
-                  <div><span class="type-label">Line height:</span> 32pt</div>
-                  <div><span class="type-label">Letter spacing:</span> 0</div>
-                  <div><span class="type-label">Case:</span> Original</div>
-               </div>
-            </div>
-
-            <div class="type-card">
-               <div class="type-example">
-                  <div class="ios-type-body">Body</div>
-               </div>
-               <div class="type-meta">
-                  <div><span class="type-label">Font:</span> SF Pro Text</div>
-                  <div><span class="type-label">Weight:</span> Medium</div>
-                  <div><span class="type-label">Size:</span> 17pt</div>
-                  <div><span class="type-label">Line height:</span> 24pt</div>
-                  <div><span class="type-label">Letter spacing:</span> 0</div>
-                  <div><span class="type-label">Case:</span> Original</div>
-               </div>
-            </div>
-
-            <div class="type-card">
-               <div class="type-example">
-                  <div class="ios-type-callout">Callout</div>
-               </div>
-               <div class="type-meta">
-                  <div><span class="type-label">Font:</span> SF Pro Text</div>
-                  <div><span class="type-label">Weight:</span> Regular</div>
-                  <div><span class="type-label">Size:</span> 16pt</div>
-                  <div><span class="type-label">Line height:</span> 28pt</div>
-                  <div><span class="type-label">Letter spacing:</span> 0</div>
-                  <div><span class="type-label">Case:</span> Original</div>
-               </div>
-            </div>
-
-            <div class="type-card">
-               <div class="type-example">
-                  <div class="ios-type-footnote">Footnote</div>
-               </div>
-               <div class="type-meta">
-                  <div><span class="type-label">Font:</span> SF Pro Text</div>
-                  <div><span class="type-label">Weight:</span> Bold</div>
-                  <div><span class="type-label">Size:</span> 14pt</div>
-                  <div><span class="type-label">Line height:</span> 24pt</div>
-                  <div><span class="type-label">Letter spacing:</span> 1.5pt</div>
-                  <div><span class="type-label">Case:</span> Uppercase</div>
-               </div>
-            </div>
-
-            <div class="type-card">
-               <div class="type-example">
-                  <div class="ios-type-subhead">Subhead</div>
-               </div>
-               <div class="type-meta">
-                  <div><span class="type-label">Font:</span> SF Pro Text</div>
-                  <div><span class="type-label">Weight:</span> Bold</div>
-                  <div><span class="type-label">Size:</span> 12pt</div>
-                  <div><span class="type-label">Line height:</span> 16pt</div>
-                  <div><span class="type-label">Letter spacing:</span> 1.5pt</div>
-                  <div><span class="type-label">Case:</span> Uppercase</div>
-               </div>
-            </div>
-
-            <div class="type-card">
-               <div class="type-example">
-                  <div class="ios-type-caption-1">Caption 1</div>
-               </div>
-               <div class="type-meta">
-                  <div><span class="type-label">Font:</span> SF Pro Text</div>
-                  <div><span class="type-label">Weight:</span> Medium</div>
-                  <div><span class="type-label">Size:</span> 12pt</div>
-                  <div><span class="type-label">Line height:</span> 20pt</div>
-                  <div><span class="type-label">Letter spacing:</span> 0</div>
-                  <div><span class="type-label">Case:</span> Original</div>
-               </div>
-            </div>
-
-            <div class="type-card">
-               <div class="type-example">
-                  <div class="ios-type-caption-2">Caption 2</div>
-               </div>
-               <div class="type-meta">
-                  <div><span class="type-label">Font:</span> SF Pro Text</div>
-                  <div><span class="type-label">Weight:</span> Regular</div>
-                  <div><span class="type-label">Size:</span> 10pt</div>
-                  <div><span class="type-label">Line height:</span> 16pt</div>
-                  <div><span class="type-label">Letter spacing:</span> 0</div>
-                  <div><span class="type-label">Case:</span> Original</div>
-               </div>
-            </div>
-         </div>
-
-         <h3>Dynamic Type in iOS</h3>
-         <p>Apple's Dynamic Type allows users to choose their preferred text size across the iOS system. Implementing Dynamic Type in your app ensures that your text scales appropriately with the user's system settings.</p>
-
-         <div class="type-scaling-example">
-            <h4>iOS Dynamic Type Example</h4>
-            <div class="scale-controls">
-               <div>Text Size:</div>
-               <input type="range" min="0" max="6" value="3" class="scale-slider" id="ios-scale-slider">
-               <div class="scale-value" id="ios-scale-value">Default</div>
-            </div>
-
-            <div class="dynamic-type-example">
-               <div class="dynamic-type-row">
-                  <div class="dynamic-type-name">Large Title</div>
-                  <div class="scale-example ios-large-title">The quick brown fox jumps over the lazy dog</div>
-               </div>
-               <div class="dynamic-type-row">
-                  <div class="dynamic-type-name">Title 1</div>
-                  <div class="scale-example ios-title-1">The quick brown fox jumps over the lazy dog</div>
-               </div>
-               <div class="dynamic-type-row">
-                  <div class="dynamic-type-name">Body</div>
-                  <div class="scale-example ios-body">The quick brown fox jumps over the lazy dog</div>
-               </div>
-               <div class="dynamic-type-row">
-                  <div class="dynamic-type-name">Caption 1</div>
-                  <div class="scale-example ios-caption-1">The quick brown fox jumps over the lazy dog</div>
-               </div>
-            </div>
-         </div>
-
-         <h3>Implementation Guidelines for iOS</h3>
-         <p>Here are the best practices to properly implement typography in iOS applications:</p>
-
-         <ul>
-            <li>Use the San Francisco font for a native iOS look and feel</li>
-            <li>Implement Dynamic Type for accessibility compliance</li>
-            <li>Set the minimum font size for body text to 17pt for readability</li>
-            <li>For custom fonts, use UIFontMetrics to scale appropriately with Dynamic Type</li>
-            <li>Test your app with all Dynamic Type size settings to ensure the layout adapts correctly</li>
-         </ul>
-
-         <div class="code-block">
-            // Swift code for implementing Dynamic Type with system font
-            label.font = UIFont.preferredFont(forTextStyle: .body)
-            label.adjustsFontForContentSizeCategory = true
-
-            // Swift code for implementing Dynamic Type with custom font
-            let customFont = UIFont(name: "CustomFont-Regular", size: 16)!
-            label.font = UIFontMetrics.default.scaledFont(for: customFont)
-            label.adjustsFontForContentSizeCategory = true
-         </div>
-      </div>
-
-      <!-- Android Content -->
-      <div class="tab-content" id="android-content">
-         <div class="intro android">
-            <h3>Android Typography System</h3>
-            <p>Android uses the Roboto font family as its system font in Material Design. The Material Design typography system provides different text styles to create clear hierarchies and provide consistent experiences across platforms.</p>
-         </div>
-
-         <h3>Android Material Typography Styles</h3>
-         <p>These are the standard text styles recommended by Material Design 3 guidelines for Android applications:</p>
-
-         <div class="typography-grid">
-            <div class="type-card">
-               <div class="type-example">
-                  <div class="android-type-display-large">Display Large</div>
-               </div>
-               <div class="type-meta">
-                  <div><span class="type-label">Font:</span> Roboto</div>
-                  <div><span class="type-label">Weight:</span> Bold</div>
-                  <div><span class="type-label">Size:</span> 36sp</div>
-                  <div><span class="type-label">Line height:</span> 48sp</div>
-                  <div><span class="type-label">Letter spacing:</span> 0</div>
-                  <div><span class="type-label">Case:</span> Original</div>
-               </div>
-            </div>
-
-            <div class="type-card">
-               <div class="type-example">
-                  <div class="android-type-headline-large">Headline Large</div>
-               </div>
-               <div class="type-meta">
-                  <div><span class="type-label">Font:</span> Roboto</div>
-                  <div><span class="type-label">Weight:</span> Bold</div>
-                  <div><span class="type-label">Size:</span> 24sp</div>
-                  <div><span class="type-label">Line height:</span> 32sp</div>
-                  <div><span class="type-label">Letter spacing:</span> 0</div>
-                  <div><span class="type-label">Case:</span> Original</div>
-               </div>
-            </div>
-
-            <div class="type-card">
-               <div class="type-example">
-                  <div class="android-type-title-large">Title Large</div>
-               </div>
-               <div class="type-meta">
-                  <div><span class="type-label">Font:</span> Roboto</div>
-                  <div><span class="type-label">Weight:</span> Regular</div>
-                  <div><span class="type-label">Size:</span> 24sp</div>
-                  <div><span class="type-label">Line height:</span> 32sp</div>
-                  <div><span class="type-label">Letter spacing:</span> 0</div>
-                  <div><span class="type-label">Case:</span> Original</div>
-               </div>
-            </div>
-
-            <div class="type-card">
-               <div class="type-example">
-                  <div class="android-type-title-medium">Title Medium</div>
-               </div>
-               <div class="type-meta">
-                  <div><span class="type-label">Font:</span> Roboto</div>
-                  <div><span class="type-label">Weight:</span> Bold</div>
-                  <div><span class="type-label">Size:</span> 18sp</div>
-                  <div><span class="type-label">Line height:</span> 24sp</div>
-                  <div><span class="type-label">Letter spacing:</span> 0</div>
-                  <div><span class="type-label">Case:</span> Original</div>
-               </div>
-            </div>
-
-            <div class="type-card">
-               <div class="type-example">
-                  <div class="android-type-title-small">Title Small</div>
-               </div>
-               <div class="type-meta">
-                  <div><span class="type-label">Font:</span> Roboto</div>
-                  <div><span class="type-label">Weight:</span> Regular</div>
-                  <div><span class="type-label">Size:</span> 16sp</div>
-                  <div><span class="type-label">Line height:</span> 32sp</div>
-                  <div><span class="type-label">Letter spacing:</span> 0</div>
-                  <div><span class="type-label">Case:</span> Original</div>
-               </div>
-            </div>
-
-            <div class="type-card">
-               <div class="type-example">
-                  <div class="android-type-body-large">Body Large</div>
-               </div>
-               <div class="type-meta">
-                  <div><span class="type-label">Font:</span> Roboto</div>
-                  <div><span class="type-label">Weight:</span> Medium</div>
-                  <div><span class="type-label">Size:</span> 16sp</div>
-                  <div><span class="type-label">Line height:</span> 24sp</div>
-                  <div><span class="type-label">Letter spacing:</span> 0</div>
-                  <div><span class="type-label">Case:</span> Original</div>
-               </div>
-            </div>
-
-            <div class="type-card">
-               <div class="type-example">
-                  <div class="android-type-body-medium">Body Medium</div>
-               </div>
-               <div class="type-meta">
-                  <div><span class="type-label">Font:</span> Roboto</div>
-                  <div><span class="type-label">Weight:</span> Regular</div>
-                  <div><span class="type-label">Size:</span> 16sp</div>
-                  <div><span class="type-label">Line height:</span> 28sp</div>
-                  <div><span class="type-label">Letter spacing:</span> 0</div>
-                  <div><span class="type-label">Case:</span> Original</div>
-               </div>
-            </div>
-
-            <div class="type-card">
-               <div class="type-example">
-                  <div class="android-type-label-large">Label Large</div>
-               </div>
-               <div class="type-meta">
-                  <div><span class="type-label">Font:</span> Roboto</div>
-                  <div><span class="type-label">Weight:</span> Bold</div>
-                  <div><span class="type-label">Size:</span> 14sp</div>
-                  <div><span class="type-label">Line height:</span> 24sp</div>
-                  <div><span class="type-label">Letter spacing:</span> 1.5sp</div>
-                  <div><span class="type-label">Case:</span> Uppercase</div>
-               </div>
-            </div>
-
-            <div class="type-card">
-               <div class="type-example">
-                  <div class="android-type-body-small">Body Small</div>
-               </div>
-               <div class="type-meta">
-                  <div><span class="type-label">Font:</span> Roboto</div>
-                  <div><span class="type-label">Weight:</span> Bold</div>
-                  <div><span class="type-label">Size:</span> 12sp</div>
-                  <div><span class="type-label">Line height:</span> 16sp</div>
-                  <div><span class="type-label">Letter spacing:</span> 1.5sp</div>
-                  <div><span class="type-label">Case:</span> Uppercase</div>
-               </div>
-            </div>
-
-            <div class="type-card">
-               <div class="type-example">
-                  <div class="android-type-label-medium">Label Medium</div>
-               </div>
-               <div class="type-meta">
-                  <div><span class="type-label">Font:</span> Roboto</div>
-                  <div><span class="type-label">Weight:</span> Medium</div>
-                  <div><span class="type-label">Size:</span> 12sp</div>
-                  <div><span class="type-label">Line height:</span> 20sp</div>
-                  <div><span class="type-label">Letter spacing:</span> 1.5sp</div>
-                  <div><span class="type-label">Case:</span> Original</div>
-               </div>
-            </div>
-
-            <div class="type-card">
-               <div class="type-example">
-                  <div class="android-type-label-small">Label Small</div>
-               </div>
-               <div class="type-meta">
-                  <div><span class="type-label">Font:</span> Roboto</div>
-                  <div><span class="type-label">Weight:</span> Regular</div>
-                  <div><span class="type-label">Size:</span> 10sp</div>
-                  <div><span class="type-label">Line height:</span> 16sp</div>
-                  <div><span class="type-label">Letter spacing:</span> 0</div>
-                  <div><span class="type-label">Case:</span> Original</div>
-               </div>
-            </div>
-         </div>
-
-         <h3>Font Scaling in Android</h3>
-         <p>Android allows users to adjust their font size through system settings. Your app should respect these settings for accessibility. Text elements defined in scalable pixels (sp) will automatically adjust according to user preferences.</p>
-
-         <div class="type-scaling-example">
-            <h4>Android Font Scaling Example</h4>
-            <div class="scale-controls">
-               <div>Font Scale:</div>
-               <input type="range" min="0.7" max="1.8" step="0.1" value="1" class="scale-slider" id="android-scale-slider">
-               <div class="scale-value" id="android-scale-value">1x</div>
-            </div>
-
-            <div class="dynamic-type-example">
-               <div class="dynamic-type-row">
-                  <div class="dynamic-type-name">Display Large</div>
-                  <div class="scale-example android-display-large">The quick brown fox jumps over the lazy dog</div>
-               </div>
-               <div class="dynamic-type-row">
-                  <div class="dynamic-type-name">Headline Large</div>
-                  <div class="scale-example android-headline-large">The quick brown fox jumps over the lazy dog</div>
-               </div>
-               <div class="dynamic-type-row">
-                  <div class="dynamic-type-name">Body Large</div>
-                  <div class="scale-example android-body-large">The quick brown fox jumps over the lazy dog</div>
-               </div>
-               <div class="dynamic-type-row">
-                  <div class="dynamic-type-name">Label Medium</div>
-                  <div class="scale-example android-label-medium">The quick brown fox jumps over the lazy dog</div>
-               </div>
-            </div>
-         </div>
-
-         <h3>Implementation Guidelines for Android</h3>
-         <p>Here are the best practices to properly implement typography in Android applications:</p>
-
-         <ul>
-            <li>Always define text sizes in scalable pixels (sp) to respect user font size preferences</li>
-            <li>The minimum recommended size for body text is 16sp for readability</li>
-            <li>For dense lists or information, you can use 14sp with a slightly heavier weight</li>
-            <li>Use dynamic layouts with wrap_content and constraintLayout to adapt to different text sizes</li>
-            <li>Test your app with font scaling set to at least 1.3x to ensure layout adaptability</li>
-         </ul>
-
-         <div class="code-block">
-            <!-- XML layout example -->
-            &lt;TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:textColor="@color/textPrimary"
-            android:text="@string/sample_text" /&gt;
-
-            <!-- Compose example -->
-            Text(
-            text = "Sample Text",
-            style = MaterialTheme.typography.bodyLarge,
-            modifier = Modifier.fillMaxWidth()
-            )
-         </div>
-
-         <h3>Material 3 Expressive (Android's Latest Design Language)</h3>
-         <p>Google recently announced Material 3 Expressive, which builds on Material You, providing more customization options with emphasized typography, bold use of shape and color, and more natural, springy animations.</p>
-
-         <p>The key typography changes in Material 3 Expressive include:</p>
-         <ul>
-            <li>More emphasis on typography as a design element</li>
-            <li>Enhanced dynamic color themes that extend to typography</li>
-            <li>Better support for custom typography that still scales with accessibility settings</li>
-            <li>Improved responsive components that adapt to different text sizes</li>
-         </ul>
-      </div>
-
-      <!-- Enhanced Accessibility Content Section -->
-<div class="tab-content" id="accessibility-content">
-    <div class="intro">
-        <h3>Typography Accessibility Guidelines - WCAG 2.1 AA Compliance</h3>
-        <p>Creating accessible typography is essential for ensuring your app can be used by everyone, regardless of their abilities. This guide follows WCAG Success Criterion 1.4.4 (Resize Text - Level AA) requirements for mobile applications.</p>
-    </div>
-
-    <!-- WCAG 1.4.4 Specific Section -->
-    <div class="wcag-section">
-        <h3>WCAG Success Criterion 1.4.4 - Resize Text (Level AA)</h3>
-        <p><strong>Requirement:</strong> Text can be resized without assistive technology up to 200 percent without loss of content or functionality.</p>
-        
-        <div class="wcag-interpretation">
-            <h4>Mobile Application Interpretation</h4>
-            <p>For mobile applications, this criterion is met when:</p>
+            <h3>Implementation Guidelines for iOS</h3>
+            <p>Here are the best practices to properly implement typography in iOS applications:</p>
             <ul>
-                <li>Apps respect the operating system's text size preferences</li>
-                <li>Text scaling is implemented without relying solely on zoom functionality</li>
-                <li>Content remains accessible and functional at larger text sizes</li>
-                <li>Layout adapts to accommodate scaled text without horizontal scrolling</li>
+                <li>Use the San Francisco font for a native iOS look and feel</li>
+                <li>Implement Dynamic Type for accessibility compliance</li>
+                <li>Set the minimum font size for body text to 17pt for readability</li>
+                <li>For custom fonts, use UIFontMetrics to scale appropriately with Dynamic Type</li>
+                <li>Test your app with all Dynamic Type size settings to ensure the layout adapts correctly</li>
             </ul>
-        </div>
-
-        <div class="assistive-tech-clarification">
-            <h4>Assistive Technology vs. Accessibility Features</h4>
-            <div class="features-grid">
-                <div class="feature-card acceptable">
-                    <h5 style="color: #28a745;">✅ Acceptable (Accessibility Features)</h5>
-                    <ul>
-                        <li><strong>iOS:</strong> Dynamic Type size adjustments in Settings</li>
-                        <li><strong>Android:</strong> Font size scaling in Display settings</li>
-                        <li><strong>Both:</strong> Bold text system preferences</li>
-                        <li><strong>WebViews:</strong> Built-in browser zoom functionality</li>
-                    </ul>
-                </div>
-                
-                <div class="feature-card not-sufficient">
-                    <h5 style="color: #dc3545;">⚠️ Not Sufficient Alone (Assistive Technology)</h5>
-                    <ul>
-                        <li><strong>iOS:</strong> Magnifier or 3-finger zoom</li>
-                        <li><strong>Android:</strong> Magnification gestures</li>
-                        <li><strong>Both:</strong> External screen reader zoom features</li>
-                    </ul>
-                    <p><small>Note: While these are valuable, they should supplement, not replace, proper text scaling support.</small></p>
-                </div>
+            <div class="code-block">
+                // Swift code for implementing Dynamic Type with system font<br>
+                label.font = UIFont.preferredFont(forTextStyle: .body)<br>
+                label.adjustsFontForContentSizeCategory = true<br>
+                <br>
+                // Swift code for implementing Dynamic Type with custom font<br>
+                let customFont = UIFont(name: "CustomFont-Regular", size: 16)!<br>
+                label.font = UIFontMetrics.default.scaledFont(for: customFont)<br>
+                label.adjustsFontForContentSizeCategory = true
             </div>
         </div>
-    </div>
 
-    <!-- Non-Linear Scaling Research -->
-    <div class="scaling-research">
-        <h3>Understanding Non-Linear Text Scaling</h3>
-        <p>Recent research shows that both iOS and Android use non-linear scaling curves, meaning different text styles scale at different rates.</p>
-        
-        <h4>iOS Non-Linear Scaling Data</h4>
-        <p>Based on iOS Human Interface Guidelines, here's how text scales from default to maximum accessibility sizes:</p>
-        
-        <table class="scaling-table">
-            <thead>
-                <tr>
-                    <th>Text Style</th>
-                    <th>Default (Large)</th>
-                    <th>AX5 (Largest)</th>
-                    <th>Scale Factor</th>
-                    <th>Reaches 200%?</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Body</td>
-                    <td>17pt</td>
-                    <td>53pt</td>
-                    <td>3.12x (312%)</td>
-                    <td style="color: #28a745;">✅ Yes</td>
-                </tr>
-                <tr>
-                    <td>Caption 1</td>
-                    <td>12pt</td>
-                    <td>38pt</td>
-                    <td>3.17x (317%)</td>
-                    <td style="color: #28a745;">✅ Yes</td>
-                </tr>
-                <tr>
-                    <td>Large Title</td>
-                    <td>34pt</td>
-                    <td>76pt</td>
-                    <td>2.24x (224%)</td>
-                    <td style="color: #28a745;">✅ Yes</td>
-                </tr>
-                <tr>
-                    <td>Footnote</td>
-                    <td>13pt</td>
-                    <td>38pt</td>
-                    <td>2.92x (292%)</td>
-                    <td style="color: #28a745;">✅ Yes</td>
-                </tr>
-            </tbody>
-        </table>
-        
-        <h4>Android Non-Linear Scaling Data</h4>
-        <p>Android 14+ uses a curve-based scaling system. Here's the scaling behavior:</p>
-        
-        <table class="scaling-table">
-            <thead>
-                <tr>
-                    <th>Base Size</th>
-                    <th>Default (1.0x)</th>
-                    <th>Largest (1.3x setting)</th>
-                    <th>Actual Scale Factor</th>
-                    <th>Reaches 200%?</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>8sp</td>
-                    <td>8sp</td>
-                    <td>16sp</td>
-                    <td>2.0x (200%)</td>
-                    <td style="color: #28a745;">✅ Yes</td>
-                </tr>
-                <tr>
-                    <td>12sp</td>
-                    <td>12sp</td>
-                    <td>24sp</td>
-                    <td>2.0x (200%)</td>
-                    <td style="color: #28a745;">✅ Yes</td>
-                </tr>
-                <tr>
-                    <td>14sp</td>
-                    <td>14sp</td>
-                    <td>26sp</td>
-                    <td>1.86x (186%)</td>
-                    <td style="color: #ffc107;">⚠️ Close</td>
-                </tr>
-                <tr>
-                    <td>18sp+</td>
-                    <td>18sp</td>
-                    <td>30sp</td>
-                    <td>1.67x (167%)</td>
-                    <td style="color: #dc3545;">❌ No</td>
-                </tr>
-            </tbody>
-        </table>
-        
-        <div class="insight-box">
-            <h5>Key Insight</h5>
-            <p>Android text larger than 14sp may not reach the 200% scaling threshold. However, this is still considered compliant as the platform provides the maximum scaling available through system settings.</p>
-        </div>
-    </div>
-
-    <!-- Implementation Requirements -->
-    <div class="implementation-requirements">
-        <h3>Implementation Requirements for WCAG 1.4.4 Compliance</h3>
-        
-        <h4>iOS Requirements</h4>
-        <div class="requirement-list">
-            <div class="requirement-item">
-                <h5>✅ Must Support Dynamic Type</h5>
-                <div class="code-block">
-// Use system text styles
-label.font = UIFont.preferredFont(forTextStyle: .body)
-label.adjustsFontForContentSizeCategory = true
-
-// For custom fonts
-let customFont = UIFont(name: "CustomFont", size: 16)!
-label.font = UIFontMetrics.default.scaledFont(for: customFont)
-label.adjustsFontForContentSizeCategory = true
+        <!-- Android Content -->
+        <div class="tab-content" id="android-content" role="tabpanel" aria-labelledby="tab-android" tabindex="0">
+            <div class="intro android">
+                <h3>Android Typography System</h3>
+                <p>Android uses the Roboto font family as its system font in Material Design. The Material Design typography system provides different text styles to create clear hierarchies and provide a consistent user experience.</p>
+            </div>
+            <h3>Android Material Typography Styles</h3>
+            <p>These are the standard text styles recommended by Material Design 3 guidelines for Android applications:</p>
+            <div class="typography-grid">
+                <!-- All Android type cards (see previous answer for full card markup) -->
+                <div class="type-card">
+                    <div class="type-example"><div class="android-type-display-large">Display Large</div></div>
+                    <div class="type-meta">
+                        <div><span class="type-label">Font:</span> Roboto</div>
+                        <div><span class="type-label">Weight:</span> Bold</div>
+                        <div><span class="type-label">Size:</span> 36sp</div>
+                        <div><span class="type-label">Line height:</span> 48sp</div>
+                        <div><span class="type-label">Letter spacing:</span> 0</div>
+                        <div><span class="type-label">Case:</span> Original</div>
+                    </div>
+                </div>
+                <!-- ...repeat for all Android styles (same as above for iOS)... -->
+                <div class="type-card"><div class="type-example"><div class="android-type-headline-large">Headline Large</div></div>
+                    <div class="type-meta"><div><span class="type-label">Font:</span> Roboto</div><div><span class="type-label">Weight:</span> Bold</div><div><span class="type-label">Size:</span> 24sp</div><div><span class="type-label">Line height:</span> 32sp</div><div><span class="type-label">Letter spacing:</span> 0</div><div><span class="type-label">Case:</span> Original</div></div>
+                </div>
+                <div class="type-card"><div class="type-example"><div class="android-type-title-large">Title Large</div></div>
+                    <div class="type-meta"><div><span class="type-label">Font:</span> Roboto</div><div><span class="type-label">Weight:</span> Regular</div><div><span class="type-label">Size:</span> 24sp</div><div><span class="type-label">Line height:</span> 32sp</div><div><span class="type-label">Letter spacing:</span> 0</div><div><span class="type-label">Case:</span> Original</div></div>
+                </div>
+                <div class="type-card"><div class="type-example"><div class="android-type-title-medium">Title Medium</div></div>
+                    <div class="type-meta"><div><span class="type-label">Font:</span> Roboto</div><div><span class="type-label">Weight:</span> Bold</div><div><span class="type-label">Size:</span> 18sp</div><div><span class="type-label">Line height:</span> 24sp</div><div><span class="type-label">Letter spacing:</span> 0</div><div><span class="type-label">Case:</span> Original</div></div>
+                </div>
+                <div class="type-card"><div class="type-example"><div class="android-type-title-small">Title Small</div></div>
+                    <div class="type-meta"><div><span class="type-label">Font:</span> Roboto</div><div><span class="type-label">Weight:</span> Regular</div><div><span class="type-label">Size:</span> 16sp</div><div><span class="type-label">Line height:</span> 32sp</div><div><span class="type-label">Letter spacing:</span> 0</div><div><span class="type-label">Case:</span> Original</div></div>
+                </div>
+                <div class="type-card"><div class="type-example"><div class="android-type-body-large">Body Large</div></div>
+                    <div class="type-meta"><div><span class="type-label">Font:</span> Roboto</div><div><span class="type-label">Weight:</span> Medium</div><div><span class="type-label">Size:</span> 16sp</div><div><span class="type-label">Line height:</span> 24sp</div><div><span class="type-label">Letter spacing:</span> 0</div><div><span class="type-label">Case:</span> Original</div></div>
+                </div>
+                <div class="type-card"><div class="type-example"><div class="android-type-body-medium">Body Medium</div></div>
+                    <div class="type-meta"><div><span class="type-label">Font:</span> Roboto</div><div><span class="type-label">Weight:</span> Regular</div><div><span class="type-label">Size:</span> 16sp</div><div><span class="type-label">Line height:</span> 28sp</div><div><span class="type-label">Letter spacing:</span> 0</div><div><span class="type-label">Case:</span> Original</div></div>
+                </div>
+                <div class="type-card"><div class="type-example"><div class="android-type-label-large">Label Large</div></div>
+                    <div class="type-meta"><div><span class="type-label">Font:</span> Roboto</div><div><span class="type-label">Weight:</span> Bold</div><div><span class="type-label">Size:</span> 14sp</div><div><span class="type-label">Line height:</span> 24sp</div><div><span class="type-label">Letter spacing:</span> 1.5sp</div><div><span class="type-label">Case:</span> Uppercase</div></div>
+                </div>
+                <div class="type-card"><div class="type-example"><div class="android-type-body-small">Body Small</div></div>
+                    <div class="type-meta"><div><span class="type-label">Font:</span> Roboto</div><div><span class="type-label">Weight:</span> Bold</div><div><span class="type-label">Size:</span> 12sp</div><div><span class="type-label">Line height:</span> 16sp</div><div><span class="type-label">Letter spacing:</span> 1.5sp</div><div><span class="type-label">Case:</span> Uppercase</div></div>
+                </div>
+                <div class="type-card"><div class="type-example"><div class="android-type-label-medium">Label Medium</div></div>
+                    <div class="type-meta"><div><span class="type-label">Font:</span> Roboto</div><div><span class="type-label">Weight:</span> Medium</div><div><span class="type-label">Size:</span> 12sp</div><div><span class="type-label">Line height:</span> 20sp</div><div><span class="type-label">Letter spacing:</span> 1.5sp</div><div><span class="type-label">Case:</span> Original</div></div>
+                </div>
+                <div class="type-card"><div class="type-example"><div class="android-type-label-small">Label Small</div></div>
+                    <div class="type-meta"><div><span class="type-label">Font:</span> Roboto</div><div><span class="type-label">Weight:</span> Regular</div><div><span class="type-label">Size:</span> 10sp</div><div><span class="type-label">Line height:</span> 16sp</div><div><span class="type-label">Letter spacing:</span> 0</div><div><span class="type-label">Case:</span> Original</div></div>
                 </div>
             </div>
-            
-            <div class="requirement-item">
-                <h5>✅ Handle Content Size Changes</h5>
-                <div class="code-block">
-// Listen for changes
+            <h3>Font Scaling in Android</h3>
+            <p>Android allows users to adjust their font size through system settings. Your app should respect these settings for accessibility. Text elements defined in scalable pixels (sp) will automatically scale with user-preferred font size.</p>
+            <div class="type-scaling-example">
+                <h4>Android Font Scaling Example</h4>
+                <div class="scale-controls">
+                    <div>Font Scale:</div>
+                    <input type="range" min="0.7" max="1.8" step="0.1" value="1" class="scale-slider" id="android-scale-slider">
+                    <div class="scale-value" id="android-scale-value">1x</div>
+                </div>
+                <div class="dynamic-type-example">
+                    <div class="dynamic-type-row"><div class="dynamic-type-name">Display Large</div><div class="scale-example android-display-large">The quick brown fox jumps over the lazy dog</div></div>
+                    <div class="dynamic-type-row"><div class="dynamic-type-name">Headline Large</div><div class="scale-example android-headline-large">The quick brown fox jumps over the lazy dog</div></div>
+                    <div class="dynamic-type-row"><div class="dynamic-type-name">Body Large</div><div class="scale-example android-body-large">The quick brown fox jumps over the lazy dog</div></div>
+                    <div class="dynamic-type-row"><div class="dynamic-type-name">Label Medium</div><div class="scale-example android-label-medium">The quick brown fox jumps over the lazy dog</div></div>
+                </div>
+            </div>
+            <h3>Implementation Guidelines for Android</h3>
+            <p>Here are the best practices to properly implement typography in Android applications:</p>
+            <ul>
+                <li>Always define text sizes in scalable pixels (sp) to respect user font size preferences</li>
+                <li>The minimum recommended size for body text is 16sp for readability</li>
+                <li>For dense lists or information, you can use 14sp with a slightly heavier weight</li>
+                <li>Use dynamic layouts with wrap_content and constraintLayout to adapt to different text sizes</li>
+                <li>Test your app with font scaling set to at least 1.3x to ensure layout adaptability</li>
+            </ul>
+            <div class="code-block">
+                &lt;!-- XML layout example --&gt;<br>
+                &lt;TextView<br>
+                &nbsp;&nbsp;android:layout_width="match_parent"<br>
+                &nbsp;&nbsp;android:layout_height="wrap_content"<br>
+                &nbsp;&nbsp;android:textSize="16sp"<br>
+                &nbsp;&nbsp;android:textColor="@color/textPrimary"<br>
+                &nbsp;&nbsp;android:text="@string/sample_text" /&gt;<br>
+                <br>
+                &lt;!-- Compose example --&gt;<br>
+                Text(<br>
+                &nbsp;&nbsp;text = "Sample Text",<br>
+                &nbsp;&nbsp;style = MaterialTheme.typography.bodyLarge,<br>
+                &nbsp;&nbsp;modifier = Modifier.fillMaxWidth()<br>
+                )
+            </div>
+        </div>
+
+        <!-- Accessibility Guidelines Content -->
+        <div class="tab-content" id="accessibility-content" role="tabpanel" aria-labelledby="tab-accessibility" tabindex="0">
+            <div class="intro">
+                <h3>Typography Accessibility Guidelines - WCAG 2.1 AA Compliance</h3>
+                <p>Creating accessible typography is essential for ensuring your app can be used by everyone, regardless of their abilities. This guide follows WCAG Success Criterion 1.4.4 (Resize Text - Level AA), which requires that text can be resized up to 200% without loss of content or functionality.</p>
+            </div>
+
+            <div class="wcag-section">
+                <h3>WCAG Success Criterion 1.4.4 - Resize Text (Level AA)</h3>
+                <p><strong>Requirement:</strong> Text can be resized without assistive technology up to 200 percent without loss of content or functionality.</p>
+                <div class="wcag-interpretation">
+                    <h4>Mobile Application Interpretation</h4>
+                    <p>For mobile applications, this criterion is met when:</p>
+                    <ul>
+                        <li>Apps respect the operating system's text size preferences</li>
+                        <li>Text scaling is implemented without relying solely on zoom functionality</li>
+                        <li>Content remains accessible and functional at larger text sizes</li>
+                        <li>Layout adapts to accommodate scaled text without horizontal scrolling</li>
+                    </ul>
+                </div>
+                <div class="assistive-tech-clarification">
+                    <h4>Assistive Technology vs. Accessibility Features</h4>
+                    <div class="features-grid">
+                        <div class="feature-card acceptable">
+                            <h5 style="color: #28a745;">✅ Acceptable (Accessibility Features)</h5>
+                            <ul>
+                                <li><strong>iOS:</strong> Dynamic Type size adjustments in Settings</li>
+                                <li><strong>Android:</strong> Font size scaling in Display settings</li>
+                                <li><strong>Both:</strong> Bold text system preferences</li>
+                                <li><strong>WebViews:</strong> Built-in browser zoom functionality</li>
+                            </ul>
+                        </div>
+                        <div class="feature-card not-sufficient">
+                            <h5 style="color: #dc3545;">⚠️ Not Sufficient Alone (Assistive Technology)</h5>
+                            <ul>
+                                <li><strong>iOS:</strong> Magnifier or 3-finger zoom</li>
+                                <li><strong>Android:</strong> Magnification gestures</li>
+                                <li><strong>Both:</strong> External screen reader zoom features</li>
+                            </ul>
+                            <p><small>Note: While these are valuable, they should supplement, not replace, proper text scaling support.</small></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="scaling-research">
+                <h3>Understanding Non-Linear Text Scaling</h3>
+                <p>Recent research shows that both iOS and Android use non-linear scaling curves, meaning different text styles scale at different rates.</p>
+                <h4>iOS Non-Linear Scaling Data</h4>
+                <p>Based on iOS Human Interface Guidelines, here's how text scales from default to maximum accessibility sizes:</p>
+                <table class="scaling-table">
+                    <thead>
+                        <tr><th>Text Style</th><th>Default (Large)</th><th>AX5 (Largest)</th><th>Scale Factor</th><th>Reaches 200%?</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Body</td><td>17pt</td><td>53pt</td><td>3.12x (312%)</td><td style="color: #28a745;">✅ Yes</td></tr>
+                        <tr><td>Caption 1</td><td>12pt</td><td>38pt</td><td>3.17x (317%)</td><td style="color: #28a745;">✅ Yes</td></tr>
+                        <tr><td>Large Title</td><td>34pt</td><td>76pt</td><td>2.24x (224%)</td><td style="color: #28a745;">✅ Yes</td></tr>
+                        <tr><td>Footnote</td><td>13pt</td><td>38pt</td><td>2.92x (292%)</td><td style="color: #28a745;">✅ Yes</td></tr>
+                    </tbody>
+                </table>
+                <h4>Android Non-Linear Scaling Data</h4>
+                <p>Android 14+ uses a curve-based scaling system. Here's the scaling behavior:</p>
+                <table class="scaling-table">
+                    <thead>
+                        <tr><th>Base Size</th><th>Default (1.0x)</th><th>Largest (1.3x setting)</th><th>Actual Scale Factor</th><th>Reaches 200%?</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>8sp</td><td>8sp</td><td>16sp</td><td>2.0x (200%)</td><td style="color: #28a745;">✅ Yes</td></tr>
+                        <tr><td>12sp</td><td>12sp</td><td>24sp</td><td>2.0x (200%)</td><td style="color: #28a745;">✅ Yes</td></tr>
+                        <tr><td>14sp</td><td>14sp</td><td>26sp</td><td>1.86x (186%)</td><td style="color: #ffc107;">⚠️ Close</td></tr>
+                        <tr><td>18sp+</td><td>18sp</td><td>30sp</td><td>1.67x (167%)</td><td style="color: #dc3545;">❌ No</td></tr>
+                    </tbody>
+                </table>
+                <div class="insight-box">
+                    <h5>Key Insight</h5>
+                    <p>Android text larger than 14sp may not reach the 200% scaling threshold. However, this is still considered compliant as the platform provides the maximum scaling available through system settings.</p>
+                </div>
+            </div>
+
+            <div class="implementation-requirements">
+                <h3>Implementation Requirements for WCAG 1.4.4 Compliance</h3>
+                <h4>iOS Requirements</h4>
+                <div class="requirement-list">
+                    <div class="requirement-item">
+                        <h5>✅ Must Support Dynamic Type</h5>
+                        <div class="code-block">
+// Use system text styles<br>
+label.font = UIFont.preferredFont(forTextStyle: .body)<br>
+label.adjustsFontForContentSizeCategory = true<br>
+// For custom fonts<br>
+let customFont = UIFont(name: "CustomFont", size: 16)!<br>
+label.font = UIFontMetrics.default.scaledFont(for: customFont)<br>
+label.adjustsFontForContentSizeCategory = true
+                        </div>
+                    </div>
+                    <div class="requirement-item">
+                        <h5>✅ Handle Content Size Changes</h5>
+                        <div class="code-block">
 NotificationCenter.default.addObserver(
     self,
     selector: #selector(contentSizeChanged),
     name: UIContentSizeCategory.didChangeNotification,
     object: nil
 )
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-
-        <h4>Android Requirements</h4>
-        <div class="requirement-list">
-            <div class="requirement-item">
-                <h5>✅ Use Scalable Pixels (sp)</h5>
-                <div class="code-block">
-<!-- Always use sp for text sizes -->
-<TextView
-    android:textSize="16sp"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content" />
-
-<!-- Jetpack Compose -->
-Text(
-    text = "Sample text",
-    fontSize = 16.sp,
-    style = MaterialTheme.typography.bodyLarge
+                <h4>Android Requirements</h4>
+                <div class="requirement-list">
+                    <div class="requirement-item">
+                        <h5>✅ Use Scalable Pixels (sp)</h5>
+                        <div class="code-block">
+&lt;TextView<br>
+    android:textSize="16sp"<br>
+    android:layout_width="wrap_content"<br>
+    android:layout_height="wrap_content" /&gt;<br>
+<br>
+// Jetpack Compose<br>
+Text(<br>
+    text = "Sample text",<br>
+    fontSize = 16.sp,<br>
+    style = MaterialTheme.typography.bodyLarge<br>
 )
+                        </div>
+                    </div>
+                    <div class="requirement-item">
+                        <h5>✅ Implement Flexible Layouts</h5>
+                        <div class="code-block">
+&lt;androidx.constraintlayout.widget.ConstraintLayout&gt;<br>
+    &lt;TextView<br>
+        android:layout_width="0dp"<br>
+        android:layout_height="wrap_content"<br>
+        app:layout_constraintStart_toStartOf="parent"<br>
+        app:layout_constraintEnd_toEndOf="parent" /&gt;<br>
+&lt;/androidx.constraintlayout.widget.ConstraintLayout&gt;
+                        </div>
+                    </div>
                 </div>
             </div>
-            
-            <div class="requirement-item">
-                <h5>✅ Implement Flexible Layouts</h5>
-                <div class="code-block">
-<!-- Use wrap_content and flexible constraints -->
-<androidx.constraintlayout.widget.ConstraintLayout>
-    <TextView
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+            <div class="testing-guidelines">
+                <h3>Testing for WCAG 1.4.4 Compliance</h3>
+                <h4>Testing Checklist</h4>
+                <div class="checklist">
+                    <div class="checklist-section">
+                        <h5>iOS Testing</h5>
+                        <label><input type="checkbox"> Test with all Dynamic Type sizes (XS to AX5)</label>
+                        <label><input type="checkbox"> Verify text scales appropriately without layout breaks</label>
+                        <label><input type="checkbox"> Check that all text remains readable and accessible</label>
+                        <label><input type="checkbox"> Ensure no horizontal scrolling is required</label>
+                        <label><input type="checkbox"> Test with Bold Text setting enabled</label>
+                        <label><input type="checkbox"> Verify Large Content Viewer works for constrained spaces</label>
+                    </div>
+                    <div class="checklist-section">
+                        <h5>Android Testing</h5>
+                        <label><input type="checkbox"> Test with font scale from 0.85x to 1.3x</label>
+                        <label><input type="checkbox"> Use ADB to test extreme scaling (up to 2.0x): adb shell settings put system font_scale 2.0</label>
+                        <label><input type="checkbox"> Verify layouts adapt without content loss</label>
+                        <label><input type="checkbox"> Check that sp units are used consistently</label>
+                        <label><input type="checkbox"> Test with different display sizes</label>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
 
-    <!-- Testing Guidelines -->
-    <div class="testing-guidelines">
-        <h3>Testing for WCAG 1.4.4 Compliance</h3>
-        
-        <h4>Testing Checklist</h4>
-        <div class="checklist">
-            <div class="checklist-section">
-                <h5>iOS Testing</h5>
-                <label><input type="checkbox"> Test with all Dynamic Type sizes (XS to AX5)</label>
-                <label><input type="checkbox"> Verify text scales appropriately without layout breaks</label>
-                <label><input type="checkbox"> Check that all text remains readable and accessible</label>
-                <label><input type="checkbox"> Ensure no horizontal scrolling is required</label>
-                <label><input type="checkbox"> Test with Bold Text setting enabled</label>
-                <label><input type="checkbox"> Verify Large Content Viewer works for constrained spaces</label>
-            </div>
-            
-            <div class="checklist-section">
-                <h5>Android Testing</h5>
-                <label><input type="checkbox"> Test with font scale from 0.85x to 1.3x</label>
-                <label><input type="checkbox"> Use ADB to test extreme scaling (up to 2.0x): adb shell settings put system font_scale 2.0</label>
-                <label><input type="checkbox"> Verify layouts adapt without content loss</label>
-                <label><input type="checkbox"> Check that sp units are used consistently</label>
-                <label><input type="checkbox"> Test with different display sizes</label>
-            </div>
-        </div>
-    </div>
-
-    <!-- WebView Considerations -->
-    <div class="webview-section">
-        <h3>WebView Accessibility Considerations</h3>
-        <p>For apps using WebViews, additional considerations apply:</p>
-        
-        <div class="webview-requirements">
-            <h4>WebView Text Scaling Options</h4>
-            <ul>
-                <li><strong>Browser Zoom:</strong> Allow standard pinch-to-zoom functionality</li>
-                <li><strong>Text Scaling:</strong> Respect system font size preferences where possible</li>
-                <li><strong>Custom Implementation:</strong> Provide app-specific text scaling controls</li>
-            </ul>
-            
-            <div class="code-block">
-// iOS WebView scaling
-extension WKWebView {
-    var zoomScale: Double {
-        get {
-            guard let scale = value(forKey: "viewScale") as? Double else {
-                return 1.0
-            }
-            return scale
-        }
-        set {
-            setValue(newValue, forKey: "viewScale")
-        }
-    }
+            <div class="webview-section">
+                <h3>WebView Accessibility Considerations</h3>
+                <p>For apps using WebViews, additional considerations apply:</p>
+                <div class="webview-requirements">
+                    <h4>WebView Text Scaling Options</h4>
+                    <ul>
+                        <li><strong>Browser Zoom:</strong> Allow standard pinch-to-zoom functionality</li>
+                        <li><strong>Text Scaling:</strong> Respect system font size preferences where possible</li>
+                        <li><strong>Custom Implementation:</strong> Provide app-specific text scaling controls</li>
+                    </ul>
+                    <div class="code-block">
+// iOS WebView scaling<br>
+extension WKWebView {<br>
+    var zoomScale: Double {<br>
+        get {<br>
+            guard let scale = value(forKey: "viewScale") as? Double else { return 1.0 }<br>
+            return scale<br>
+        }<br>
+        set { setValue(newValue, forKey: "viewScale") }<br>
+    }<br>
+}<br>
+// Android WebView scaling<br>
+fun WebView.setScale(initialScale: Float, zoomScale: Float) {<br>
+    val zoom = (initialScale * zoomScale * 100).toInt()<br>
+    setInitialScale(zoom)<br>
 }
+                    </div>
+                </div>
+            </div>
 
-// Android WebView scaling
-fun WebView.setScale(initialScale: Float, zoomScale: Float) {
-    val zoom = (initialScale * zoomScale * 100).toInt()
-    setInitialScale(zoom)
-}
+            <div class="best-practices-summary">
+                <h3>Best Practices Summary</h3>
+                <div class="practices-grid">
+                    <div class="practice-card">
+                        <h4>Design Phase</h4>
+                        <ul>
+                            <li>Design layouts that accommodate 200%+ text scaling</li>
+                            <li>Use minimum 16sp/17pt for body text</li>
+                            <li>Plan for content reflow and wrapping</li>
+                            <li>Consider scrollable containers for complex layouts</li>
+                        </ul>
+                    </div>
+                    <div class="practice-card">
+                        <h4>Development Phase</h4>
+                        <ul>
+                            <li>Implement Dynamic Type (iOS) and sp units (Android)</li>
+                            <li>Use flexible layout systems</li>
+                            <li>Test with maximum accessibility settings</li>
+                            <li>Handle font size change notifications</li>
+                        </ul>
+                    </div>
+                    <div class="practice-card">
+                        <h4>Testing Phase</h4>
+                        <ul>
+                            <li>Test with real users who rely on large text</li>
+                            <li>Use accessibility testing tools</li>
+                            <li>Verify functionality remains intact at all sizes</li>
+                            <li>Document any limitations transparently</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="recommendations">
+                <h4>W3C MATF Recommendations Implementation</h4>
+                <p>Based on the ongoing W3C MATF discussions, this guide implements:</p>
+                <ul>
+                    <li><strong>Clear AT vs. Accessibility Feature distinction:</strong> We differentiate between zoom (assistive technology) and text scaling (accessibility feature)</li>
+                    <li><strong>Non-linear scaling documentation:</strong> We provide actual scaling data from both platforms</li>
+                    <li><strong>Platform-specific requirements:</strong> We detail what each OS requires for compliance</li>
+                    <li><strong>WebView considerations:</strong> We address the complexities of web content in native apps</li>
+                    <li><strong>Testing methodologies:</strong> We provide concrete testing steps for validation</li>
+                </ul>
             </div>
         </div>
     </div>
-
-    <!-- Best Practices Summary -->
-    <div class="best-practices-summary">
-        <h3>Best Practices Summary</h3>
-        <div class="practices-grid">
-            <div class="practice-card">
-                <h4>Design Phase</h4>
-                <ul>
-                    <li>Design layouts that accommodate 200%+ text scaling</li>
-                    <li>Use minimum 16sp/17pt for body text</li>
-                    <li>Plan for content reflow and wrapping</li>
-                    <li>Consider scrollable containers for complex layouts</li>
-                </ul>
-            </div>
-            
-            <div class="practice-card">
-                <h4>Development Phase</h4>
-                <ul>
-                    <li>Implement Dynamic Type (iOS) and sp units (Android)</li>
-                    <li>Use flexible layout systems</li>
-                    <li>Test with maximum accessibility settings</li>
-                    <li>Handle font size change notifications</li>
-                </ul>
-            </div>
-            
-            <div class="practice-card">
-                <h4>Testing Phase</h4>
-                <ul>
-                    <li>Test with real users who rely on large text</li>
-                    <li>Use accessibility testing tools</li>
-                    <li>Verify functionality remains intact at all sizes</li>
-                    <li>Document any limitations transparently</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-
-    <div class="recommendations">
-        <h4>W3C MATF Recommendations Implementation</h4>
-        <p>Based on the ongoing W3C MATF discussions, this guide implements:</p>
-        <ul>
-            <li><strong>Clear AT vs. Accessibility Feature distinction:</strong> We differentiate between zoom (assistive technology) and text scaling (accessibility feature)</li>
-            <li><strong>Non-linear scaling documentation:</strong> We provide actual scaling data from both platforms</li>
-            <li><strong>Platform-specific requirements:</strong> We detail what each OS requires for compliance</li>
-            <li><strong>WebView considerations:</strong> We address the complexities of web content in native apps</li>
-            <li><strong>Testing methodologies:</strong> We provide concrete testing steps for validation</li>
-        </ul>
-    </div>
-</div>
-
-   <script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
-
 </html>
