@@ -94,3 +94,41 @@ document.addEventListener('DOMContentLoaded', function() {
     if (iosScaleSlider) iosScaleSlider.dispatchEvent(new Event('input'));
     if (androidScaleSlider) androidScaleSlider.dispatchEvent(new Event('input'));
 });
+// Dark mode toggle logic with system fallback and persistence
+(function(){
+  // Create the theme toggle button
+  const btn = document.createElement('button');
+  btn.className = 'theme-toggle';
+  btn.setAttribute('aria-label', 'Toggle dark mode');
+  btn.innerHTML = '🌙 Dark Mode';
+
+  // Insert into DOM after body loads
+  window.addEventListener('DOMContentLoaded', () => {
+    document.body.appendChild(btn);
+
+    // Initial state: prefer saved theme, fallback to system
+    const saved = localStorage.getItem('theme');
+    if (saved === 'dark' || saved === 'light') {
+      document.documentElement.setAttribute('data-theme', saved);
+      btn.innerHTML = saved === 'dark' ? '☀️ Light Mode' : '🌙 Dark Mode';
+    } else {
+      document.documentElement.removeAttribute('data-theme');
+      btn.innerHTML = window.matchMedia('(prefers-color-scheme: dark)').matches
+        ? '☀️ Light Mode' : '🌙 Dark Mode';
+    }
+  });
+
+  // Toggle handler
+  btn.addEventListener('click', () => {
+    const current = document.documentElement.getAttribute('data-theme');
+    if (current === 'dark') {
+      document.documentElement.setAttribute('data-theme', 'light');
+      localStorage.setItem('theme', 'light');
+      btn.innerHTML = '🌙 Dark Mode';
+    } else {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      localStorage.setItem('theme', 'dark');
+      btn.innerHTML = '☀️ Light Mode';
+    }
+  });
+})();
