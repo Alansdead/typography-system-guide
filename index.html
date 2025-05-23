@@ -26,10 +26,15 @@
     <section class="tab-content active" id="ios-content" role="tabpanel" aria-labelledby="tab-ios" tabindex="0">
       <article class="intro">
         <h2>iOS Typography System</h2>
-        <p>iOS uses the San Francisco (SF) font family, switching between SF Pro Text (≤ 19pt) and SF Pro Display (≥ 20pt) automatically. Dynamic Type ensures accessibility for all users.</p>
+        <p>
+          iOS uses the San Francisco (SF) font family, which automatically switches between SF Pro Text for smaller sizes (≤ 19pt) and SF Pro Display for larger sizes (≥ 20pt). The system’s Dynamic Type feature lets users customize text size for accessibility.
+        </p>
       </article>
       <section>
         <h3>iOS Default Typography Styles</h3>
+        <p>
+          These are the standard text styles recommended by Apple's Human Interface Guidelines for iOS applications:
+        </p>
         <div class="typography-grid">
           <!-- Exhaustive iOS Type Cards -->
           <article class="type-card">
@@ -157,6 +162,9 @@
       </section>
       <section class="type-scaling-example">
         <h3>Dynamic Type in iOS</h3>
+        <p>
+          Apple's Dynamic Type allows users to choose their preferred text size across the iOS system. Implementing Dynamic Type in your app ensures that your text scales appropriately with the user's accessibility preferences, maintaining readability and usability.
+        </p>
         <form>
           <label for="ios-scale-slider">Text Size:</label>
           <input type="range" min="0" max="6" value="3" class="scale-slider" id="ios-scale-slider" aria-valuenow="3" aria-valuemin="0" aria-valuemax="6">
@@ -182,6 +190,9 @@
       </section>
       <section>
         <h3>Implementation Guidelines for iOS</h3>
+        <p>
+          Here are the best practices to properly implement typography in iOS applications:
+        </p>
         <ul>
           <li>Use San Francisco font for a native iOS look and feel</li>
           <li>Implement Dynamic Type for accessibility compliance</li>
@@ -205,10 +216,15 @@ label.adjustsFontForContentSizeCategory = true
     <section class="tab-content" id="android-content" role="tabpanel" aria-labelledby="tab-android" tabindex="0">
       <article class="intro android">
         <h2>Android Typography System</h2>
-        <p>Android uses the Roboto font family. Text sizes in "sp" ensure scaling according to user accessibility settings.</p>
+        <p>
+          Android uses the Roboto font family as its system font in Material Design. The Material Design typography system provides different text styles to create clear hierarchies and ensure a consistent, readable experience. Text sizes defined in "sp" automatically scale according to user accessibility settings.
+        </p>
       </article>
       <section>
         <h3>Android Material Typography Styles</h3>
+        <p>
+          These are the standard text styles recommended by Material Design 3 guidelines for Android applications:
+        </p>
         <div class="typography-grid">
           <!-- Exhaustive Android Type Cards -->
           <article class="type-card">
@@ -380,6 +396,9 @@ label.adjustsFontForContentSizeCategory = true
       </section>
       <section class="type-scaling-example">
         <h3>Font Scaling in Android</h3>
+        <p>
+          Android allows users to adjust their font size through system settings. Your app should respect these settings for accessibility. Text elements defined in scalable pixels (sp) will scale automatically, ensuring that users with low vision can read your content comfortably.
+        </p>
         <form>
           <label for="android-scale-slider">Font Scale:</label>
           <input type="range" min="0.7" max="1.8" step="0.1" value="1" class="scale-slider" id="android-scale-slider" aria-valuenow="1" aria-valuemin="0.7" aria-valuemax="1.8">
@@ -405,11 +424,15 @@ label.adjustsFontForContentSizeCategory = true
       </section>
       <section>
         <h3>Implementation Guidelines for Android</h3>
+        <p>
+          Here are the best practices to properly implement typography in Android applications:
+        </p>
         <ul>
-          <li>Use "sp" units for all text sizes</li>
-          <li>Minimum recommended body text size: 16sp</li>
-          <li>Use constraint layouts for adaptive design</li>
-          <li>Test with font scaling set to at least 1.3x</li>
+          <li>Always define text sizes in scalable pixels (sp) to respect user font size preferences</li>
+          <li>The minimum recommended size for body text is 16sp for readability</li>
+          <li>For dense lists or information, you can use 14sp with a slightly heavier weight</li>
+          <li>Use dynamic layouts with wrap_content and constraintLayout to adapt to different text sizes</li>
+          <li>Test your app with font scaling set to at least 1.3x to ensure layout adaptability</li>
         </ul>
         <pre><code>&lt;!-- XML layout example --&gt;
 &lt;TextView
@@ -433,12 +456,51 @@ Text(
     <section class="tab-content" id="accessibility-content" role="tabpanel" aria-labelledby="tab-accessibility" tabindex="0">
       <article class="intro">
         <h2>Typography Accessibility Guidelines – WCAG 2.1 AA Compliance</h2>
-        <p>Creating accessible typography is essential for ensuring your app is usable by everyone. This section follows WCAG Success Criterion 1.4.4 (Resize Text).</p>
+        <p>
+          Creating accessible typography is essential for ensuring your app can be used by everyone, regardless of their abilities. This guide follows WCAG Success Criterion 1.4.4 (Resize Text).
+        </p>
       </article>
       <section class="wcag-section">
         <h3>WCAG Success Criterion 1.4.4 - Resize Text (Level AA)</h3>
+        <p><strong>Requirement:</strong> Text can be resized without assistive technology up to 200 percent without loss of content or functionality.</p>
+        <div class="wcag-interpretation">
+          <h4>Mobile Application Interpretation</h4>
+          <p>For mobile applications, this criterion is met when:</p>
+          <ul>
+            <li>Apps respect the operating system's text size preferences</li>
+            <li>Text scaling is implemented without relying solely on zoom functionality</li>
+            <li>Content remains accessible and functional at larger text sizes</li>
+            <li>Layout adapts to accommodate scaled text without horizontal scrolling</li>
+          </ul>
+        </div>
+        <div class="assistive-tech-clarification">
+          <h4>Assistive Technology vs. Accessibility Features</h4>
+          <div class="features-grid">
+            <div class="feature-card acceptable">
+              <h5 style="color: #28a745;">✅ Acceptable (Accessibility Features)</h5>
+              <ul>
+                <li><strong>iOS:</strong> Dynamic Type size adjustments in Settings</li>
+                <li><strong>Android:</strong> Font size scaling in Display settings</li>
+                <li><strong>Both:</strong> Bold text system preferences</li>
+                <li><strong>WebViews:</strong> Built-in browser zoom functionality</li>
+              </ul>
+            </div>
+            <div class="feature-card not-sufficient">
+              <h5 style="color: #dc3545;">⚠️ Not Sufficient Alone (Assistive Technology)</h5>
+              <ul>
+                <li><strong>iOS:</strong> Magnifier or 3-finger zoom</li>
+                <li><strong>Android:</strong> Magnification gestures</li>
+                <li><strong>Both:</strong> External screen reader zoom features</li>
+              </ul>
+              <p><small>Note: While these are valuable, they should supplement, not replace, proper text scaling support.</small></p>
+            </div>
+          </div>
+        </div>
+        <h3>Understanding Non-Linear Text Scaling</h3>
+        <p>Recent research shows that both iOS and Android use non-linear scaling curves, meaning different text styles scale at different rates.</p>
+        <h4>iOS Non-Linear Scaling Data</h4>
+        <p>Based on iOS Human Interface Guidelines, here's how text scales from default to maximum accessibility sizes:</p>
         <table class="scaling-table">
-          <caption>iOS Non-Linear Scaling Data</caption>
           <thead>
             <tr><th>Text Style</th><th>Default (Large)</th><th>AX5 (Largest)</th><th>Scale Factor</th><th>Reaches 200%?</th></tr>
           </thead>
@@ -452,8 +514,9 @@ Text(
             <tr><td>Footnote</td><td>13pt</td><td>38pt</td><td>2.92x (292%)</td><td>✅ Yes</td></tr>
           </tbody>
         </table>
+        <h4>Android Non-Linear Scaling Data</h4>
+        <p>Android 14+ uses a curve-based scaling system. Here's the scaling behavior:</p>
         <table class="scaling-table">
-          <caption>Android Non-Linear Scaling Data</caption>
           <thead>
             <tr><th>Base Size</th><th>Default (1.0x)</th><th>Largest (1.3x setting)</th><th>Actual Scale Factor</th><th>Reaches 200%?</th></tr>
           </thead>
@@ -465,6 +528,10 @@ Text(
             <tr><td>18sp</td><td>18sp</td><td>30sp</td><td>1.67x (167%)</td><td>❌ No</td></tr>
           </tbody>
         </table>
+        <div class="insight-box">
+          <h5>Key Insight</h5>
+          <p>Android text larger than 14sp may not reach the 200% scaling threshold. However, this is still considered compliant as the platform provides the maximum scaling available to users.</p>
+        </div>
       </section>
       <section class="implementation-requirements">
         <h3>Implementation Requirements for WCAG 1.4.4 Compliance</h3>
@@ -497,9 +564,10 @@ Text(
       </section>
       <section class="testing-guidelines">
         <h3>Testing for WCAG 1.4.4 Compliance</h3>
+        <h4>Testing Checklist</h4>
         <div class="checklist">
           <article class="checklist-section">
-            <h4>iOS Testing</h4>
+            <h5>iOS Testing</h5>
             <ul>
               <li>Test with all Dynamic Type sizes (XS to AX5)</li>
               <li>Verify text scales appropriately without layout breaks</li>
@@ -512,7 +580,7 @@ Text(
             </ul>
           </article>
           <article class="checklist-section">
-            <h4>Android Testing</h4>
+            <h5>Android Testing</h5>
             <ul>
               <li>Test with font scale from 0.85x to 1.3x</li>
               <li>Use ADB to test extreme scaling (up to 2.0x): <code>adb shell settings put system font_scale 2.0</code></li>
@@ -527,6 +595,9 @@ Text(
       </section>
       <section class="webview-section">
         <h3>WebView Accessibility Considerations</h3>
+        <p>
+          For apps using WebViews, additional considerations apply:
+        </p>
         <ul>
           <li>Allow pinch-to-zoom and system text scaling in WebViews</li>
           <li>Test with font scaling and zoom enabled</li>
@@ -582,6 +653,17 @@ fun WebView.setScale(initialScale: Float, zoomScale: Float) {
             </ul>
           </article>
         </div>
+      </section>
+      <section class="recommendations">
+        <h4>W3C MATF Recommendations Implementation</h4>
+        <p>Based on the ongoing W3C MATF discussions, this guide implements:</p>
+        <ul>
+          <li><strong>Clear AT vs. Accessibility Feature distinction:</strong> We differentiate between zoom (assistive technology) and text scaling (accessibility feature)</li>
+          <li><strong>Non-linear scaling documentation:</strong> We provide actual scaling data from both platforms</li>
+          <li><strong>Platform-specific requirements:</strong> We detail what each OS requires for compliance</li>
+          <li><strong>WebView considerations:</strong> We address the complexities of web content in native apps</li>
+          <li><strong>Testing methodologies:</strong> We provide concrete testing steps for validation</li>
+        </ul>
       </section>
     </section>
   </main>
