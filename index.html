@@ -575,5 +575,69 @@ Text(
               <h4>Contrast & Structure</h4>
               <label><input type="checkbox" disabled checked> All foreground/background color pairs pass WCAG 2.1 AA contrast</label>
               <label><input type="checkbox" disabled checked> Heading structure is strictly hierarchical</label>
-              <label><input type="
-
+              <label><input type="checkbox" disabled checked> Color is not the sole means to communicate information</label>
+            </section>
+          </div>
+        </div>
+        <div class="section">
+          <h3>Testing and Tools</h3>
+          <div class="testing-guidelines">
+            <ul>
+              <li>Test with screen readers (VoiceOver, TalkBack, NVDA, JAWS)</li>
+              <li>Test with OS accessibility features (large text, high contrast, etc.)</li>
+              <li>Test keyboard navigation for all interactive elements</li>
+              <li>Test on both light and dark themes</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<script>
+  // Accessible tab keyboard navigation
+  const tabs = document.querySelectorAll('[role="tab"]');
+  const tabPanels = document.querySelectorAll('[role="tabpanel"]');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', activateTab);
+    tab.addEventListener('keydown', e => {
+      let idx = Array.prototype.indexOf.call(tabs, document.activeElement);
+      if (e.key === "ArrowRight") {
+        let next = (idx + 1) % tabs.length;
+        tabs[next].focus();
+      }
+      if (e.key === "ArrowLeft") {
+        let prev = (idx - 1 + tabs.length) % tabs.length;
+        tabs[prev].focus();
+      }
+      if (e.key === "Home") {
+        tabs[0].focus();
+      }
+      if (e.key === "End") {
+        tabs[tabs.length - 1].focus();
+      }
+      if (e.key === "Enter" || e.key === " ") {
+        activateTab.call(document.activeElement, e);
+      }
+    });
+  });
+  function activateTab(e) {
+    tabs.forEach(tab => {
+      tab.setAttribute('aria-selected', 'false');
+      tab.setAttribute('tabindex', '-1');
+    });
+    this.setAttribute('aria-selected', 'true');
+    this.setAttribute('tabindex', '0');
+    this.focus();
+    tabPanels.forEach(panel => {
+      panel.setAttribute('aria-hidden', 'true');
+      panel.classList.remove('active');
+    });
+    const panel = document.getElementById(this.getAttribute('aria-controls'));
+    panel.setAttribute('aria-hidden', 'false');
+    panel.classList.add('active');
+  }
+</script>
+</body>
+</html>
