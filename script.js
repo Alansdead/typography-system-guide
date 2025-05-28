@@ -1,49 +1,54 @@
-// Accessible Tab Switching and Typography Scaling Functionality
 document.addEventListener('DOMContentLoaded', function() {
+    // Tab functionality
     const tabs = Array.from(document.querySelectorAll('.tab'));
-    const tabContents = document.querySelectorAll('.tab-content');
+    const tabContents = document.querySelectorAll('.panel');
 
     function activateTab(tab) {
+        // Remove active class from all tabs
         tabs.forEach(t => {
             t.classList.remove('active');
             t.setAttribute('aria-selected', 'false');
             t.setAttribute('tabindex', '-1');
         });
+        
+        // Add active class to clicked tab
         tab.classList.add('active');
         tab.setAttribute('aria-selected', 'true');
         tab.setAttribute('tabindex', '0');
-        tab.focus();
 
+        // Show corresponding panel
         const tabId = tab.getAttribute('data-tab');
         tabContents.forEach(content => {
             content.classList.remove('active');
-            content.setAttribute('hidden', 'true');
-            if (content.id === `${tabId}-content`) {
+            if (content.id === `${tabId}-panel`) {
                 content.classList.add('active');
-                content.removeAttribute('hidden');
             }
         });
     }
 
+    // Add click listeners to tabs
     tabs.forEach(tab => {
         tab.addEventListener('click', () => activateTab(tab));
 
+        // Keyboard navigation for tabs
         tab.addEventListener('keydown', (e) => {
             let idx = tabs.indexOf(tab);
             if (e.key === 'ArrowRight') {
                 e.preventDefault();
                 activateTab(tabs[(idx + 1) % tabs.length]);
+                tabs[(idx + 1) % tabs.length].focus();
             } else if (e.key === 'ArrowLeft') {
                 e.preventDefault();
                 activateTab(tabs[(idx - 1 + tabs.length) % tabs.length]);
+                tabs[(idx - 1 + tabs.length) % tabs.length].focus();
             }
         });
     });
 
     // iOS Scale Slider functionality
-    const iosScaleSlider = document.getElementById('ios-scale-slider');
+    const iosScaleSlider = document.getElementById('ios-scale');
     const iosScaleValue = document.getElementById('ios-scale-value');
-    const iosScaleLabels = ['xSmall', 'Small', 'Medium', 'Large (Default)', 'xLarge', 'xxLarge', 'xxxLarge'];
+    const iosScaleLabels = ['XS', 'S', 'M', 'L (Default)', 'XL', 'XXL', 'XXXL'];
     const iosScaleFactors = [0.8, 0.9, 0.95, 1, 1.15, 1.3, 1.5];
 
     if (iosScaleSlider && iosScaleValue) {
@@ -51,23 +56,32 @@ document.addEventListener('DOMContentLoaded', function() {
             const index = parseInt(iosScaleSlider.value, 10);
             iosScaleValue.textContent = iosScaleLabels[index];
 
-            // Update text sizes with scale factor
-            document.querySelectorAll('.ios-large-title, .ios-title-1, .ios-body, .ios-caption-1').forEach(el => {
-                if (el.classList.contains('ios-large-title')) {
-                    el.style.fontSize = `${2.25 * iosScaleFactors[index]}rem`;
-                } else if (el.classList.contains('ios-title-1')) {
-                    el.style.fontSize = `${1.5 * iosScaleFactors[index]}rem`;
-                } else if (el.classList.contains('ios-body')) {
-                    el.style.fontSize = `${1 * iosScaleFactors[index]}rem`;
-                } else if (el.classList.contains('ios-caption-1')) {
-                    el.style.fontSize = `${0.75 * iosScaleFactors[index]}rem`;
-                }
-            });
+            // Update iOS demo text sizes
+            const iosLargeDemo = document.getElementById('ios-large-demo');
+            const iosTitle1Demo = document.getElementById('ios-title1-demo');
+            const iosTitle2Demo = document.getElementById('ios-title2-demo');
+            const iosHeadlineDemo = document.getElementById('ios-headline-demo');
+            const iosBodyDemo = document.getElementById('ios-body-demo');
+            const iosCalloutDemo = document.getElementById('ios-callout-demo');
+            const iosFootnoteDemo = document.getElementById('ios-footnote-demo');
+            const iosCaptionDemo = document.getElementById('ios-caption-demo');
+
+            if (iosLargeDemo) iosLargeDemo.style.fontSize = `${2.125 * iosScaleFactors[index]}rem`;
+            if (iosTitle1Demo) iosTitle1Demo.style.fontSize = `${1.75 * iosScaleFactors[index]}rem`;
+            if (iosTitle2Demo) iosTitle2Demo.style.fontSize = `${1.375 * iosScaleFactors[index]}rem`;
+            if (iosHeadlineDemo) iosHeadlineDemo.style.fontSize = `${1.0625 * iosScaleFactors[index]}rem`;
+            if (iosBodyDemo) iosBodyDemo.style.fontSize = `${1.0625 * iosScaleFactors[index]}rem`;
+            if (iosCalloutDemo) iosCalloutDemo.style.fontSize = `${1.0 * iosScaleFactors[index]}rem`;
+            if (iosFootnoteDemo) iosFootnoteDemo.style.fontSize = `${0.8125 * iosScaleFactors[index]}rem`;
+            if (iosCaptionDemo) iosCaptionDemo.style.fontSize = `${0.75 * iosScaleFactors[index]}rem`;
         });
+
+        // Initialize iOS slider
+        iosScaleSlider.dispatchEvent(new Event('input'));
     }
 
     // Android Scale Slider functionality
-    const androidScaleSlider = document.getElementById('android-scale-slider');
+    const androidScaleSlider = document.getElementById('android-scale');
     const androidScaleValue = document.getElementById('android-scale-value');
 
     if (androidScaleSlider && androidScaleValue) {
@@ -75,60 +89,81 @@ document.addEventListener('DOMContentLoaded', function() {
             const scaleFactor = parseFloat(androidScaleSlider.value);
             androidScaleValue.textContent = `${scaleFactor.toFixed(1)}x`;
 
-            // Update text sizes with scale factor
-            document.querySelectorAll('.android-display-large, .android-headline-large, .android-body-large, .android-label-medium').forEach(el => {
-                if (el.classList.contains('android-display-large')) {
-                    el.style.fontSize = `${2.25 * scaleFactor}rem`;
-                } else if (el.classList.contains('android-headline-large')) {
-                    el.style.fontSize = `${1.5 * scaleFactor}rem`;
-                } else if (el.classList.contains('android-body-large')) {
-                    el.style.fontSize = `${1 * scaleFactor}rem`;
-                } else if (el.classList.contains('android-label-medium')) {
-                    el.style.fontSize = `${0.75 * scaleFactor}rem`;
-                }
-            });
+            // Update Android demo text sizes
+            const androidDisplayDemo = document.getElementById('android-display-demo');
+            const androidHeadlineDemo = document.getElementById('android-headline-demo');
+            const androidTitleDemo = document.getElementById('android-title-demo');
+            const androidBodyDemo = document.getElementById('android-body-demo');
+            const androidLabelDemo = document.getElementById('android-label-demo');
+
+            if (androidDisplayDemo) androidDisplayDemo.style.fontSize = `${3.5625 * scaleFactor}rem`;
+            if (androidHeadlineDemo) androidHeadlineDemo.style.fontSize = `${2.0 * scaleFactor}rem`;
+            if (androidTitleDemo) androidTitleDemo.style.fontSize = `${1.0 * scaleFactor}rem`;
+            if (androidBodyDemo) androidBodyDemo.style.fontSize = `${1.0 * scaleFactor}rem`;
+            if (androidLabelDemo) androidLabelDemo.style.fontSize = `${0.6875 * scaleFactor}rem`;
         });
-    }
 
-    // Initialize the sliders on page load
-    if (iosScaleSlider) iosScaleSlider.dispatchEvent(new Event('input'));
-    if (androidScaleSlider) androidScaleSlider.dispatchEvent(new Event('input'));
+        // Initialize Android slider
+        androidScaleSlider.dispatchEvent(new Event('input'));
+    }
 });
-// Dark mode toggle logic with system fallback and persistence
+
+// Theme toggle functionality - Using in-memory storage instead of localStorage
 (function(){
-  // Create the theme toggle button
-  const btn = document.createElement('button');
-  btn.className = 'theme-toggle';
-  btn.setAttribute('aria-label', 'Toggle dark mode');
-  btn.innerHTML = '🌙 Dark Mode';
+    const btn = document.querySelector('.theme-toggle');
+    const themeIcon = document.querySelector('.theme-icon');
+    const themeText = document.querySelector('.theme-text');
+    
+    if (!btn) return;
+    
+    // Store theme state in memory
+    let currentTheme = 'light';
+    
+    // Detect user's preferred color scheme
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    
+    // Set initial state based on user preference
+    window.addEventListener('DOMContentLoaded', () => {
+        if (prefersDark) {
+            currentTheme = 'dark';
+            document.documentElement.setAttribute('data-theme', 'dark');
+            themeIcon.textContent = '☀️';
+            themeText.textContent = 'Light';
+        } else {
+            currentTheme = 'light';
+            document.documentElement.removeAttribute('data-theme');
+            themeIcon.textContent = '🌙';
+            themeText.textContent = 'Dark';
+        }
+    });
 
-  // Insert into DOM after body loads
-  window.addEventListener('DOMContentLoaded', () => {
-    document.body.appendChild(btn);
-
-    // Initial state: prefer saved theme, fallback to system
-    const saved = localStorage.getItem('theme');
-    if (saved === 'dark' || saved === 'light') {
-      document.documentElement.setAttribute('data-theme', saved);
-      btn.innerHTML = saved === 'dark' ? '☀️ Light Mode' : '🌙 Dark Mode';
-    } else {
-      document.documentElement.removeAttribute('data-theme');
-      btn.innerHTML = window.matchMedia('(prefers-color-scheme: dark)').matches
-        ? '☀️ Light Mode' : '🌙 Dark Mode';
-    }
-  });
-
-  // Toggle handler
-  btn.addEventListener('click', () => {
-    const current = document.documentElement.getAttribute('data-theme');
-    if (current === 'dark') {
-      document.documentElement.setAttribute('data-theme', 'light');
-      localStorage.setItem('theme', 'light');
-      btn.innerHTML = '🌙 Dark Mode';
-    } else {
-      document.documentElement.setAttribute('data-theme', 'dark');
-      localStorage.setItem('theme', 'dark');
-      btn.innerHTML = '☀️ Light Mode';
-    }
-  });
+    // Toggle handler
+    btn.addEventListener('click', () => {
+        if (currentTheme === 'dark') {
+            currentTheme = 'light';
+            document.documentElement.setAttribute('data-theme', 'light');
+            themeIcon.textContent = '🌙';
+            themeText.textContent = 'Dark';
+        } else {
+            currentTheme = 'dark';
+            document.documentElement.setAttribute('data-theme', 'dark');
+            themeIcon.textContent = '☀️';
+            themeText.textContent = 'Light';
+        }
+    });
+    
+    // Listen for changes in user's color scheme preference
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+        if (e.matches && currentTheme === 'light') {
+            currentTheme = 'dark';
+            document.documentElement.setAttribute('data-theme', 'dark');
+            themeIcon.textContent = '☀️';
+            themeText.textContent = 'Light';
+        } else if (!e.matches && currentTheme === 'dark') {
+            currentTheme = 'light';
+            document.documentElement.removeAttribute('data-theme');
+            themeIcon.textContent = '🌙';
+            themeText.textContent = 'Dark';
+        }
+    });
 })();
