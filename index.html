@@ -1,25 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<link rel="stylesheet" href="style.css">
+   <link rel="stylesheet" href="style.css">
 <script src="script.js"></script>
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <meta name="description" content="A comprehensive, accessible typography guide for iOS and Android mobile apps.">
-   <title>Typography System Guide - iOS & Android 2025</title>
+   <meta name="description" content="A comprehensive, accessible typography guide for iOS and Android mobile apps - Dark Theme">
+   <title>Typography System Guide - iOS & Android 2025 (Dark)</title>
 </head>
 <body>
    <a href="#main" class="skip-link">Skip to main content</a>
 
-   <button class="theme-toggle" aria-label="Toggle dark mode">
-      <span class="theme-icon">🌙</span>
-      <span class="theme-text">Dark</span>
-   </button>
-
    <header class="header">
       <div class="container">
          <h1>Typography System Guide for iOS and Android</h1>
-         <p class="subtitle">Comprehensive guide for implementing accessible typography in mobile apps – 2025 Edition</p>
+         <p class="subtitle">Comprehensive guide for implementing accessible typography in mobile apps – 2025 Edition (Dark Theme)</p>
       </div>
    </header>
 
@@ -1011,7 +1006,7 @@ override fun onConfigurationChanged(newConfig: Configuration) {
                <h3>Testing for WCAG 1.4.4 Compliance</h3>
                <div class="testing-guidelines">
                   <h4>Complete Testing Process</h4>
-                  
+
                   <div class="subsection">
                      <h5>Step 1: Platform Setup</h5>
                      <div class="testing-steps">
@@ -1021,11 +1016,11 @@ override fun onConfigurationChanged(newConfig: Configuration) {
                               <li>Open <strong>Settings</strong> → <strong>Accessibility</strong></li>
                               <li>Tap <strong>Display & Text Size</strong></li>
                               <li>Select <strong>Larger Text</strong></li>
-                              <li>Enable <strong>Larger Accessibility Sizes</strong> toggle</li>
+                              <li>Enable <strong>Larger Accessibility Sizes</strong> ee</li>
                               <li>Test all sizes from XS to AX5</li>
                            </ol>
                         </div>
-                        
+
                         <div class="testing-step">
                            <h6>🤖 Android Setup</h6>
                            <ol>
@@ -1033,7 +1028,8 @@ override fun onConfigurationChanged(newConfig: Configuration) {
                               <li>Tap <strong>Font size and style</strong></li>
                               <li>Test all sizes (Small to Huge)</li>
                               <li>For extreme testing, use ADB:<br>
-                                 <code>adb shell settings put system font_scale 2.0</code></li>
+                                 <code>adb shell settings put system font_scale 2.0</code>
+                              </li>
                            </ol>
                         </div>
                      </div>
@@ -1066,7 +1062,7 @@ override fun onConfigurationChanged(newConfig: Configuration) {
                               <li><strong>Cut-off text:</strong> Text clipped in constrained spaces</li>
                            </ul>
                         </div>
-                        
+
                         <div class="issue-category">
                            <h6>🎯 Interaction Issues</h6>
                            <ul>
@@ -1197,4 +1193,6 @@ override fun onConfigurationChanged(newConfig: Configuration) {
       </div>
    </footer>
 </body>
+
 </html>
+
