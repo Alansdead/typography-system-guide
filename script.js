@@ -136,21 +136,7 @@ document.addEventListener('DOMContentLoaded', function() {
             themeText.textContent = 'Dark';
         }
     });
-
-    // Toggle handler
-    btn.addEventListener('click', () => {
-        if (currentTheme === 'dark') {
-            currentTheme = 'light';
-            document.documentElement.setAttribute('data-theme', 'light');
-            themeIcon.textContent = '🌙';
-            themeText.textContent = 'Dark';
-        } else {
-            currentTheme = 'dark';
-            document.documentElement.setAttribute('data-theme', 'dark');
-            themeIcon.textContent = '☀️';
-            themeText.textContent = 'Light';
-        }
-    });
+;
     
     // Listen for changes in user's color scheme preference
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
