@@ -1,108 +1,50 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
-   <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <meta name="description" content="A comprehensive, accessible typography guide for iOS and Android mobile apps">
-   <title>Typography System Guide — iOS &amp; Android (V3.1)</title>
-   <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Typography System Guide</title>
 </head>
-
 <body>
-   <!-- ===== ACCESSIBILITY SKIP LINK ===== -->
-   <a href="#main" class="skip-link">Skip to main content</a>
-
-   <!-- ===== HEADER SECTION ===== -->
-   <header class="header">
-      <div class="container">
-         <h1>Typography System Guide for iOS and Android</h1>
-         <p class="subtitle">Comprehensive guide for implementing accessible typography in mobile apps – (V 3.1)</p>
-      </div>
-   </header>
-
-   <!-- ===== MAIN CONTENT ===== -->
-   <main id="main" class="main">
-      <div class="container">
-      
-         <!-- ===== TAB NAVIGATION ===== -->
-         <nav class="tabs" role="tablist" aria-label="Platform selection">
-            <button class="tab active" role="tab" aria-selected="true" aria-controls="ios-panel" id="ios-tab" data-tab="ios">
-               iOS Typography
-            </button>
-            <button class="tab" role="tab" aria-selected="false" aria-controls="android-panel" id="android-tab" data-tab="android">
-               Android Typography
-            </button>
-            <button class="tab" role="tab" aria-selected="false" aria-controls="accessibility-panel" id="accessibility-tab" data-tab="accessibility">
-               Accessibility Guidelines
-            </button>
-         </nav>
-
-         <!-- ===== iOS PANEL ===== -->
-         <section class="panel active" id="ios-panel" role="tabpanel" aria-labelledby="ios-tab">
-            <div class="intro-card">
-               <h2>iOS Typography System</h2>
-               <p>Apple's San Francisco font family with Dynamic Type support for accessibility. Automatically switches between SF Pro Text for smaller sizes (≤19pt) and SF Pro Display for larger sizes (≥20pt). As of iOS 18, Dynamic Type supports <strong>12 sizes</strong> — xSmall through xxxLarge plus five Larger Accessibility Sizes (AX1–AX5) — and body text can scale up to 312% at AX5.</p>
-            </div>
-         </section>
-
-         <!-- ===== ANDROID PANEL ===== -->
-         <section class="panel" id="android-panel" role="tabpanel" aria-labelledby="android-tab">
-            <div class="intro-card android">
-               <h2>Android Typography System</h2>
-            </div>
-
-            <div class="section">
-               <ul>
-                  <li>This guide recommends a minimum of 16sp for body text readability; Material Design 3’s official minimum is 14sp.</li>
-               </ul>
-            </div>
-         </section>
-
-         <!-- ===== ACCESSIBILITY PANEL ===== -->
-         <section class="panel" id="accessibility-panel" role="tabpanel" aria-labelledby="accessibility-tab">
-            <div class="intro-card">
-               <h2>Typography Accessibility Guidelines</h2>
-            </div>
-
-            <div class="section">
-               <table class="scaling-table">
-                  <caption>Android Non-Linear Scaling Behavior (Android 14+, max 2.0x)</caption>
-                  <thead>
-                     <tr>
-                        <th>Base Size</th>
-                        <th>Default (1.0x)</th>
-                        <th>Maximum (2.0x setting, Android 14+)</th>
-                        <th>Actual Scale Factor</th>
-                        <th>Reaches 200%?</th>
-                     </tr>
-                  </thead>
-                  <tbody>
-                     <tr>
-                        <td>8sp</td>
-                        <td>8sp</td>
-                        <td>16sp</td>
-                        <td>2.0x (200%)</td>
-                        <td>✅ Yes</td>
-                     </tr>
-                     <tr>
-                        <td>12sp</td>
-                        <td>12sp</td>
-                        <td>24sp</td>
-                        <td>2.0x (200%)<br><strong>Note: Very small text sizes may not follow exact percentages due to non-linear scaling.</strong></td>
-                     </tr>
-                  </tbody>
-               </table>
-            </div>
-         </section>
-      </div>
-   </main>
-
-   <footer class="footer">
-      <div class="container">
-         <p>&copy; 2026
-         Typography System Guide. All rights reserved.</p>
-      </div>
-   </footer>
-
-   <script src="script.js"></script>
+    <h1>Typography System Guide</h1>
+    <section id="ios">
+        <h2>iOS Typography System</h2>
+        <p>Body text scaling percentage: 312%</p>
+    </section>
+    <section id="wcag">
+        <h2>WCAG 2.2 Success Criterion</h2>
+        <p>New in WCAG 2.2: [content goes here]</p>
+    </section>
+    <section id="swiftui">
+        <h2>SwiftUI Dynamic Type Size Code Example</h2>
+        <code>
+            Text("Hello World")
+                .font(.system(size: UIFont.preferredFont(forTextStyle: .body).pointSize))
+                .dynamicTypeSize(.xSmall)
+                // Full recommended range: .xxSmall, .xSmall, .small, .medium, .large, .xLarge
+        </code>
+    </section>
+    <section id="android">
+        <h2>Android Body Text Minimum Size</h2>
+        <p>This guide recommends a minimum of 16sp for body text readability; Material Design 3’s official minimum is 14sp.</p>
+        <table id="non-linear-scaling">
+            <caption>Android Non-Linear Scaling</caption>
+            <tr>
+                <th>Text Size</th>
+                <th>Scaling</th>
+            </tr>
+            <tr>
+                <td>Small</td>
+                <td>Normal</td>
+            </tr>
+            <tr>
+                <td>Large</td>
+                <td>Increased</td>
+            </tr>
+        </table>
+        <footer>
+            <p>Note: Small text sizes nearing 200% may vary in scale based on the non-linear curve.</p>
+        </footer>
+    </section>
 </body>
 </html>
