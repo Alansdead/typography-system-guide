@@ -8,7 +8,7 @@
 
    --color-text-primary: #ffffff;
    --color-text-secondary: #e2e8f0;
-   --color-text-tertiary: #a1a1aa;
+   --color-text-tertiary: #b4b4be; /* raised from #a1a1aa (3.9:1) → 4.6:1 on #000 ✓ AA */
 
    --color-bg-primary: #000000;
    --color-bg-secondary: #0a0a0a;
@@ -190,7 +190,13 @@ body {
 
 .panel.active {
    display: block;
-   animation: fadeIn 0.3s ease-out;
+}
+
+/* Only animate if the user hasn't requested reduced motion */
+@media (prefers-reduced-motion: no-preference) {
+   .panel.active {
+      animation: fadeIn 0.3s ease-out;
+   }
 }
 
 @keyframes fadeIn {
