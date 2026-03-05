@@ -180,61 +180,11 @@ document.addEventListener('DOMContentLoaded', function() {
       }
    };
 
-   // ===== THEME TOGGLE FUNCTIONALITY =====
+   // ===== THEME TOGGLE =====
+   // No theme toggle UI — app is dark mode only.
+   // ThemeManager kept as a stub so init() doesn't throw.
    const ThemeManager = {
-      button: $('.theme-toggle'),
-      icon: $('.theme-icon'),
-      text: $('.theme-text'),
-      currentTheme: 'light',
-      
-      init() {
-         if (!this.button) return;
-         this.setupInitialTheme();
-         this.bindEvents();
-      },
-      
-      setupInitialTheme() {
-         const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-         
-         if (prefersDark) {
-            this.setTheme('dark');
-         } else {
-            this.setTheme('light');
-         }
-      },
-      
-      bindEvents() {
-         this.button.addEventListener('click', () => this.toggleTheme());
-         
-         // Listen for system theme changes
-         window.matchMedia('(prefers-color-scheme: dark)')
-            .addEventListener('change', (e) => {
-               if (e.matches && this.currentTheme === 'light') {
-                  this.setTheme('dark');
-               } else if (!e.matches && this.currentTheme === 'dark') {
-                  this.setTheme('light');
-               }
-            });
-      },
-      
-      setTheme(theme) {
-         this.currentTheme = theme;
-         
-         if (theme === 'dark') {
-            document.documentElement.setAttribute('data-theme', 'dark');
-            if (this.icon) this.icon.textContent = '☀️';
-            if (this.text) this.text.textContent = 'Light';
-         } else {
-            document.documentElement.removeAttribute('data-theme');
-            if (this.icon) this.icon.textContent = '🌙';
-            if (this.text) this.text.textContent = 'Dark';
-         }
-      },
-      
-      toggleTheme() {
-         const newTheme = this.currentTheme === 'light' ? 'dark' : 'light';
-         this.setTheme(newTheme);
-      }
+      init() {}
    };
 
    // ===== CHECKLIST FUNCTIONALITY =====
