@@ -33,12 +33,16 @@ document.addEventListener('DOMContentLoaded', function() {
          activeTab.setAttribute('aria-selected', 'true');
          activeTab.setAttribute('tabindex', '0');
          
-         // Show corresponding panel
+         // Show corresponding panel and make it reachable via Tab key.
+         // ARIA tab pattern: Tab from tablist moves into the active panel,
+         // not to the next tab button. tabindex="0" on the panel enables this.
          const tabId = activeTab.getAttribute('data-tab');
          this.panels.forEach(panel => {
             panel.classList.remove('active');
+            panel.removeAttribute('tabindex');
             if (panel.id === `${tabId}-panel`) {
                panel.classList.add('active');
+               panel.setAttribute('tabindex', '0');
             }
          });
       },
@@ -60,6 +64,17 @@ document.addEventListener('DOMContentLoaded', function() {
                this.activateTab(this.tabs[nextIndex]);
                this.tabs[nextIndex].focus();
                break;
+            case 'Home': /* ARIA tabs pattern requires Home = first tab */
+               e.preventDefault();
+               this.activateTab(this.tabs[0]);
+               this.tabs[0].focus();
+               break;
+            case 'End': /* ARIA tabs pattern requires End = last tab */
+               e.preventDefault();
+               nextIndex = this.tabs.length - 1;
+               this.activateTab(this.tabs[nextIndex]);
+               this.tabs[nextIndex].focus();
+               break;
          }
       }
    };
@@ -68,8 +83,10 @@ document.addEventListener('DOMContentLoaded', function() {
    const IOSScaler = {
       slider: $('#ios-scale'),
       valueDisplay: $('#ios-scale-value'),
-      labels: ['XS', 'S', 'M', 'L (Default)', 'XL', 'XXL', 'XXXL'],
-      scaleFactors: [0.8, 0.9, 0.95, 1, 1.15, 1.3, 1.5],
+      // 12 Dynamic Type sizes as of iOS 18: xSmall → xxxLarge + AX1–AX5
+      labels: ['xSmall', 'Small', 'Medium', 'Large (Default)', 'xLarge', 'xxLarge', 'xxxLarge', 'AX1', 'AX2', 'AX3', 'AX4', 'AX5'],
+      // Approximate scale factors relative to Large (default = 1.0); AX sizes from Apple docs
+      scaleFactors: [0.8, 0.9, 0.95, 1, 1.15, 1.3, 1.5, 1.7, 1.9, 2.1, 2.35, 2.65],
       elements: {
          large: $('#ios-large-demo'),
          title1: $('#ios-title1-demo'),
@@ -118,10 +135,10 @@ document.addEventListener('DOMContentLoaded', function() {
       }
    };
 
-   // ===== ANDROID SCALING FUNCTIONALITY =====
    const AndroidScaler = {
       slider: $('#android-scale'),
       valueDisplay: $('#android-scale-value'),
+      // Android 14+ supports up to 2.0x font scale (was 1.3x before Android 14)
       elements: {
          display: $('#android-display-demo'),
          headline: $('#android-headline-demo'),
@@ -222,7 +239,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
    // ===== CHECKLIST FUNCTIONALITY =====
    const ChecklistManager = {
-      checkboxes: $('.checklist-item input[type="checkbox"]'),
+      checkboxes: $$('.checklist-item input[type="checkbox"]'), /* was $() — only returned first checkbox */
       
       init() {
          this.bindEvents();
@@ -237,16 +254,19 @@ document.addEventListener('DOMContentLoaded', function() {
       handleCheckboxChange(checkbox) {
          const item = checkbox.closest('.checklist-item');
          if (checkbox.checked) {
-            item.style.opacity = '0.7';
+            // Use text-decoration instead of opacity — opacity reduces contrast below AA
+            item.style.textDecoration = 'line-through';
+            item.style.color = 'var(--color-text-tertiary)';
          } else {
-            item.style.opacity = '1';
+            item.style.textDecoration = '';
+            item.style.color = '';
          }
       }
    };
 
    // ===== SMOOTH SCROLLING FOR ANCHOR LINKS =====
    const SmoothScrollManager = {
-      links: $('a[href^="#"]'),
+      links: $$('a[href^="#"]'), /* was $() — only returned first anchor link */
       
       init() {
          this.bindEvents();
@@ -302,7 +322,7 @@ document.addEventListener('DOMContentLoaded', function() {
       
       setupKeyboardNavigation() {
          // Enhanced keyboard navigation for interactive elements
-         const interactiveElements = $(this.focusableElements);
+         const interactiveElements = $$(this.focusableElements); /* was $() — only returned first element */
          
          interactiveElements.forEach(element => {
             element.addEventListener('keydown', (e) => {
@@ -323,7 +343,7 @@ document.addEventListener('DOMContentLoaded', function() {
       
       setupLazyLoading() {
          // Implement lazy loading for heavy content sections
-         const sections = $('.section');
+         const sections = $$('.section'); /* was $() — only returned first section */
          
          sections.forEach(section => {
             if (section.offsetTop > window.innerHeight * 2) {
@@ -345,7 +365,7 @@ document.addEventListener('DOMContentLoaded', function() {
             rootMargin: '50px'
          });
          
-         $('.type-card, .practice-card, .checklist-card').forEach(card => {
+         $$('.type-card, .practice-card, .checklist-card').forEach(card => { /* was $() */
             observer.observe(card);
          });
       }
@@ -364,7 +384,7 @@ document.addEventListener('DOMContentLoaded', function() {
       
       handleResize() {
          // Handle responsive behavior for sliders on mobile
-         const sliderWrappers = $('.slider-wrapper');
+         const sliderWrappers = $$('.slider-wrapper'); /* was $() — only returned first wrapper */
          const isMobile = window.innerWidth <= 768;
          
          sliderWrappers.forEach(wrapper => {
@@ -388,7 +408,7 @@ document.addEventListener('DOMContentLoaded', function() {
       
       enhanceInputs() {
          // Enhance range inputs with better accessibility
-         const rangeInputs = $('input[type="range"]');
+         const rangeInputs = $$('input[type="range"]'); /* was $() — only returned first range */
          
          rangeInputs.forEach(input => {
             // Add aria-valuetext for better screen reader support
@@ -407,7 +427,7 @@ document.addEventListener('DOMContentLoaded', function() {
       
       setupValidation() {
          // Add basic form validation and feedback
-         const inputs = $('input, select, textarea');
+         const inputs = $$('input, select, textarea'); /* was $() — only returned first input */
          
          inputs.forEach(input => {
             input.addEventListener('invalid', (e) => {
@@ -490,7 +510,7 @@ document.addEventListener('DOMContentLoaded', function() {
       
       trackUserInteractions() {
          // Track tab switches for UX insights
-         const tabs = $('.tab');
+         const tabs = $$('.tab'); /* was $() — only returned first tab */
          tabs.forEach(tab => {
             tab.addEventListener('click', () => {
                this.logEvent('tab_switch', {
@@ -501,7 +521,7 @@ document.addEventListener('DOMContentLoaded', function() {
          });
          
          // Track slider usage
-         const sliders = $('.slider');
+         const sliders = $$('.slider'); /* was $() — only returned first slider */
          sliders.forEach(slider => {
             slider.addEventListener('change', () => {
                this.logEvent('slider_interaction', {
@@ -591,7 +611,7 @@ window.TypographyGuide = {
    // Utility functions that might be useful externally
    utils: {
       $: $,
-      $: $,
+      $$: $$, /* was defined twice as $ — $$ was never exported */
       
       // Debounce function for performance
       debounce: (func, wait) => {
