@@ -1,4 +1,14 @@
-<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>Typography System Guide for iOS and Android [OFFICIAL -  v1.2]</title>
+    <link rel="stylesheet" href="./style.css">
+
+  </head>
+    
+  <body>
+  <!DOCTYPE html>
 <html lang="en">
 <head>
    <meta charset="UTF-8">
@@ -41,7 +51,7 @@
          <section class="panel active" id="ios-panel" role="tabpanel" aria-labelledby="ios-tab">
             <div class="intro-card">
                <h2>iOS Typography System</h2>
-               <p>Apple's San Francisco font family with Dynamic Type support for accessibility. Automatically switches between SF Pro Text for smaller sizes (≤19pt) and SF Pro Display for larger sizes (≥20pt).</p>
+               <p>Apple's San Francisco font family with Dynamic Type support for accessibility. Automatically switches between SF Pro Text for smaller sizes (≤19pt) and SF Pro Display for larger sizes (≥20pt). As of iOS 18, Dynamic Type supports <strong>12 sizes</strong> — xSmall through xxxLarge plus five Larger Accessibility Sizes (AX1–AX5) — and body text can scale up to 310% at AX5.</p>
             </div>
 
             <div class="section">
@@ -297,7 +307,7 @@
                   <div class="slider-container">
                      <label for="ios-scale" class="slider-label">Text Size</label>
                      <div class="slider-wrapper">
-                        <input type="range" id="ios-scale" min="0" max="6" value="3" class="slider" aria-describedby="ios-scale-value">
+                        <input type="range" id="ios-scale" min="0" max="11" value="3" class="slider" aria-describedby="ios-scale-value">
                         <div class="slider-value" id="ios-scale-value">Large (Default)</div>
                      </div>
                   </div>
@@ -343,20 +353,31 @@
                <p>Here are the best practices to properly implement typography in iOS applications:</p>
                <ul>
                   <li>Use San Francisco font for a native iOS look and feel</li>
-                  <li>Implement Dynamic Type for accessibility compliance</li>
+                  <li>Implement Dynamic Type for accessibility compliance — iOS 18 supports 12 sizes: xSmall, Small, Medium, Large (default), xLarge, xxLarge, xxxLarge, and AX1–AX5</li>
                   <li>Set minimum font size for body text to 17pt for readability</li>
-                  <li>For custom fonts, use UIFontMetrics for Dynamic Type</li>
-                  <li>Test your app with all Dynamic Type size settings</li>
+                  <li>For custom fonts, use <code>UIFontMetrics</code> for Dynamic Type scaling</li>
+                  <li>Test your app with <strong>all 12 Dynamic Type sizes</strong>, including all five Larger Accessibility Sizes (AX1–AX5). Body text reaches up to 310% at AX5 — design layouts to handle this</li>
+                  <li><strong>Large Content Viewer (iOS 13+):</strong> For fixed-size UI elements that cannot grow with Dynamic Type — such as tab bars, toolbars, and navigation bar icons — implement the Large Content Viewer so users can still identify them at maximum text sizes. Use <code>showsLargeContentViewer = true</code> on UIKit elements or the <code>.accessibilityShowsLargeContentViewer()</code> modifier in SwiftUI</li>
                </ul>
                <div class="code-block">
-                  <pre><code>// Swift code for Dynamic Type with system font
+                  <pre><code>// Swift: Dynamic Type with system font
 label.font = UIFont.preferredFont(forTextStyle: .body)
 label.adjustsFontForContentSizeCategory = true
 
-// With custom font
+// Swift: Custom font with UIFontMetrics
 let customFont = UIFont(name: "CustomFont-Regular", size: 16)!
 label.font = UIFontMetrics.default.scaledFont(for: customFont)
-label.adjustsFontForContentSizeCategory = true</code></pre>
+label.adjustsFontForContentSizeCategory = true
+
+// SwiftUI: Restrict Dynamic Type range when layout requires it
+// (only use .accessibility1–.accessibility5 if you've tested all sizes)
+Text("Sample Text")
+    .font(.body)
+    .dynamicTypeSize(.large ... .accessibility5)
+
+// SwiftUI: Large Content Viewer for fixed-size elements
+Image(systemName: "star.fill")
+    .accessibilityShowsLargeContentViewer()</code></pre>
                </div>
             </div>
          </section>
@@ -365,7 +386,7 @@ label.adjustsFontForContentSizeCategory = true</code></pre>
          <section class="panel" id="android-panel" role="tabpanel" aria-labelledby="android-tab">
             <div class="intro-card android">
                <h2>Android Typography System</h2>
-               <p>Android uses the Roboto font family in Material Design. Text sizes in "sp" automatically scale with user preferences.</p>
+               <p>Android uses the Roboto font family in Material Design 3. Text sizes in <strong>sp</strong> (scalable pixels) automatically scale with user preferences. As of <strong>Android 14</strong>, the maximum font scale increased from 130% to <strong>200%</strong>, and the system now applies a <strong>non-linear scaling curve</strong> — larger text grows more slowly than smaller text to prevent oversized display text from breaking layouts.</p>
             </div>
 
             <div class="section">
@@ -709,7 +730,7 @@ label.adjustsFontForContentSizeCategory = true</code></pre>
                   <div class="slider-container">
                      <label for="android-scale" class="slider-label">Font Scale</label>
                      <div class="slider-wrapper">
-                        <input type="range" id="android-scale" min="0.7" max="1.8" step="0.1" value="1" class="slider" aria-describedby="android-scale-value">
+                        <input type="range" id="android-scale" min="0.7" max="2.0" step="0.1" value="1" class="slider" aria-describedby="android-scale-value">
                         <div class="slider-value" id="android-scale-value">1x</div>
                      </div>
                   </div>
@@ -742,27 +763,33 @@ label.adjustsFontForContentSizeCategory = true</code></pre>
                <h3>Implementation Guidelines for Android</h3>
                <p>Here are the best practices to properly implement typography in Android applications:</p>
                <ul>
-                  <li>Always define text sizes in scalable pixels (sp) to respect user font size preferences</li>
-                  <li>The minimum recommended size for body text is 16sp for readability</li>
+                  <li>Always define text sizes in scalable pixels (<strong>sp</strong>) to respect user font size preferences — never use <code>dp</code> or <code>px</code> for text</li>
+                  <li><strong>Also use sp for line heights</strong> — if you define <code>lineHeight</code> in <code>dp</code>, it will not scale with the font, causing text to overlap at larger sizes on Android 14+</li>
+                  <li>The minimum recommended size for body text is 16sp for readability (Material Design 3 minimum is 14sp)</li>
                   <li>For dense lists or information, you can use 14sp with a slightly heavier weight</li>
-                  <li>Use dynamic layouts with wrap_content and constraintLayout to adapt to different text sizes</li>
-                  <li>Test your app with font scaling set to at least 1.3x to ensure layout adaptability</li>
+                  <li>Use dynamic layouts with <code>wrap_content</code> and <code>ConstraintLayout</code> to adapt to different text sizes</li>
+                  <li><strong>Android 14+:</strong> Test font scale from 0.85x up to <strong>2.0x</strong> — the maximum increased from 130% to 200% in Android 14. The system applies non-linear scaling, so large Display text grows more slowly than Body text</li>
+                  <li>Avoid setting fixed heights on containers that hold text — use <code>wrap_content</code> or <code>minHeight</code> instead</li>
                </ul>
                <div class="code-block">
-                  <pre><code>&lt;!-- XML layout example --&gt;
+                  <pre><code>&lt;!-- XML: use sp for both textSize AND lineHeight --&gt;
 &lt;TextView
    android:layout_width="match_parent"
    android:layout_height="wrap_content"
    android:textSize="16sp"
+   android:lineHeight="24sp"
    android:textColor="@color/textPrimary"
    android:text="@string/sample_text" /&gt;
 
-&lt;!-- Compose example --&gt;
+&lt;!-- Compose: MaterialTheme styles handle sp scaling automatically --&gt;
 Text(
    text = "Sample Text",
    style = MaterialTheme.typography.bodyLarge,
    modifier = Modifier.fillMaxWidth()
-)</code></pre>
+)
+
+&lt;!-- Compose: Never hardcode sp values directly — use the type scale --&gt;
+&lt;!-- MaterialTheme.typography.bodyLarge = 16sp / 24sp line height --&gt;</code></pre>
                </div>
             </div>
          </section>
@@ -771,11 +798,11 @@ Text(
          <section class="panel" id="accessibility-panel" role="tabpanel" aria-labelledby="accessibility-tab">
             <div class="intro-card">
                <h2>Typography Accessibility Guidelines</h2>
-               <p>Creating accessible typography following WCAG 2.1 AA standards for text scaling and readability.</p>
+               <p>Creating accessible typography following <strong>WCAG 2.2 AA</strong> standards for text scaling and readability. WCAG 2.2 was published October 2023 and is the current recommended standard.</p>
             </div>
 
             <div class="section">
-               <h3>WCAG 2.1 Success Criterion 1.4.4 - Resize Text</h3>
+               <h3>WCAG 2.1 Success Criterion 1.4.4 — Resize Text</h3>
                <div class="requirement-card">
                   <div class="requirement-header">
                      <h4>Requirement</h4>
@@ -783,7 +810,6 @@ Text(
                   </div>
                   <p><strong>Text can be resized without assistive technology up to 200% without loss of content or functionality.</strong></p>
                </div>
-
                <div class="subsection">
                   <h4>Mobile Implementation</h4>
                   <ul>
@@ -791,6 +817,68 @@ Text(
                      <li>Use Dynamic Type (iOS) and sp units (Android)</li>
                      <li>Maintain functionality at all text sizes</li>
                      <li>Avoid horizontal scrolling</li>
+                  </ul>
+               </div>
+            </div>
+
+            <div class="section">
+               <h3>WCAG 2.1 Success Criterion 1.4.10 — Reflow</h3>
+               <div class="requirement-card">
+                  <div class="requirement-header">
+                     <h4>Requirement</h4>
+                     <span class="level-badge">Level AA</span>
+                  </div>
+                  <p><strong>Content can be presented without loss of information or functionality, and without requiring scrolling in two dimensions at a viewport width equivalent to 320 CSS pixels.</strong></p>
+               </div>
+               <div class="subsection">
+                  <h4>What this means for mobile typography</h4>
+                  <ul>
+                     <li>At 400% browser zoom (equivalent to a 320px-wide viewport), all text content must reflow into a single column — no horizontal scrolling</li>
+                     <li>Exception: content that requires two-dimensional layout for usage (data tables, maps, certain diagrams)</li>
+                     <li>On native mobile: design single-column layouts that handle the largest text sizes without overflow</li>
+                     <li>Avoid fixed-width containers with <code>overflow: hidden</code> — text will be clipped rather than reflowing</li>
+                  </ul>
+               </div>
+            </div>
+
+            <div class="section">
+               <h3>WCAG 2.1 Success Criterion 1.4.12 — Text Spacing</h3>
+               <div class="requirement-card">
+                  <div class="requirement-header">
+                     <h4>Requirement</h4>
+                     <span class="level-badge">Level AA</span>
+                  </div>
+                  <p><strong>No loss of content or functionality occurs when users set all of the following: line height to at least 1.5× the font size, paragraph spacing to at least 2× the font size, letter spacing to at least 0.12× the font size, and word spacing to at least 0.16× the font size.</strong></p>
+               </div>
+               <div class="subsection">
+                  <h4>What this means for mobile typography</h4>
+                  <ul>
+                     <li>Your layouts must not break when users apply custom text spacing via accessibility settings or browser extensions</li>
+                     <li>Avoid fixed-height containers that clip text when line height is increased</li>
+                     <li>iOS Bold Text setting increases font weight without affecting spacing — test this separately</li>
+                     <li>On Android, the system does not expose direct letter-spacing or word-spacing overrides, but your code should not hard-code tight spacing that would conflict with OS-level adjustments</li>
+                     <li>For WebViews: this SC applies directly — test with the <a href="https://www.html5accessibility.com/tests/tsbookmarklet.html" target="_blank" rel="noopener noreferrer">Text Spacing bookmarklet</a></li>
+                  </ul>
+               </div>
+            </div>
+
+            <div class="section">
+               <h3>WCAG 2.2 Success Criterion 2.5.8 — Target Size (Minimum)</h3>
+               <div class="requirement-card">
+                  <div class="requirement-header">
+                     <h4>Requirement</h4>
+                     <span class="level-badge">Level AA — New in WCAG 2.2</span>
+                  </div>
+                  <p><strong>The size of the target for pointer inputs is at least 24×24 CSS pixels, except where spacing is sufficient or the target is inline text.</strong></p>
+               </div>
+               <div class="subsection">
+                  <h4>Why this matters for typography</h4>
+                  <ul>
+                     <li>At large text sizes, button labels wrap or shrink — the <em>visual</em> label may remain readable but the <em>tap target</em> can fall below 24×24px</li>
+                     <li>iOS HIG recommends 44×44pt minimum touch targets — significantly stricter than WCAG's minimum</li>
+                     <li>Android Material Design 3 recommends 48×48dp minimum touch targets</li>
+                     <li>Use <code>minHeight</code> / <code>minWidth</code> constraints rather than wrapping content tightly</li>
+                     <li>Test tap targets at AX5 (iOS) and 2.0x font scale (Android) — this is when they are most likely to fail</li>
                   </ul>
                </div>
             </div>
@@ -951,12 +1039,12 @@ override fun onConfigurationChanged(newConfig: Configuration) {
 
                <div class="scaling-table-container">
                   <table class="scaling-table">
-                     <caption>Android Non-Linear Scaling Behavior</caption>
+                     <caption>Android Non-Linear Scaling Behavior (Android 14+, max 2.0x)</caption>
                      <thead>
                         <tr>
                            <th>Base Size</th>
                            <th>Default (1.0x)</th>
-                           <th>Largest (1.3x setting)</th>
+                           <th>Maximum (2.0x setting, Android 14+)</th>
                            <th>Actual Scale Factor</th>
                            <th>Reaches 200%?</th>
                         </tr>
@@ -1003,7 +1091,7 @@ override fun onConfigurationChanged(newConfig: Configuration) {
 
                <div class="insight-box">
                   <h5>Key Insight</h5>
-                  <p>Android text larger than 14sp may not reach the 200% scaling threshold. However, this is still considered compliant as the platform provides the maximum scaling available to users.</p>
+                  <p>Android 14+ applies non-linear scaling — smaller text grows proportionally more than larger text. Body text (16sp) may only reach ~175% at the 2.0x setting. This is still compliant because the platform provides the maximum scaling available, but layouts must be tested at 2.0x, not just 1.3x.</p>
                </div>
             </div>
 
@@ -1101,15 +1189,19 @@ override fun onConfigurationChanged(newConfig: Configuration) {
                      <div class="checklist">
                         <label class="checklist-item">
                            <input type="checkbox">
-                           Test all Dynamic Type sizes (XS to AX5)
+                           Test all 12 Dynamic Type sizes (xSmall → AX5)
                         </label>
                         <label class="checklist-item">
                            <input type="checkbox">
-                           Verify layout adapts without breaks
+                           Verify layout adapts without breaks at AX5 (body ~310%)
                         </label>
                         <label class="checklist-item">
                            <input type="checkbox">
                            Test with Bold Text enabled
+                        </label>
+                        <label class="checklist-item">
+                           <input type="checkbox">
+                           Test Large Content Viewer on fixed-size elements
                         </label>
                         <label class="checklist-item">
                            <input type="checkbox">
@@ -1123,11 +1215,15 @@ override fun onConfigurationChanged(newConfig: Configuration) {
                      <div class="checklist">
                         <label class="checklist-item">
                            <input type="checkbox">
-                           Test font scale 0.85x to 1.3x
+                           Test font scale 0.85x to 2.0x (Android 14+ max)
                         </label>
                         <label class="checklist-item">
                            <input type="checkbox">
-                           Verify sp units used consistently
+                           Verify sp units used for both text size AND line height
+                        </label>
+                        <label class="checklist-item">
+                           <input type="checkbox">
+                           Test layout at 2.0x with ADB: <code>adb shell settings put system font_scale 2.0</code>
                         </label>
                         <label class="checklist-item">
                            <input type="checkbox">
@@ -1195,11 +1291,17 @@ override fun onConfigurationChanged(newConfig: Configuration) {
    <!-- ===== FOOTER ===== -->
    <footer class="footer">
       <div class="container">
-         <p>&copy; 2025 Typography System Guide. All rights reserved.</p>
+         <p>&copy; 2026
+         Typography System Guide. All rights reserved.</p>
       </div>
    </footer>
 
    <!-- ===== JAVASCRIPT ===== -->
    <script src="script.js"></script>
 </body>
+</html>
+    <script  src="./script.js"></script>
+
+  </body>
+  
 </html>
