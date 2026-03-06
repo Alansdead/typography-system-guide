@@ -40,7 +40,7 @@
          <section class="panel active" id="ios-panel" role="tabpanel" aria-labelledby="ios-tab">
             <div class="intro-card">
                <h2>iOS Typography System</h2>
-               <p>Apple's San Francisco font family with Dynamic Type support for accessibility. Automatically switches between SF Pro Text for smaller sizes (≤19pt) and SF Pro Display for larger sizes (≥20pt). As of iOS 18, Dynamic Type supports <strong>12 sizes total</strong> — 7 standard sizes (xSmall through xxxLarge) plus 5 Larger Accessibility Sizes (AX1–AX5) — and body text can scale up to approximately 310% at AX5.</p>
+               <p>Apple's San Francisco font family with Dynamic Type support for accessibility. Automatically switches between SF Pro Text for smaller sizes (≤19pt) and SF Pro Display for larger sizes (≥20pt). As of iOS 18, Dynamic Type supports <strong>12 sizes total</strong> — 7 standard sizes (xSmall through xxxLarge) plus 5 Larger Accessibility Sizes (AX1–AX5) — and body text can scale up to approximately 310% at AX5. <a href="https://developer.apple.com/design/human-interface-guidelines/typography" target="_blank" rel="noopener noreferrer">Apple HIG — Typography</a></p>
             </div>
 
             <div class="section">
@@ -349,6 +349,7 @@
                   <li><strong>Large Content Viewer (iOS 13+):</strong> For fixed-size UI elements that cannot grow with Dynamic Type — such as tab bars, toolbars, and navigation bar icons — implement the Large Content Viewer so users can still identify them at maximum text sizes. Use <code>showsLargeContentViewer = true</code> on UIKit elements or the <code>.accessibilityShowsLargeContentViewer()</code> modifier in SwiftUI</li>
                </ul>
                <div class="code-block">
+                  <p class="code-source"><a href="https://developer.apple.com/documentation/uikit/scaling-fonts-automatically" target="_blank" rel="noopener noreferrer">Apple Developer — Scaling Fonts Automatically</a></p>
                   <pre><code>// Swift: Dynamic Type with system font
 label.font = UIFont.preferredFont(forTextStyle: .body)
 label.adjustsFontForContentSizeCategory = true
@@ -375,7 +376,7 @@ Image(systemName: "star.fill")
          <section class="panel" id="android-panel" role="tabpanel" aria-labelledby="android-tab">
             <div class="intro-card android">
                <h2>Android Typography System</h2>
-               <p>Android uses the Roboto font family in Material Design 3. Text sizes in <strong>sp</strong> (scalable pixels) automatically scale with user preferences. As of <strong>Android 14</strong>, the maximum font scale increased from 130% to <strong>200%</strong>, and the system now applies a <strong>non-linear scaling curve</strong> — larger text grows more slowly than smaller text to prevent oversized display text from breaking layouts.</p>
+               <p>Android uses the Roboto font family in Material Design 3. Text sizes in <strong>sp</strong> (scalable pixels) automatically scale with user preferences. As of <strong>Android 14</strong>, the maximum font scale increased from 130% to <strong>200%</strong>, and the system now applies a <strong>non-linear scaling curve</strong> — larger text grows more slowly than smaller text to prevent oversized display text from breaking layouts. <a href="https://developer.android.com/about/versions/14/features#sp-units" target="_blank" rel="noopener noreferrer">Android 14 — Font Scaling</a></p>
             </div>
 
             <div class="section">
@@ -761,6 +762,7 @@ Image(systemName: "star.fill")
                   <li>Avoid setting fixed heights on containers that hold text — use <code>wrap_content</code> or <code>minHeight</code> instead</li>
                </ul>
                <div class="code-block">
+                  <p class="code-source"><a href="https://developer.android.com/training/multiscreen/screendensities#TaskUseDP" target="_blank" rel="noopener noreferrer">Android Developer — Screen Densities & sp units</a></p>
                   <pre><code>&lt;!-- XML: use sp for both textSize AND lineHeight --&gt;
 &lt;TextView
    android:layout_width="match_parent"
@@ -787,11 +789,11 @@ Text(
          <section class="panel" id="accessibility-panel" role="tabpanel" aria-labelledby="accessibility-tab">
             <div class="intro-card">
                <h2>Typography Accessibility Guidelines</h2>
-               <p>Creating accessible typography following <strong>WCAG 2.2 AA</strong> standards for text scaling and readability. WCAG 2.2 was published October 2023 and is the current recommended standard.</p>
+               <p>Creating accessible typography following <strong>WCAG 2.2 AA</strong> standards for text scaling and readability. WCAG 2.2 was published October 2023 and is the current recommended standard. <a href="https://www.w3.org/TR/WCAG22/" target="_blank" rel="noopener noreferrer">WCAG 2.2 Specification</a></p>
             </div>
 
             <div class="section">
-               <h3>WCAG 1.4.3 Success Criterion — Contrast (Minimum)</h3>
+               <h3>WCAG 1.4.3 Success Criterion — <a href="https://www.w3.org/TR/WCAG22/#contrast-minimum" target="_blank" rel="noopener noreferrer">Contrast (Minimum)</a></h3>
                <div class="requirement-card">
                   <div class="requirement-header">
                      <h4>Requirement</h4>
@@ -821,7 +823,7 @@ Text(
             </div>
 
             <div class="section">
-               <h3>WCAG 2.1 Success Criterion 1.4.4 — Resize Text</h3>
+               <h3>WCAG 2.1 Success Criterion 1.4.4 — <a href="https://www.w3.org/TR/WCAG22/#resize-text" target="_blank" rel="noopener noreferrer">Resize Text</a></h3>
                <div class="requirement-card">
                   <div class="requirement-header">
                      <h4>Requirement</h4>
@@ -841,7 +843,7 @@ Text(
             </div>
 
             <div class="section">
-               <h3>WCAG 2.1 Success Criterion 1.4.10 — Reflow</h3>
+               <h3>WCAG 2.1 Success Criterion 1.4.10 — <a href="https://www.w3.org/TR/WCAG22/#reflow" target="_blank" rel="noopener noreferrer">Reflow</a></h3>
                <div class="requirement-card">
                   <div class="requirement-header">
                      <h4>Requirement</h4>
@@ -861,7 +863,7 @@ Text(
             </div>
 
             <div class="section">
-               <h3>WCAG 2.1 Success Criterion 1.4.12 — Text Spacing</h3>
+               <h3>WCAG 2.1 Success Criterion 1.4.12 — <a href="https://www.w3.org/TR/WCAG22/#text-spacing" target="_blank" rel="noopener noreferrer">Text Spacing</a></h3>
                <div class="requirement-card">
                   <div class="requirement-header">
                      <h4>Requirement</h4>
@@ -882,7 +884,7 @@ Text(
             </div>
 
             <div class="section">
-               <h3>WCAG 2.2 Success Criterion 2.5.8 — Target Size (Minimum)</h3>
+               <h3>WCAG 2.2 Success Criterion 2.5.8 — <a href="https://www.w3.org/TR/WCAG22/#target-size-minimum" target="_blank" rel="noopener noreferrer">Target Size (Minimum)</a></h3>
                <div class="requirement-card">
                   <div class="requirement-header">
                      <h4>Requirement</h4>
@@ -1311,7 +1313,7 @@ override fun onConfigurationChanged(newConfig: Configuration) {
             <div class="section">
                <div class="recommendations">
                   <h3>W3C MATF Recommendations Implementation</h3>
-                  <p>The W3C Mobile Accessibility Task Force (MATF) has been working to clarify how WCAG applies to native mobile apps. Several of those discussions have since been formalized — <strong>WCAG 2.2 was published October 2023</strong> and is now the current recommended standard, superseding WCAG 2.1. This guide implements:</p>
+                  <p>The W3C Mobile Accessibility Task Force (MATF) has been working to clarify how WCAG applies to native mobile apps. Several of those discussions have since been formalized — <strong>WCAG 2.2 was published October 2023</strong> and is now the current recommended standard, superseding WCAG 2.1. This guide implements guidance from <a href="https://w3c.github.io/matf/" target="_blank" rel="noopener noreferrer">WCAG2Mobile</a>:</p>
                   <ul>
                      <li><strong>Assistive Technology vs Accessibility Features:</strong> Distinguishes between zoom and magnification (assistive technologies) and system text scaling features.</li>
                      <li><strong>Non-linear text scaling:</strong> Documents real scaling behavior on iOS and Android to help teams test typography under extreme settings.</li>
