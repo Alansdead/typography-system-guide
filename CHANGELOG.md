@@ -1,23 +1,91 @@
 # Changelog
-## [2026-03-05]
+---
+## [2026-03-06]
 
-As of 2025, Dynamic Type has 12 sizes: xSmall, Small, Medium, Large (default), xLarge, xxLarge, xxxLarge, AX1, AX2, AX3, AX4, AX5. The guide says "XS to AX5" which is correct in range but uses inconsistent abbreviations — "XS/S/M/L/XL/XXL/XXXL" should be written out as "xSmall through xxxLarge" to match Apple's exact naming.
-The guide's testing section says "Test all Dynamic Type sizes (XS to AX5)" — that's fine for intent, but the label in the JS slider only goes up to XXXL with 7 steps. If Larger Accessibility Sizes is enabled, 5 more text sizes become available, making 12 total. The slider is missing AX1–AX5 entirely.
-Apple's App Store Connect now evaluates Larger Text support, and apps should support body text scaling to 200% or more — Dynamic Type on iOS allows body text sizes over 300%. The guide caps its recommendation at 200%, which meets WCAG but undersells what iOS actually requires for a good experience.
-WWDC24 introduced the Large Content Viewer as the recommended solution for navigation controls like tab bars that can't grow with Dynamic Type. The guide doesn't mention this at all.
-The font size values in the type cards (34pt, 28pt, 22pt etc.) are still accurate — these are the standard Dynamic Type default sizes and haven't changed.
+**HTML Structure**
+- Removed duplicate `<html>`, `<head>`, `<body>` tags — the outer broken shell had the wrong title, missing viewport meta, wrong CSS filename, and a duplicate script tag
+- Fixed `<title>` to single clean version
+- Removed duplicate `<script src="./script.js">` tag at the bottom
 
 ---
-This is the bigger problem. Starting with Android 14, the maximum font scale increased from 130% to 200%, and the system now applies a non-linear scaling curve so that large text doesn't scale at the same rate as smaller text.
-The guide's testing section says "Test font scale 0.85x to 1.3x"—that ceiling is incorrect. Android 13 topped out at 130% on Pixels, but Android 14 goes to 200%. The guide needs to say 0.85x to 2.0x.
-Because font scaling is non-linear in Android 14+, the scaledDensity field is no longer accurate, and lineHeight should always use sp units instead of dp so it scales with text. The guide doesn't mention non-linear scaling at all, which is a significant omission for a typography guide.
-The Material Design 3 type scale naming in the guide is correct (Display, Headline, Title, Body, Label). Material 3's old h1/h2/body1 naming from Material 2 is gone — and the guide already uses the correct M3 names, so that's fine.
-Material Design 3 recommends a minimum of 14sp for body text and never set touch targets below 48dp. The guide recommends "minimum 16sp/17pt for body text" in the Best Practices section, which is slightly more conservative than M3's own minimum — that's not wrong, but worth noting as a discrepancy.
-The guide references WCAG AA contrast (4.5:1 for normal text, 3:1 for large text) which is still correct. But it's missing two relevant SC updates from WCAG 2.1/2.2 that directly affect mobile typography:
-WCAG 2.5.8 Target Size (Minimum) at AA requires interactive elements to have a minimum target size of 24×24 CSS pixels — the guide's testing checklist doesn't mention this.
-WCAG 1.4.12 Text Spacing requires that no loss of content or functionality occurs when users set: line height to at least 1.5× font size, paragraph spacing to at least 2× font size, letter spacing to at least 0.12× font size, and word spacing to at least 0.16× font size. This SC isn't mentioned anywhere in the guide, even though the Accessibility Guidelines tab has a full testing section.
-WCAG 1.4.10 Reflow (AA) requires content to reflow without horizontal scrolling at 400% zoom (equivalent to a 320px-wide viewport) — also absent from the guide.
 
+**iOS Section**
+- Updated intro card to mention iOS 18 by name and clarify Dynamic Type as "12 sizes total — 7 standard (xSmall → xxxLarge) + 5 Larger Accessibility Sizes (AX1–AX5)"
+- Changed all instances of "12 sizes" to "7 standard + 5 accessibility sizes" for accuracy (4 places)
+- Replaced "XS to AX5" with "xSmall to AX5" in the testing step to match Apple's official naming
+- Added body text scales to "approximately 310%" — flagged as approximate since Apple doesn't publish official percentages
+- Added Large Content Viewer guidance (iOS 13+) with UIKit and SwiftUI code examples
+- Extended the Dynamic Type slider from `max="6"` (7 sizes) to `max="11"` (12 sizes)
+- Updated slider labels in JS from `['XS','S','M','L (Default)','XL','XXL','XXXL']` to correct Apple naming `['xSmall' … 'AX5']`
+- Updated scale factors in JS from 7 values topping at 1.5x to 12 values up to 2.65x
+
+---
+
+**iOS Scaling Table**
+- Updated caption to "Approximate measured values — Apple does not publish official percentages"
+- Added `~` prefix to all AX5 values and scale factors
+- Column header changed from "AX5 (Largest)" to "AX5 (approx.)"
+
+---
+
+**Android Section**
+- Updated intro card to mention Android 14 by name, 200% maximum font scale, and non-linear scaling curve
+- Updated implementation guidelines: test ceiling changed from "1.3x" to "2.0x"
+- Added explicit warning to use `sp` for line heights, not `dp`, with explanation of why it breaks on Android 14+
+- Updated XML code example to include `android:lineHeight="24sp"`
+- Extended Android slider from `max="1.8"` to `max="2.0"`
+- Added JS comment noting Android 14's 2.0x maximum
+
+---
+
+**Android Scaling Table**
+- Replaced entirely — old table was linear extrapolation (`base × 2.0`), which is wrong for Android 14's non-linear curve
+- New table uses real measured values from Android 14's `FontScaleConverter`
+- Added Display Large (57sp) row showing it only reaches ~112% at 2.0x — the most important data point for designers
+- Updated caption, column headers, and Key Insight text to reflect actual non-linear behavior
+- Key insight rewritten: small text (8sp) exceeds 200% while large display text barely grows — the opposite of what the old table implied
+
+---
+
+**Accessibility Tab — New Sections Added**
+- **SC 1.4.3 Contrast (Minimum)** — added as a full new section, covering 4.5:1 body / 3:1 large text split, placeholder text, disabled text, the Dynamic Type threshold interaction, Bold Text on iOS, High Contrast Text on Android, and text over gradients
+- **SC 1.4.10 Reflow** — added, covering 320px viewport requirement and mobile-specific guidance
+- **SC 1.4.12 Text Spacing** — added, covering line height, paragraph spacing, letter spacing, word spacing, iOS Bold Text, Android overrides, and WebView testing
+- **SC 2.5.8 Target Size (Minimum)** — added, new in WCAG 2.2, covering 24×24px minimum, iOS 44pt and Android 48dp recommendations, and when targets are most likely to fail
+
+---
+
+**Accessibility Tab — Existing Content Updated**
+- Intro card updated from "WCAG 2.1 AA" to "WCAG 2.2 AA" with publication date note
+- SC 1.4.4 heading dash style normalized
+- iOS testing checklist expanded from 4 to 5 items — added Large Content Viewer item
+- Android testing checklist expanded from 4 to 5 items — added `sp` for line heights item and ADB command updated to `font_scale 2.0`
+- Added **Truncation Issues** block to Common Issues checklist covering `line-clamp`, `lineLimit`, `ellipsize`, `truncationMode`, fixed heights in SwiftUI and Android XML, and the "most important words first" fallback rule
+
+---
+
+**W3C MATF Section**
+- Replaced "ongoing W3C MATF discussions" framing with accurate status: WCAG 2.2 published October 2023, now the current standard
+- All five bullet points rewritten to your exact wording
+- Added dated footnote: "Last reviewed against WCAG 2.2 (October 2023), iOS 18, and Android 14"
+
+---
+
+**JavaScript (script.js)**
+- Fixed critical bug: 11 instances of `$()` (returns first element only) replaced with `$$()` across 7 managers — `ChecklistManager`, `AnalyticsManager`, `FormManager`, `AccessibilityManager`, `PerformanceManager`, `ResponsiveManager`, `SmoothScrollManager` were all silently broken
+- Fixed `window.TypographyGuide.utils` export — `$` was exported twice, `$$` was never exported
+- `TabManager.handleKeydown` now handles `Home` (first tab) and `End` (last tab) keys — required by ARIA tabs pattern
+- `activateTab` now sets `tabindex="0"` on the active panel for correct focus management
+- `ThemeManager` replaced with a clean no-op stub since there's no toggle UI
+
+---
+
+**CSS (styles.css)**
+- `--color-text-tertiary` raised from `#a1a1aa` (3.9:1 contrast — fails AA) to `#b4b4be` (4.6:1 — passes AA)
+- Panel `fadeIn` animation wrapped in `@media (prefers-reduced-motion: no-preference)` so it respects the OS reduced motion setting
+- Checked checklist items changed from `opacity: 0.7` (effective contrast ~3.5:1, fails AA) to `text-decoration: line-through` + `color: var(--color-text-tertiary)` for proper visual treatment without contrast failure
+
+---
 ## [2025-05-27]
 Fixed HTML Structure Issues
 
