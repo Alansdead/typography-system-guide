@@ -899,6 +899,14 @@ body {
    margin-bottom: var(--space-2);
 }
 
+.footer-links {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   gap: var(--space-3);
+   margin-top: var(--space-1);
+}
+
 .footer a {
    color: var(--color-primary);
    text-decoration: none;
