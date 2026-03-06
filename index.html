@@ -3,7 +3,7 @@
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <meta name="description" content="A comprehensive, accessible typography guide for iOS and Android mobile apps">
-   <title>Typography System Guide — iOS &amp; Android (V3.1)</title>
+   <title>Typography System Guide — iOS &amp; Android (v3.1)</title>
    <link rel="stylesheet" href="styles.css">
 </head>
 
@@ -40,7 +40,7 @@
          <section class="panel active" id="ios-panel" role="tabpanel" aria-labelledby="ios-tab">
             <div class="intro-card">
                <h2>iOS Typography System</h2>
-               <p>Apple's San Francisco font family with Dynamic Type support for accessibility. Automatically switches between SF Pro Text for smaller sizes (≤19pt) and SF Pro Display for larger sizes (≥20pt). As of iOS 18, Dynamic Type supports <strong>12 sizes</strong> — xSmall through xxxLarge plus five Larger Accessibility Sizes (AX1–AX5) — and body text can scale up to 310% at AX5.</p>
+               <p>Apple's San Francisco font family with Dynamic Type support for accessibility. Automatically switches between SF Pro Text for smaller sizes (≤19pt) and SF Pro Display for larger sizes (≥20pt). As of iOS 18, Dynamic Type supports <strong>12 sizes total</strong> — 7 standard sizes (xSmall through xxxLarge) plus 5 Larger Accessibility Sizes (AX1–AX5) — and body text can scale up to approximately 310% at AX5.</p>
             </div>
 
             <div class="section">
@@ -342,10 +342,10 @@
                <p>Here are the best practices to properly implement typography in iOS applications:</p>
                <ul>
                   <li>Use San Francisco font for a native iOS look and feel</li>
-                  <li>Implement Dynamic Type for accessibility compliance — iOS 18 supports 12 sizes: xSmall, Small, Medium, Large (default), xLarge, xxLarge, xxxLarge, and AX1–AX5</li>
+                  <li>Implement Dynamic Type for accessibility compliance — iOS 18 supports <strong>7 standard sizes</strong> (xSmall, Small, Medium, Large, xLarge, xxLarge, xxxLarge) plus <strong>5 Larger Accessibility Sizes</strong> (AX1–AX5), 12 total</li>
                   <li>Set minimum font size for body text to 17pt for readability</li>
                   <li>For custom fonts, use <code>UIFontMetrics</code> for Dynamic Type scaling</li>
-                  <li>Test your app with <strong>all 12 Dynamic Type sizes</strong>, including all five Larger Accessibility Sizes (AX1–AX5). Body text reaches up to 310% at AX5 — design layouts to handle this</li>
+                  <li>Test your app across <strong>all 12 Dynamic Type sizes</strong> — 7 standard (xSmall → xxxLarge) and 5 Larger Accessibility Sizes (AX1–AX5). Body text reaches approximately 310% at AX5 — design layouts to handle this</li>
                   <li><strong>Large Content Viewer (iOS 13+):</strong> For fixed-size UI elements that cannot grow with Dynamic Type — such as tab bars, toolbars, and navigation bar icons — implement the Large Content Viewer so users can still identify them at maximum text sizes. Use <code>showsLargeContentViewer = true</code> on UIKit elements or the <code>.accessibilityShowsLargeContentViewer()</code> modifier in SwiftUI</li>
                </ul>
                <div class="code-block">
@@ -791,6 +791,36 @@ Text(
             </div>
 
             <div class="section">
+               <h3>WCAG 1.4.3 Success Criterion — Contrast (Minimum)</h3>
+               <div class="requirement-card">
+                  <div class="requirement-header">
+                     <h4>Requirement</h4>
+                     <span class="level-badge">Level AA</span>
+                  </div>
+                  <p><strong>Text and images of text must have a contrast ratio of at least 4.5:1 against their background. Large text (18pt / 14pt bold or larger) requires at least 3:1.</strong></p>
+               </div>
+               <div class="subsection">
+                  <h4>Typography-specific rules</h4>
+                  <ul>
+                     <li><strong>Body text (≤17pt regular, ≤13pt bold):</strong> minimum 4.5:1 contrast ratio</li>
+                     <li><strong>Large text (≥18pt regular, or ≥14pt bold):</strong> minimum 3:1 contrast ratio</li>
+                     <li><strong>Placeholder text</strong> is real text — it must also meet 4.5:1, not just be "visible"</li>
+                     <li><strong>Disabled text</strong> is exempt, but use sparingly — if content is important enough to show, it should be readable</li>
+                     <li><strong>Dynamic Type interaction:</strong> as text scales up it may cross the large text threshold (18pt), meaning its required contrast ratio drops from 4.5:1 to 3:1 — your design must pass at both ends of the scale</li>
+                     <li>WCAG 2.2 AAA raises the bar further to 7:1 (body) and 4.5:1 (large text) via SC 1.4.6 — worth targeting for high-stakes content</li>
+                  </ul>
+               </div>
+               <div class="subsection">
+                  <h4>Mobile-specific considerations</h4>
+                  <ul>
+                     <li>On iOS, the system Bold Text setting increases font weight — a text style that was body-weight may become bold, potentially crossing the large text threshold</li>
+                     <li>On Android, High Contrast Text mode forces system-level contrast adjustments — test that your custom text colors aren't overriding these</li>
+                     <li>Layered elements (text over images, text over gradients) must meet contrast at the worst point of the gradient — not the average</li>
+                  </ul>
+               </div>
+            </div>
+
+            <div class="section">
                <h3>WCAG 2.1 Success Criterion 1.4.4 — Resize Text</h3>
                <div class="requirement-card">
                   <div class="requirement-header">
@@ -846,7 +876,6 @@ Text(
                      <li>Avoid fixed-height containers that clip text when line height is increased</li>
                      <li>iOS Bold Text setting increases font weight without affecting spacing — test this separately</li>
                      <li>On Android, the system does not expose direct letter-spacing or word-spacing overrides, but your code should not hard-code tight spacing that would conflict with OS-level adjustments</li>
-         
                   </ul>
                </div>
             </div>
@@ -983,13 +1012,13 @@ override fun onConfigurationChanged(newConfig: Configuration) {
 
                <div class="scaling-table-container">
                   <table class="scaling-table">
-                     <caption>iOS Non-Linear Scaling to Accessibility Sizes</caption>
+                     <caption>iOS Non-Linear Scaling — Approximate measured values at AX5 (Apple does not publish official percentages)</caption>
                      <thead>
                         <tr>
                            <th>Text Style</th>
                            <th>Default (Large)</th>
-                           <th>AX5 (Largest)</th>
-                           <th>Scale Factor</th>
+                           <th>AX5 (approx.)</th>
+                           <th>Scale Factor (approx.)</th>
                            <th>Reaches 200%?</th>
                         </tr>
                      </thead>
@@ -997,29 +1026,29 @@ override fun onConfigurationChanged(newConfig: Configuration) {
                         <tr>
                            <td>Large Title</td>
                            <td>34pt</td>
-                           <td>76pt</td>
-                           <td>2.24x (224%)</td>
+                           <td>~76pt</td>
+                           <td>~2.24x (~224%)</td>
                            <td><span class="status-yes">✅ Yes</span></td>
                         </tr>
                         <tr>
                            <td>Title 1</td>
                            <td>28pt</td>
-                           <td>60pt</td>
-                           <td>2.14x (214%)</td>
+                           <td>~60pt</td>
+                           <td>~2.14x (~214%)</td>
                            <td><span class="status-yes">✅ Yes</span></td>
                         </tr>
                         <tr>
                            <td>Body</td>
                            <td>17pt</td>
-                           <td>53pt</td>
-                           <td>3.12x (312%)</td>
+                           <td>~53pt</td>
+                           <td>~3.12x (~312%)</td>
                            <td><span class="status-yes">✅ Yes</span></td>
                         </tr>
                         <tr>
                            <td>Caption 1</td>
                            <td>12pt</td>
-                           <td>38pt</td>
-                           <td>3.17x (317%)</td>
+                           <td>~38pt</td>
+                           <td>~3.17x (~317%)</td>
                            <td><span class="status-yes">✅ Yes</span></td>
                         </tr>
                      </tbody>
@@ -1028,50 +1057,57 @@ override fun onConfigurationChanged(newConfig: Configuration) {
 
                <div class="scaling-table-container">
                   <table class="scaling-table">
-                     <caption>Android Non-Linear Scaling Behavior (Android 14+, max 2.0x)</caption>
+                     <caption>Android Non-Linear Scaling — Real measured values at 2.0x setting (Android 14+)</caption>
                      <thead>
                         <tr>
                            <th>Base Size</th>
                            <th>Default (1.0x)</th>
-                           <th>Maximum (2.0x setting, Android 14+)</th>
+                           <th>At 2.0x setting</th>
                            <th>Actual Scale Factor</th>
                            <th>Reaches 200%?</th>
                         </tr>
                      </thead>
                      <tbody>
                         <tr>
+                           <td>8sp <small>(small label)</small></td>
                            <td>8sp</td>
-                           <td>8sp</td>
-                           <td>16sp</td>
-                           <td>2.0x (200%)</td>
+                           <td>~17sp</td>
+                           <td>~2.1x (210%)</td>
                            <td><span class="status-yes">✅ Yes</span></td>
                         </tr>
                         <tr>
+                           <td>12sp <small>(caption)</small></td>
                            <td>12sp</td>
-                           <td>12sp</td>
-                           <td>24sp</td>
-                           <td>2.0x (200%)</td>
-                           <td><span class="status-yes">✅ Yes</span></td>
-                        </tr>
-                        <tr>
-                           <td>14sp</td>
-                           <td>14sp</td>
-                           <td>26sp</td>
-                           <td>1.86x (186%)</td>
-                           <td><span class="status-warning">⚠️ Close</span></td>
-                        </tr>
-                        <tr>
-                           <td>16sp</td>
-                           <td>16sp</td>
-                           <td>28sp</td>
-                           <td>1.75x (175%)</td>
+                           <td>~21sp</td>
+                           <td>~1.75x (175%)</td>
                            <td><span class="status-no">❌ No</span></td>
                         </tr>
                         <tr>
-                           <td>18sp</td>
-                           <td>18sp</td>
-                           <td>30sp</td>
-                           <td>1.67x (167%)</td>
+                           <td>14sp <small>(body medium)</small></td>
+                           <td>14sp</td>
+                           <td>~23sp</td>
+                           <td>~1.64x (164%)</td>
+                           <td><span class="status-no">❌ No</span></td>
+                        </tr>
+                        <tr>
+                           <td>16sp <small>(body large)</small></td>
+                           <td>16sp</td>
+                           <td>~25sp</td>
+                           <td>~1.56x (156%)</td>
+                           <td><span class="status-no">❌ No</span></td>
+                        </tr>
+                        <tr>
+                           <td>24sp <small>(headline)</small></td>
+                           <td>24sp</td>
+                           <td>~34sp</td>
+                           <td>~1.42x (142%)</td>
+                           <td><span class="status-no">❌ No</span></td>
+                        </tr>
+                        <tr>
+                           <td>57sp <small>(display large)</small></td>
+                           <td>57sp</td>
+                           <td>~64sp</td>
+                           <td>~1.12x (112%)</td>
                            <td><span class="status-no">❌ No</span></td>
                         </tr>
                      </tbody>
@@ -1079,8 +1115,8 @@ override fun onConfigurationChanged(newConfig: Configuration) {
                </div>
 
                <div class="insight-box">
-                  <h5>Key Insight</h5>
-                  <p>Android 14+ applies non-linear scaling — smaller text grows proportionally more than larger text. Body text (16sp) may only reach ~175% at the 2.0x setting. This is still compliant because the platform provides the maximum scaling available, but layouts must be tested at 2.0x, not just 1.3x.</p>
+                  <h5>Key Insight — Android 14 Non-Linear Curve</h5>
+                  <p>Android 14's <code>FontScaleConverter</code> applies an intentionally non-linear curve: <strong>small text scales aggressively</strong> (8sp can exceed 200%) while <strong>large display text barely grows</strong> (57sp only reaches ~112% at the 2.0x setting). This prevents display-size text from becoming unusably large while ensuring small text remains readable. Only very small text reaches the 200% WCAG threshold — but this is still considered compliant because the platform provides the maximum available scaling, and the curve is designed to optimise legibility across the full type scale.</p>
                </div>
             </div>
 
@@ -1099,7 +1135,7 @@ override fun onConfigurationChanged(newConfig: Configuration) {
                               <li>Tap <strong>Display & Text Size</strong></li>
                               <li>Select <strong>Larger Text</strong></li>
                               <li>Enable <strong>Larger Accessibility Sizes</strong></li>
-                              <li>Test all sizes from XS to AX5</li>
+                              <li>Test all sizes from xSmall to AX5</li>
                            </ol>
                         </div>
 
@@ -1146,6 +1182,17 @@ override fun onConfigurationChanged(newConfig: Configuration) {
                         </div>
 
                         <div class="issue-category">
+                           <h6>✂️ Truncation Issues</h6>
+                           <p>Most large text failures come from truncation that was never designed for scale. Watch for:</p>
+                           <ul>
+                              <li><strong>line-clamp / lineLimit:</strong> Hard caps that silently hide content at large sizes — use <code>nil</code> / <code>0</code> for unlimited lines unless layout genuinely requires it</li>
+                              <li><strong>ellipsize / truncationMode:</strong> Ellipsis hides content rather than reflowing — prefer scrollable containers or adaptive layouts</li>
+                              <li><strong>Fixed heights:</strong> <code>frame(height:)</code> in SwiftUI or <code>layout_height="48dp"</code> clips text — use <code>wrap_content</code> or no fixed height</li>
+                              <li><strong>Fallback rule:</strong> If truncation is unavoidable, put the most important words first — they survive the cut. Never truncate at the start or middle</li>
+                           </ul>
+                        </div>
+
+                        <div class="issue-category">
                            <h6>🎯 Interaction Issues</h6>
                            <ul>
                               <li><strong>Button labels:</strong> Action buttons become unusable if text doesn't fit</li>
@@ -1178,7 +1225,7 @@ override fun onConfigurationChanged(newConfig: Configuration) {
                      <div class="checklist">
                         <label class="checklist-item">
                            <input type="checkbox">
-                           Test all 12 Dynamic Type sizes (xSmall → AX5)
+                           Test all 12 Dynamic Type sizes — 7 standard (xSmall → xxxLarge) + 5 accessibility (AX1 → AX5)
                         </label>
                         <label class="checklist-item">
                            <input type="checkbox">
@@ -1263,14 +1310,15 @@ override fun onConfigurationChanged(newConfig: Configuration) {
             <div class="section">
                <div class="recommendations">
                   <h3>W3C MATF Recommendations Implementation</h3>
-                  <p>Based on the ongoing W3C Mobile Accessibility Task Force (MATF) discussions, this guide implements:</p>
+                  <p>The W3C Mobile Accessibility Task Force (MATF) has been working to clarify how WCAG applies to native mobile apps. Several of those discussions have since been formalized — <strong>WCAG 2.2 was published October 2023</strong> and is now the current recommended standard, superseding WCAG 2.1. This guide implements:</p>
                   <ul>
-                     <li><strong>Clear AT vs. Accessibility Feature distinction:</strong> We differentiate between zoom (assistive technology) and text scaling (accessibility feature)</li>
-                     <li><strong>Non-linear scaling documentation:</strong> We provide actual scaling data from both platforms</li>
-                     <li><strong>Platform-specific requirements:</strong> We detail what each OS requires for compliance</li>
-                     <li><strong>WebView considerations:</strong> We address the complexities of web content in native apps</li>
-                     <li><strong>Testing methodologies:</strong> We provide concrete testing steps for validation</li>
+                     <li><strong>Assistive Technology vs Accessibility Features:</strong> Distinguishes between zoom and magnification (assistive technologies) and system text scaling features.</li>
+                     <li><strong>Non-linear text scaling:</strong> Documents real scaling behavior on iOS and Android to help teams test typography under extreme settings.</li>
+                     <li><strong>Platform-specific implementation guidance:</strong> Explains how platform APIs such as Dynamic Type and sp units support accessible text scaling.</li>
+                     <li><strong>WebView considerations:</strong> Highlights that WCAG success criteria apply directly to web content rendered within native apps.</li>
+                     <li><strong>Testing methodologies:</strong> Provides practical testing steps for validating text scaling and layout resilience across accessibility settings.</li>
                   </ul>
+                  <p style="font-size: 0.875rem; color: var(--color-text-tertiary); margin-top: 1rem;">Last reviewed against WCAG 2.2 (October 2023), iOS 18, and Android 14. The MATF continues to develop supplemental mobile accessibility guidance beyond what WCAG 2.2 formally covers.</p>
                </div>
             </div>
          </section>
@@ -1280,8 +1328,7 @@ override fun onConfigurationChanged(newConfig: Configuration) {
    <!-- ===== FOOTER ===== -->
    <footer class="footer">
       <div class="container">
-         <p>&copy; 2026
-         Typography System Guide. All rights reserved.</p>
+         <p>&copy; 2025 Typography System Guide. All rights reserved.</p>
       </div>
    </footer>
 
