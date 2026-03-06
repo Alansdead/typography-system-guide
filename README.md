@@ -14,8 +14,9 @@ See [CHANGELOG.md](CHANGELOG.md) for the latest updates and release history.
 - Implementation code samples
 
 ## Preview
+<img width="1300" height="324" alt="main screen of Typographt Sytem Guide" src="https://github.com/user-attachments/assets/2d2a042b-2cb0-481b-87a2-2c492abf6650" />
 
-![Typography Guide Preview](preview.png)
+
 
 ## How to Use
 
