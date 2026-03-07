@@ -8,9 +8,9 @@ The goal is to turn accessibility guidance into something **practical and intera
 
 ---
 ## Whats New
-check 'CHANGELOG.MD'
-    2acfb4846f9462aabf3f8a580f7b51a326a350bd
-
+ 
+check 
+     CHANGELOG.md
 ## Preview
 
 <img width="1300" height="324" alt="Main screen of Typography Accessibility Guide" src="https://github.com/user-attachments/assets/2d2a042b-2cb0-481b-87a2-2c492abf6650" />
