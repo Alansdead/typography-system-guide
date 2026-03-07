@@ -4,7 +4,7 @@ A comprehensive interactive guide for implementing accessible typography in mobi
 
 ## What’s New
 
-See <CHANGELOG.md> for the latest updates and release history.
+See [CHANGELOG.md](CHANGELOG.md) for the latest updates and release history.
 
 ## Features
 
