@@ -7,6 +7,9 @@ This project visualizes how typography systems behave across platforms, includin
 The goal is to turn accessibility guidance into something **practical and interactive**, rather than something designers only read in documentation.
 
 ---
+## Whats New
+check 'CHANGELOG.MD'
+    2acfb4846f9462aabf3f8a580f7b51a326a350bd
 
 ## Preview
 
