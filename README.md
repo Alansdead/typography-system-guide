@@ -34,7 +34,7 @@ https://alansdead.github.io/typography-system-guide/
 
 This guide was created to:
 
-- Help designers understand **how typography accessibility works in real interfaces**
+- Help designers understand **how typography works in real interfaces**
 - Provide a **visual explanation of font scaling behavior**
 - Serve as a **reference that can evolve as platform guidelines and accessibility standards change**
 
