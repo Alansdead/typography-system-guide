@@ -1,604 +1,256 @@
-// ===== UTILITY FUNCTIONS =====
-const $ = (selector) => document.querySelector(selector);
-const $$ = (selector) => document.querySelectorAll(selector);
+const $ = (sel, ctx = document) => ctx.querySelector(sel);
+const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
 
-// ===== DOM READY =====
-document.addEventListener('DOMContentLoaded', function() {
-   // ===== TAB FUNCTIONALITY =====
-   const TabManager = {
-      tabs: Array.from($$('.tab')),
-      panels: $$('.panel'),
-      
-      init() {
-         this.bindEvents();
-      },
-      
-      bindEvents() {
-         this.tabs.forEach(tab => {
-            tab.addEventListener('click', () => this.activateTab(tab));
-            tab.addEventListener('keydown', (e) => this.handleKeydown(e, tab));
-         });
-      },
-      
-      activateTab(activeTab) {
-         // Reset all tabs
-         this.tabs.forEach(tab => {
-            tab.classList.remove('active');
-            tab.setAttribute('aria-selected', 'false');
-            tab.setAttribute('tabindex', '-1');
-         });
-         
-         // Activate selected tab
-         activeTab.classList.add('active');
-         activeTab.setAttribute('aria-selected', 'true');
-         activeTab.setAttribute('tabindex', '0');
-         
-         // Show corresponding panel and make it reachable via Tab key.
-         // ARIA tab pattern: Tab from tablist moves into the active panel,
-         // not to the next tab button. tabindex="0" on the panel enables this.
-         const tabId = activeTab.getAttribute('data-tab');
-         this.panels.forEach(panel => {
-            panel.classList.remove('active');
-            panel.removeAttribute('tabindex');
-            if (panel.id === `${tabId}-panel`) {
-               panel.classList.add('active');
-               panel.setAttribute('tabindex', '0');
-            }
-         });
-      },
-      
-      handleKeydown(e, tab) {
-         const currentIndex = this.tabs.indexOf(tab);
-         let nextIndex;
-         
-         switch(e.key) {
-            case 'ArrowRight':
-               e.preventDefault();
-               nextIndex = (currentIndex + 1) % this.tabs.length;
-               this.activateTab(this.tabs[nextIndex]);
-               this.tabs[nextIndex].focus();
-               break;
-            case 'ArrowLeft':
-               e.preventDefault();
-               nextIndex = (currentIndex - 1 + this.tabs.length) % this.tabs.length;
-               this.activateTab(this.tabs[nextIndex]);
-               this.tabs[nextIndex].focus();
-               break;
-            case 'Home': /* ARIA tabs pattern requires Home = first tab */
-               e.preventDefault();
-               this.activateTab(this.tabs[0]);
-               this.tabs[0].focus();
-               break;
-            case 'End': /* ARIA tabs pattern requires End = last tab */
-               e.preventDefault();
-               nextIndex = this.tabs.length - 1;
-               this.activateTab(this.tabs[nextIndex]);
-               this.tabs[nextIndex].focus();
-               break;
-         }
-      }
-   };
+document.addEventListener('DOMContentLoaded', () => {
+  const tocSync = setupToc();
+  setupTabs(tocSync);
+  setupIosScaler();
+  setupAndroidScaler();
+  setupChecklist();
+  setupSmoothScroll();
+  setupSearch();
+  setupBackToTop();
+  setupScrollReveal();
 
-   // ===== iOS SCALING FUNCTIONALITY =====
-   const IOSScaler = {
-      slider: $('#ios-scale'),
-      valueDisplay: $('#ios-scale-value'),
-      // 12 Dynamic Type sizes as of iOS 18: xSmall → xxxLarge + AX1–AX5
-      labels: ['xSmall', 'Small', 'Medium', 'Large (Default)', 'xLarge', 'xxLarge', 'xxxLarge', 'AX1', 'AX2', 'AX3', 'AX4', 'AX5'],
-      // Approximate scale factors relative to Large (default = 1.0); AX sizes from Apple docs
-      scaleFactors: [0.8, 0.9, 0.95, 1, 1.15, 1.3, 1.5, 1.7, 1.9, 2.1, 2.35, 2.65],
-      elements: {
-         large: $('#ios-large-demo'),
-         title1: $('#ios-title1-demo'),
-         title2: $('#ios-title2-demo'),
-         headline: $('#ios-headline-demo'),
-         body: $('#ios-body-demo'),
-         callout: $('#ios-callout-demo'),
-         footnote: $('#ios-footnote-demo'),
-         caption: $('#ios-caption-demo')
-      },
-      baseSizes: {
-         large: 2.125,
-         title1: 1.75,
-         title2: 1.375,
-         headline: 1.0625,
-         body: 1.0625,
-         callout: 1.0,
-         footnote: 0.8125,
-         caption: 0.75
-      },
-      
-      init() {
-         if (!this.slider) return;
-         this.bindEvents();
-         this.updateScale();
-      },
-      
-      bindEvents() {
-         this.slider.addEventListener('input', () => this.updateScale());
-      },
-      
-      updateScale() {
-         const index = parseInt(this.slider.value, 10);
-         const scaleFactor = this.scaleFactors[index];
-         
-         // Update display
-         this.valueDisplay.textContent = this.labels[index];
-         
-         // Update all text elements
-         Object.keys(this.elements).forEach(key => {
-            if (this.elements[key]) {
-               const newSize = this.baseSizes[key] * scaleFactor;
-               this.elements[key].style.fontSize = `${newSize}rem`;
-            }
-         });
-      }
-   };
-
-   const AndroidScaler = {
-      slider: $('#android-scale'),
-      valueDisplay: $('#android-scale-value'),
-      // Android 14+ supports up to 2.0x font scale (was 1.3x before Android 14)
-      elements: {
-         display: $('#android-display-demo'),
-         headline: $('#android-headline-demo'),
-         title: $('#android-title-demo'),
-         body: $('#android-body-demo'),
-         label: $('#android-label-demo')
-      },
-      baseSizes: {
-         display: 3.5625,
-         headline: 2.0,
-         title: 1.0,
-         body: 1.0,
-         label: 0.6875
-      },
-      
-      init() {
-         if (!this.slider) return;
-         this.bindEvents();
-         this.updateScale();
-      },
-      
-      bindEvents() {
-         this.slider.addEventListener('input', () => this.updateScale());
-      },
-      
-      updateScale() {
-         const scaleFactor = parseFloat(this.slider.value);
-         
-         // Update display
-         this.valueDisplay.textContent = `${scaleFactor.toFixed(1)}x`;
-         
-         // Update all text elements
-         Object.keys(this.elements).forEach(key => {
-            if (this.elements[key]) {
-               const newSize = this.baseSizes[key] * scaleFactor;
-               this.elements[key].style.fontSize = `${newSize}rem`;
-            }
-         });
-      }
-   };
-
-   // ===== THEME TOGGLE =====
-   // No theme toggle UI — app is dark mode only.
-   // ThemeManager kept as a stub so init() doesn't throw.
-   const ThemeManager = {
-      init() {}
-   };
-
-   // ===== CHECKLIST FUNCTIONALITY =====
-   const ChecklistManager = {
-      checkboxes: $$('.checklist-item input[type="checkbox"]'), /* was $() — only returned first checkbox */
-      
-      init() {
-         this.bindEvents();
-      },
-      
-      bindEvents() {
-         this.checkboxes.forEach(checkbox => {
-            checkbox.addEventListener('change', () => this.handleCheckboxChange(checkbox));
-         });
-      },
-      
-      handleCheckboxChange(checkbox) {
-         const item = checkbox.closest('.checklist-item');
-         if (checkbox.checked) {
-            // Use text-decoration instead of opacity — opacity reduces contrast below AA
-            item.style.textDecoration = 'line-through';
-            item.style.color = 'var(--color-text-tertiary)';
-         } else {
-            item.style.textDecoration = '';
-            item.style.color = '';
-         }
-      }
-   };
-
-   // ===== SMOOTH SCROLLING FOR ANCHOR LINKS =====
-   const SmoothScrollManager = {
-      links: $$('a[href^="#"]'), /* was $() — only returned first anchor link */
-      
-      init() {
-         this.bindEvents();
-      },
-      
-      bindEvents() {
-         this.links.forEach(link => {
-            link.addEventListener('click', (e) => this.handleClick(e, link));
-         });
-      },
-      
-      handleClick(e, link) {
-         const targetId = link.getAttribute('href').substring(1);
-         const targetElement = $(`#${targetId}`);
-         
-         if (targetElement) {
-            e.preventDefault();
-            targetElement.scrollIntoView({
-               behavior: 'smooth',
-               block: 'start'
-            });
-            
-            // Focus the target for accessibility
-            if (targetElement.tabIndex < 0) {
-               targetElement.tabIndex = -1;
-            }
-            targetElement.focus();
-         }
-      }
-   };
-
-   // ===== ACCESSIBILITY ENHANCEMENTS =====
-   const AccessibilityManager = {
-      focusableElements: 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
-      
-      init() {
-         this.setupFocusTrapping();
-         this.setupKeyboardNavigation();
-      },
-      
-      setupFocusTrapping() {
-         // Add visible focus indicators for keyboard users
-         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Tab') {
-               document.body.classList.add('keyboard-nav');
-            }
-         });
-         
-         document.addEventListener('mousedown', () => {
-            document.body.classList.remove('keyboard-nav');
-         });
-      },
-      
-      setupKeyboardNavigation() {
-         // Enhanced keyboard navigation for interactive elements
-         const interactiveElements = $$(this.focusableElements); /* was $() — only returned first element */
-         
-         interactiveElements.forEach(element => {
-            element.addEventListener('keydown', (e) => {
-               if (e.key === 'Enter' && element.tagName !== 'BUTTON' && element.tagName !== 'A') {
-                  element.click();
-               }
-            });
-         });
-      }
-   };
-
-   // ===== PERFORMANCE OPTIMIZATIONS =====
-   const PerformanceManager = {
-      init() {
-         this.setupLazyLoading();
-         this.setupIntersectionObserver();
-      },
-      
-      setupLazyLoading() {
-         // Implement lazy loading for heavy content sections
-         const sections = $$('.section'); /* was $() — only returned first section */
-         
-         sections.forEach(section => {
-            if (section.offsetTop > window.innerHeight * 2) {
-               section.style.contentVisibility = 'auto';
-            }
-         });
-      },
-      
-      setupIntersectionObserver() {
-         // Animate elements as they come into view
-         const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-               if (entry.isIntersecting) {
-                  entry.target.classList.add('animate-in');
-               }
-            });
-         }, {
-            threshold: 0.1,
-            rootMargin: '50px'
-         });
-         
-         $$('.type-card, .practice-card, .checklist-card').forEach(card => { /* was $() */
-            observer.observe(card);
-         });
-      }
-   };
-
-   // ===== RESPONSIVE BEHAVIOR MANAGER =====
-   const ResponsiveManager = {
-      init() {
-         this.handleResize();
-         this.bindEvents();
-      },
-      
-      bindEvents() {
-         window.addEventListener('resize', () => this.handleResize());
-      },
-      
-      handleResize() {
-         // Handle responsive behavior for sliders on mobile
-         const sliderWrappers = $$('.slider-wrapper'); /* was $() — only returned first wrapper */
-         const isMobile = window.innerWidth <= 768;
-         
-         sliderWrappers.forEach(wrapper => {
-            if (isMobile) {
-               wrapper.style.flexDirection = 'column';
-               wrapper.style.alignItems = 'stretch';
-            } else {
-               wrapper.style.flexDirection = 'row';
-               wrapper.style.alignItems = 'center';
-            }
-         });
-      }
-   };
-
-   // ===== FORM ENHANCEMENT MANAGER =====
-   const FormManager = {
-      init() {
-         this.enhanceInputs();
-         this.setupValidation();
-      },
-      
-      enhanceInputs() {
-         // Enhance range inputs with better accessibility
-         const rangeInputs = $$('input[type="range"]'); /* was $() — only returned first range */
-         
-         rangeInputs.forEach(input => {
-            // Add aria-valuetext for better screen reader support
-            input.addEventListener('input', () => {
-               const value = input.value;
-               const max = input.max;
-               const min = input.min;
-               const percentage = ((value - min) / (max - min)) * 100;
-               input.setAttribute('aria-valuetext', `${Math.round(percentage)}% of maximum`);
-            });
-            
-            // Initialize aria-valuetext
-            input.dispatchEvent(new Event('input'));
-         });
-      },
-      
-      setupValidation() {
-         // Add basic form validation and feedback
-         const inputs = $$('input, select, textarea'); /* was $() — only returned first input */
-         
-         inputs.forEach(input => {
-            input.addEventListener('invalid', (e) => {
-               e.preventDefault();
-               this.showValidationMessage(input);
-            });
-            
-            input.addEventListener('input', () => {
-               this.clearValidationMessage(input);
-            });
-         });
-      },
-      
-      showValidationMessage(input) {
-         // Custom validation message display
-         const existingMessage = input.parentNode.querySelector('.validation-message');
-         if (existingMessage) {
-            existingMessage.remove();
-         }
-         
-         const message = document.createElement('div');
-         message.className = 'validation-message';
-         message.textContent = input.validationMessage;
-         message.style.color = 'var(--color-error)';
-         message.style.fontSize = '0.875rem';
-         message.style.marginTop = 'var(--space-1)';
-         
-         input.parentNode.appendChild(message);
-         input.setAttribute('aria-describedby', 'validation-message');
-      },
-      
-      clearValidationMessage(input) {
-         const message = input.parentNode.querySelector('.validation-message');
-         if (message) {
-            message.remove();
-         }
-         input.removeAttribute('aria-describedby');
-      }
-   };
-
-   // ===== ERROR HANDLING =====
-   const ErrorHandler = {
-      init() {
-         window.addEventListener('error', (e) => {
-            console.error('Application error:', e.error);
-            this.logError(e.error);
-         });
-         
-         window.addEventListener('unhandledrejection', (e) => {
-            console.error('Unhandled promise rejection:', e.reason);
-            this.logError(e.reason);
-         });
-      },
-      
-      logError(error) {
-         // In a real application, you might send this to a logging service
-         const errorLog = {
-            message: error.message || error,
-            stack: error.stack || 'No stack trace available',
-            timestamp: new Date().toISOString(),
-            userAgent: navigator.userAgent,
-            url: window.location.href
-         };
-         
-         // Store in session for debugging (avoiding localStorage as requested)
-         if (window.sessionStorage) {
-            const existingLogs = JSON.parse(sessionStorage.getItem('errorLogs') || '[]');
-            existingLogs.push(errorLog);
-            sessionStorage.setItem('errorLogs', JSON.stringify(existingLogs.slice(-10))); // Keep last 10 errors
-         }
-      }
-   };
-
-   // ===== ANALYTICS AND TRACKING (Privacy-Friendly) =====
-   const AnalyticsManager = {
-      init() {
-         this.trackUserInteractions();
-         this.trackPerformance();
-      },
-      
-      trackUserInteractions() {
-         // Track tab switches for UX insights
-         const tabs = $$('.tab'); /* was $() — only returned first tab */
-         tabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-               this.logEvent('tab_switch', {
-                  tab: tab.getAttribute('data-tab'),
-                  timestamp: Date.now()
-               });
-            });
-         });
-         
-         // Track slider usage
-         const sliders = $$('.slider'); /* was $() — only returned first slider */
-         sliders.forEach(slider => {
-            slider.addEventListener('change', () => {
-               this.logEvent('slider_interaction', {
-                  slider_id: slider.id,
-                  value: slider.value,
-                  timestamp: Date.now()
-               });
-            });
-         });
-      },
-      
-      trackPerformance() {
-         // Track page load performance
-         window.addEventListener('load', () => {
-            const perfData = performance.getEntriesByType('navigation')[0];
-            this.logEvent('page_performance', {
-               load_time: perfData.loadEventEnd - perfData.loadEventStart,
-               dom_content_loaded: perfData.domContentLoadedEventEnd - perfData.domContentLoadedEventStart,
-               timestamp: Date.now()
-            });
-         });
-      },
-      
-      logEvent(eventName, data) {
-         // Privacy-friendly analytics - store only in session, no external tracking
-         if (window.sessionStorage) {
-            const existingEvents = JSON.parse(sessionStorage.getItem('analytics') || '[]');
-            existingEvents.push({
-               event: eventName,
-               data: data
-            });
-            sessionStorage.setItem('analytics', JSON.stringify(existingEvents.slice(-50))); // Keep last 50 events
-         }
-      }
-   };
-
-   // ===== INITIALIZATION =====
-   try {
-      // Initialize all managers in order of dependency
-      ErrorHandler.init();
-      TabManager.init();
-      IOSScaler.init();
-      AndroidScaler.init();
-      ThemeManager.init();
-      ChecklistManager.init();
-      SmoothScrollManager.init();
-      AccessibilityManager.init();
-      PerformanceManager.init();
-      ResponsiveManager.init();
-      FormManager.init();
-      AnalyticsManager.init();
-      
-      console.log('Typography Guide initialized successfully');
-      
-      // Dispatch custom event for external integrations
-      document.dispatchEvent(new CustomEvent('typographyGuideReady', {
-         detail: {
-            version: '2.0.0',
-            timestamp: Date.now(),
-            managers: [
-               'TabManager',
-               'IOSScaler', 
-               'AndroidScaler',
-               'ThemeManager',
-               'ChecklistManager',
-               'SmoothScrollManager',
-               'AccessibilityManager',
-               'PerformanceManager',
-               'ResponsiveManager',
-               'FormManager',
-               'AnalyticsManager'
-            ]
-         }
-      }));
-      
-   } catch (error) {
-      console.error('Initialization error:', error);
-      ErrorHandler.logError(error);
-   }
+  addEventListener('keydown', e => { if (e.key === 'Tab') document.body.classList.add('keyboard-nav'); });
+  addEventListener('mousedown', () => document.body.classList.remove('keyboard-nav'));
 });
 
-// ===== GLOBAL UTILITIES =====
-// Export utilities for external use if needed
-window.TypographyGuide = {
-   version: '2.0.0',
-   
-   // Utility functions that might be useful externally
-   utils: {
-      $: $,
-      $$: $$, /* was defined twice as $ — $$ was never exported */
-      
-      // Debounce function for performance
-      debounce: (func, wait) => {
-         let timeout;
-         return function executedFunction(...args) {
-            const later = () => {
-               clearTimeout(timeout);
-               func(...args);
-            };
-            clearTimeout(timeout);
-            timeout = setTimeout(later, wait);
-         };
-      },
-      
-      // Throttle function for performance
-      throttle: (func, limit) => {
-         let inThrottle;
-         return function() {
-            const args = arguments;
-            const context = this;
-            if (!inThrottle) {
-               func.apply(context, args);
-               inThrottle = true;
-               setTimeout(() => inThrottle = false, limit);
-            }
-         };
-      },
-      
-      // Check if element is in viewport
-      isInViewport: (element) => {
-         const rect = element.getBoundingClientRect();
-         return (
-            rect.top >= 0 &&
-            rect.left >= 0 &&
-            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-         );
+function setupTabs(onChange) {
+  const tabs = $$('.tab');
+  const panels = $$('.panel');
+  if (!tabs.length) return;
+
+  function activate(tab) {
+    tabs.forEach(t => {
+      const on = t === tab;
+      t.classList.toggle('active', on);
+      t.setAttribute('aria-selected', on);
+      t.tabIndex = on ? 0 : -1;
+    });
+
+    const id = tab.dataset.tab;
+    panels.forEach(p => {
+      const on = p.id === `${id}-panel`;
+      p.classList.toggle('active', on);
+      if (on) p.tabIndex = 0;
+      else p.removeAttribute('tabindex');
+    });
+
+    onChange?.(id);
+  }
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => activate(tab));
+    tab.addEventListener('keydown', e => {
+      const i = tabs.indexOf(tab);
+      let next;
+      if (e.key === 'ArrowRight') next = tabs[(i + 1) % tabs.length];
+      else if (e.key === 'ArrowLeft') next = tabs[(i - 1 + tabs.length) % tabs.length];
+      else if (e.key === 'Home') next = tabs[0];
+      else if (e.key === 'End') next = tabs.at(-1);
+      else return;
+
+      e.preventDefault();
+      activate(next);
+      next.focus();
+    });
+  });
+}
+
+function buildDemos(prefix, baseSizes) {
+  return Object.entries(baseSizes).map(([key, base]) => ({
+    el: $(`#${prefix}-${key}-demo`),
+    base,
+  }));
+}
+
+function setupIosScaler() {
+  const slider = $('#ios-scale');
+  const out = $('#ios-scale-value');
+  if (!slider) return;
+
+  const labels = ['xSmall', 'Small', 'Medium', 'Large (Default)', 'xLarge', 'xxLarge',
+    'xxxLarge', 'AX1', 'AX2', 'AX3', 'AX4', 'AX5'];
+  const factors = [0.8, 0.9, 0.95, 1, 1.15, 1.3, 1.5, 1.7, 1.9, 2.1, 2.35, 2.65];
+
+  const demos = buildDemos('ios', {
+    large: 2.125, title1: 1.75, title2: 1.375, headline: 1.0625,
+    body: 1.0625, callout: 1, footnote: 0.8125, caption: 0.75,
+  });
+
+  function update() {
+    const i = Number(slider.value);
+    out.textContent = labels[i];
+    slider.setAttribute('aria-valuetext', labels[i]);
+    for (const { el, base } of demos) {
+      if (el) el.style.fontSize = base * factors[i] + 'rem';
+    }
+  }
+
+  slider.addEventListener('input', update);
+  update();
+}
+
+function setupAndroidScaler() {
+  const slider = $('#android-scale');
+  const out = $('#android-scale-value');
+  if (!slider) return;
+
+  const demos = buildDemos('android', {
+    display: 3.5625, headline: 2, title: 1, body: 1, label: 0.6875,
+  });
+
+  function update() {
+    const factor = parseFloat(slider.value);
+    const text = factor.toFixed(1) + 'x';
+    out.textContent = text;
+    slider.setAttribute('aria-valuetext', text);
+    for (const { el, base } of demos) {
+      if (el) el.style.fontSize = base * factor + 'rem';
+    }
+  }
+
+  slider.addEventListener('input', update);
+  update();
+}
+
+function setupChecklist() {
+  $$('.checklist-item input[type="checkbox"]').forEach(box => {
+    box.addEventListener('change', () => {
+      const item = box.closest('.checklist-item');
+      item.style.textDecoration = box.checked ? 'line-through' : '';
+      item.style.color = box.checked ? 'var(--color-text-tertiary)' : '';
+    });
+  });
+}
+
+function setupSmoothScroll() {
+  $$('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', e => {
+      const href = link.getAttribute('href');
+      if (href.length < 2) return;
+
+      const target = document.getElementById(href.slice(1));
+      if (!target) return;
+
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+      if (target.tabIndex < 0) target.tabIndex = -1;
+      target.focus({ preventScroll: true });
+    });
+  });
+}
+
+function setupToc() {
+  const items = $$('.toc-item');
+  const links = $$('.toc-list a');
+
+  function syncToPanel(panelId) {
+    items.forEach(item => {
+      const show = !item.dataset.panel || item.dataset.panel === panelId;
+      item.style.display = show ? '' : 'none';
+    });
+  }
+
+  function highlight() {
+    let best = null;
+    let bestDist = Infinity;
+    links.forEach(link => {
+      const target = $(link.getAttribute('href'));
+      if (!target) return;
+      const dist = Math.abs(target.getBoundingClientRect().top - 100);
+      if (dist < bestDist) {
+        bestDist = dist;
+        best = link;
       }
-   }
-};
+    });
+    links.forEach(l => l.classList.toggle('toc-active', l === best));
+  }
+
+  window.addEventListener('scroll', highlight, { passive: true });
+  syncToPanel('ios');
+  highlight();
+
+  return syncToPanel;
+}
+
+function setupSearch() {
+  const input = $('#guide-search');
+  const count = $('#search-count');
+  if (!input) return;
+
+  const originals = new Map();
+
+  function reset() {
+    originals.forEach((html, el) => { el.innerHTML = html; });
+    originals.clear();
+  }
+
+  function run(query) {
+    reset();
+
+    if (query.length < 2) {
+      count.textContent = '';
+      return;
+    }
+
+    const re = new RegExp(query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
+    let hits = 0;
+
+    $$('.panel p, .panel li, .panel h3, .panel h4, .panel h5, .panel h6, .panel td, .panel caption')
+      .forEach(el => {
+        if (el.querySelector('code, pre')) return;
+        if (!re.test(el.textContent)) return;
+        re.lastIndex = 0;
+
+        originals.set(el, el.innerHTML);
+        el.innerHTML = el.innerHTML.replace(re, m => `<mark class="search-highlight">${m}</mark>`);
+        hits++;
+      });
+
+    $('.search-highlight')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    count.textContent = hits ? `${hits} match${hits === 1 ? '' : 'es'}` : 'No matches';
+  }
+
+  let timer;
+  input.addEventListener('input', () => {
+    clearTimeout(timer);
+    timer = setTimeout(() => run(input.value.trim()), 250);
+  });
+
+  input.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      input.value = '';
+      run('');
+      input.blur();
+    }
+  });
+}
+
+function setupBackToTop() {
+  const btn = $('#back-to-top');
+  if (!btn) return;
+
+  window.addEventListener('scroll', () => {
+    btn.classList.toggle('visible', window.scrollY > 2000);
+  }, { passive: true });
+
+  btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+}
+
+function setupScrollReveal() {
+  const cards = $$('.type-card, .practice-card, .checklist-card');
+  if (!cards.length || !('IntersectionObserver' in window)) return;
+
+  const io = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('animate-in');
+      obs.unobserve(entry.target);
+    });
+  }, { threshold: 0.1, rootMargin: '50px' });
+
+  cards.forEach(c => io.observe(c));
+}
