@@ -1,769 +1,1177 @@
 <html lang="en">
-<head>
-   <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <meta name="description" content="A comprehensive, accessible typography guide for iOS and Android mobile apps">
-   <title>Typography System Guide — iOS &amp; Android (v2.1)</title>
-   <link rel="stylesheet" href="styles.css">
-</head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="A comprehensive, accessible typography guide for iOS and Android mobile apps"
+    />
+    <title>Typography System Guide — iOS &amp; Android (v2.1)</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css"
+    />
+  </head>
 
-<body>
-   <!-- ===== ACCESSIBILITY SKIP LINK ===== -->
-   <a href="#main" class="skip-link">Skip to main content</a>
+  <body>
+    <a href="#main" class="skip-link">Skip to main content</a>
 
-   <!-- ===== HEADER SECTION ===== -->
-   <header class="header">
+    <header class="header">
       <div class="container">
-         <h1>Typography System Guide for iOS and Android</h1>
-         <p class="subtitle">Comprehensive guide for implementing accessible typography in mobile apps – (V 2.1)</p>
+        <h1>Typography System Guide for iOS and Android</h1>
+        <p class="subtitle">
+          Comprehensive guide for implementing accessible typography in mobile
+          apps – (V 2.2)
+        </p>
       </div>
-   </header>
+    </header>
 
-   <!-- ===== MAIN CONTENT ===== -->
-   <main id="main" class="main">
+    <main id="main" class="main">
+      <div class="tabs-wrapper">
+        <div class="container">
+          <div class="tabs" role="tablist" aria-label="Platform selection">
+            <button
+              type="button"
+              class="tab active"
+              role="tab"
+              aria-selected="true"
+              aria-controls="ios-panel"
+              id="ios-tab"
+              data-tab="ios"
+            >
+              iOS Typography
+            </button>
+            <button
+              type="button"
+              class="tab"
+              role="tab"
+              aria-selected="false"
+              aria-controls="android-panel"
+              id="android-tab"
+              data-tab="android"
+            >
+              Android Typography
+            </button>
+            <button
+              type="button"
+              class="tab"
+              role="tab"
+              aria-selected="false"
+              aria-controls="accessibility-panel"
+              id="accessibility-tab"
+              data-tab="accessibility"
+            >
+              Accessibility Guidelines
+            </button>
+          </div>
+        </div>
+      </div>
+
       <div class="container">
-         
-         <!-- ===== TAB NAVIGATION ===== -->
-         <nav class="tabs" role="tablist" aria-label="Platform selection">
-            <button class="tab active" role="tab" aria-selected="true" aria-controls="ios-panel" id="ios-tab" data-tab="ios">
-               iOS Typography
-            </button>
-            <button class="tab" role="tab" aria-selected="false" aria-controls="android-panel" id="android-tab" data-tab="android">
-               Android Typography
-            </button>
-            <button class="tab" role="tab" aria-selected="false" aria-controls="accessibility-panel" id="accessibility-tab" data-tab="accessibility">
-               Accessibility Guidelines
-            </button>
-         </nav>
+        <div class="main-layout">
+          <aside
+            class="toc-sidebar"
+            aria-label="Table of contents"
+            id="toc-sidebar"
+          >
+            <p class="toc-title">On this page</p>
+            <ul class="toc-list" id="toc-list">
+              <li class="toc-item" data-panel="ios">
+                <a href="#ios-panel">iOS Typography</a>
+              </li>
+              <li class="toc-item toc-sub" data-panel="ios">
+                <a href="#ios-styles">Type Styles</a>
+              </li>
+              <li class="toc-item toc-sub" data-panel="ios">
+                <a href="#ios-demo">Dynamic Type Demo</a>
+              </li>
+              <li class="toc-item toc-sub" data-panel="ios">
+                <a href="#ios-impl">Implementation</a>
+              </li>
 
-         <!-- ===== iOS PANEL ===== -->
-         <section class="panel active" id="ios-panel" role="tabpanel" aria-labelledby="ios-tab">
-            <div class="intro-card">
-               <h2>iOS Typography System</h2>
-               <p>Apple's San Francisco font family with Dynamic Type support for accessibility. Automatically switches between SF Pro Text for smaller sizes (≤19pt) and SF Pro Display for larger sizes (≥20pt). As of iOS 18, Dynamic Type supports <strong>12 sizes total</strong> — 7 standard sizes (xSmall through xxxLarge) plus 5 Larger Accessibility Sizes (AX1–AX5) — and body text can scale up to approximately 310% at AX5. <a href="https://developer.apple.com/design/human-interface-guidelines/typography" target="_blank" rel="noopener noreferrer">Apple HIG — Typography</a></p>
-            </div>
+              <li class="toc-item" data-panel="android">
+                <a href="#android-panel">Android Typography</a>
+              </li>
+              <li class="toc-item toc-sub" data-panel="android">
+                <a href="#android-styles">Type Styles</a>
+              </li>
+              <li class="toc-item toc-sub" data-panel="android">
+                <a href="#android-demo">Font Scaling Demo</a>
+              </li>
+              <li class="toc-item toc-sub" data-panel="android">
+                <a href="#android-impl">Implementation</a>
+              </li>
 
-            <div class="section">
-               <h3>iOS Default Typography Styles</h3>
-               <div class="grid">
+              <li class="toc-item" data-panel="accessibility">
+                <a href="#accessibility-panel">Accessibility</a>
+              </li>
+              <li class="toc-item toc-sub" data-panel="accessibility">
+                <a href="#sc-1-4-3">1.4.3 Contrast</a>
+              </li>
+              <li class="toc-item toc-sub" data-panel="accessibility">
+                <a href="#sc-1-4-4">1.4.4 Resize Text</a>
+              </li>
+              <li class="toc-item toc-sub" data-panel="accessibility">
+                <a href="#sc-1-4-10">1.4.10 Reflow</a>
+              </li>
+              <li class="toc-item toc-sub" data-panel="accessibility">
+                <a href="#sc-1-4-12">1.4.12 Text Spacing</a>
+              </li>
+              <li class="toc-item toc-sub" data-panel="accessibility">
+                <a href="#sc-2-5-8">2.5.8 Target Size</a>
+              </li>
+              <li class="toc-item toc-sub" data-panel="accessibility">
+                <a href="#sc-testing">Testing</a>
+              </li>
+              <li class="toc-item toc-sub" data-panel="accessibility">
+                <a href="#sc-checklist">Checklist</a>
+              </li>
+              <li class="toc-item toc-sub" data-panel="accessibility">
+                <a href="#sc-matf">W3C MATF</a>
+              </li>
+            </ul>
+          </aside>
+
+          <div class="main-content">
+            <section
+              class="panel active"
+              id="ios-panel"
+              role="tabpanel"
+              aria-labelledby="ios-tab"
+            >
+              <div class="intro-card">
+                <h2>iOS Typography System</h2>
+                <p>
+                  Apple's San Francisco font family with Dynamic Type support
+                  for accessibility. Automatically switches between SF Pro Text
+                  for smaller sizes (≤19pt) and SF Pro Display for larger sizes
+                  (≥20pt). As of iOS 18, Dynamic Type supports
+                  <strong>12 sizes total</strong>
+                  — 7 standard sizes (xSmall through xxxLarge) plus 5 Larger
+                  Accessibility Sizes (AX1–AX5) — and body text can scale up to
+                  approximately 310% at AX5.
+                  <a
+                    href="https://developer.apple.com/design/human-interface-guidelines/typography"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Apple HIG — Typography
+                  </a>
+                </p>
+              </div>
+
+              <div class="section" id="ios-styles">
+                <h3>iOS Default Typography Styles</h3>
+                <div class="grid">
                   <div class="type-card">
-                     <div class="type-sample ios-large-title">Large Title</div>
-                     <div class="type-specs">
-                        <div class="spec">
-                           <span class="spec-label">Font</span>
-                           <span class="spec-value">SF Pro Display</span>
-                        </div>
-                        <div class="spec">
-                           <span class="spec-label">Weight</span>
-                           <span class="spec-value">Bold</span>
-                        </div>
-                        <div class="spec">
-                           <span class="spec-label">Size</span>
-                           <span class="spec-value">34pt</span>
-                        </div>
-                        <div class="spec">
-                           <span class="spec-label">Line Height</span>
-                           <span class="spec-value">41pt</span>
-                        </div>
-                     </div>
+                    <div class="type-sample ios-large-title">Large Title</div>
+                    <div class="type-specs">
+                      <div class="spec">
+                        <span class="spec-label">Font</span>
+                        <span class="spec-value">SF Pro Display</span>
+                      </div>
+                      <div class="spec">
+                        <span class="spec-label">Weight</span>
+                        <span class="spec-value">Bold</span>
+                      </div>
+                      <div class="spec">
+                        <span class="spec-label">Size</span>
+                        <span class="spec-value">34pt</span>
+                      </div>
+                      <div class="spec">
+                        <span class="spec-label">Line Height</span>
+                        <span class="spec-value">41pt</span>
+                      </div>
+                    </div>
                   </div>
 
                   <div class="type-card">
-                     <div class="type-sample ios-title-1">Title 1</div>
-                     <div class="type-specs">
-                        <div class="spec">
-                           <span class="spec-label">Font</span>
-                           <span class="spec-value">SF Pro Display</span>
-                        </div>
-                        <div class="spec">
-                           <span class="spec-label">Weight</span>
-                           <span class="spec-value">Regular</span>
-                        </div>
-                        <div class="spec">
-                           <span class="spec-label">Size</span>
-                           <span class="spec-value">28pt</span>
-                        </div>
-                        <div class="spec">
-                           <span class="spec-label">Line Height</span>
-                           <span class="spec-value">34pt</span>
-                        </div>
-                     </div>
+                    <div class="type-sample ios-title-1">Title 1</div>
+                    <div class="type-specs">
+                      <div class="spec">
+                        <span class="spec-label">Font</span>
+                        <span class="spec-value">SF Pro Display</span>
+                      </div>
+                      <div class="spec">
+                        <span class="spec-label">Weight</span>
+                        <span class="spec-value">Regular</span>
+                      </div>
+                      <div class="spec">
+                        <span class="spec-label">Size</span>
+                        <span class="spec-value">28pt</span>
+                      </div>
+                      <div class="spec">
+                        <span class="spec-label">Line Height</span>
+                        <span class="spec-value">34pt</span>
+                      </div>
+                    </div>
                   </div>
 
                   <div class="type-card">
-                     <div class="type-sample ios-title-2">Title 2</div>
-                     <div class="type-specs">
-                        <div class="spec">
-                           <span class="spec-label">Font</span>
-                           <span class="spec-value">SF Pro Display</span>
-                        </div>
-                        <div class="spec">
-                           <span class="spec-label">Weight</span>
-                           <span class="spec-value">Regular</span>
-                        </div>
-                        <div class="spec">
-                           <span class="spec-label">Size</span>
-                           <span class="spec-value">22pt</span>
-                        </div>
-                        <div class="spec">
-                           <span class="spec-label">Line Height</span>
-                           <span class="spec-value">28pt</span>
-                        </div>
-                     </div>
+                    <div class="type-sample ios-title-2">Title 2</div>
+                    <div class="type-specs">
+                      <div class="spec">
+                        <span class="spec-label">Font</span>
+                        <span class="spec-value">SF Pro Display</span>
+                      </div>
+                      <div class="spec">
+                        <span class="spec-label">Weight</span>
+                        <span class="spec-value">Regular</span>
+                      </div>
+                      <div class="spec">
+                        <span class="spec-label">Size</span>
+                        <span class="spec-value">22pt</span>
+                      </div>
+                      <div class="spec">
+                        <span class="spec-label">Line Height</span>
+                        <span class="spec-value">28pt</span>
+                      </div>
+                    </div>
                   </div>
 
                   <div class="type-card">
-                     <div class="type-sample ios-title-3">Title 3</div>
-                     <div class="type-specs">
-                        <div class="spec">
-                           <span class="spec-label">Font</span>
-                           <span class="spec-value">SF Pro Display</span>
-                        </div>
-                        <div class="spec">
-                           <span class="spec-label">Weight</span>
-                           <span class="spec-value">Regular</span>
-                        </div>
-                        <div class="spec">
-                           <span class="spec-label">Size</span>
-                           <span class="spec-value">20pt</span>
-                        </div>
-                        <div class="spec">
-                           <span class="spec-label">Line Height</span>
-                           <span class="spec-value">25pt</span>
-                        </div>
-                     </div>
+                    <div class="type-sample ios-title-3">Title 3</div>
+                    <div class="type-specs">
+                      <div class="spec">
+                        <span class="spec-label">Font</span>
+                        <span class="spec-value">SF Pro Display</span>
+                      </div>
+                      <div class="spec">
+                        <span class="spec-label">Weight</span>
+                        <span class="spec-value">Regular</span>
+                      </div>
+                      <div class="spec">
+                        <span class="spec-label">Size</span>
+                        <span class="spec-value">20pt</span>
+                      </div>
+                      <div class="spec">
+                        <span class="spec-label">Line Height</span>
+                        <span class="spec-value">25pt</span>
+                      </div>
+                    </div>
                   </div>
 
                   <div class="type-card">
-                     <div class="type-sample ios-headline">Headline</div>
-                     <div class="type-specs">
-                        <div class="spec">
-                           <span class="spec-label">Font</span>
-                           <span class="spec-value">SF Pro Text</span>
-                        </div>
-                        <div class="spec">
-                           <span class="spec-label">Weight</span>
-                           <span class="spec-value">Semibold</span>
-                        </div>
-                        <div class="spec">
-                           <span class="spec-label">Size</span>
-                           <span class="spec-value">17pt</span>
-                        </div>
-                        <div class="spec">
-                           <span class="spec-label">Line Height</span>
-                           <span class="spec-value">22pt</span>
-                        </div>
-                     </div>
+                    <div class="type-sample ios-headline">Headline</div>
+                    <div class="type-specs">
+                      <div class="spec">
+                        <span class="spec-label">Font</span>
+                        <span class="spec-value">SF Pro Text</span>
+                      </div>
+                      <div class="spec">
+                        <span class="spec-label">Weight</span>
+                        <span class="spec-value">Semibold</span>
+                      </div>
+                      <div class="spec">
+                        <span class="spec-label">Size</span>
+                        <span class="spec-value">17pt</span>
+                      </div>
+                      <div class="spec">
+                        <span class="spec-label">Line Height</span>
+                        <span class="spec-value">22pt</span>
+                      </div>
+                    </div>
                   </div>
 
                   <div class="type-card">
-                     <div class="type-sample ios-body">Body</div>
-                     <div class="type-specs">
-                        <div class="spec">
-                           <span class="spec-label">Font</span>
-                           <span class="spec-value">SF Pro Text</span>
-                        </div>
-                        <div class="spec">
-                           <span class="spec-label">Weight</span>
-                           <span class="spec-value">Regular</span>
-                        </div>
-                        <div class="spec">
-                           <span class="spec-label">Size</span>
-                           <span class="spec-value">17pt</span>
-                        </div>
-                        <div class="spec">
-                           <span class="spec-label">Line Height</span>
-                           <span class="spec-value">22pt</span>
-                        </div>
-                     </div>
+                    <div class="type-sample ios-body">Body</div>
+                    <div class="type-specs">
+                      <div class="spec">
+                        <span class="spec-label">Font</span>
+                        <span class="spec-value">SF Pro Text</span>
+                      </div>
+                      <div class="spec">
+                        <span class="spec-label">Weight</span>
+                        <span class="spec-value">Regular</span>
+                      </div>
+                      <div class="spec">
+                        <span class="spec-label">Size</span>
+                        <span class="spec-value">17pt</span>
+                      </div>
+                      <div class="spec">
+                        <span class="spec-label">Line Height</span>
+                        <span class="spec-value">22pt</span>
+                      </div>
+                    </div>
                   </div>
 
                   <div class="type-card">
-                     <div class="type-sample ios-callout">Callout</div>
-                     <div class="type-specs">
-                        <div class="spec">
-                           <span class="spec-label">Font</span>
-                           <span class="spec-value">SF Pro Text</span>
-                        </div>
-                        <div class="spec">
-                           <span class="spec-label">Weight</span>
-                           <span class="spec-value">Regular</span>
-                        </div>
-                        <div class="spec">
-                           <span class="spec-label">Size</span>
-                           <span class="spec-value">16pt</span>
-                        </div>
-                        <div class="spec">
-                           <span class="spec-label">Line Height</span>
-                           <span class="spec-value">21pt</span>
-                        </div>
-                     </div>
+                    <div class="type-sample ios-callout">Callout</div>
+                    <div class="type-specs">
+                      <div class="spec">
+                        <span class="spec-label">Font</span>
+                        <span class="spec-value">SF Pro Text</span>
+                      </div>
+                      <div class="spec">
+                        <span class="spec-label">Weight</span>
+                        <span class="spec-value">Regular</span>
+                      </div>
+                      <div class="spec">
+                        <span class="spec-label">Size</span>
+                        <span class="spec-value">16pt</span>
+                      </div>
+                      <div class="spec">
+                        <span class="spec-label">Line Height</span>
+                        <span class="spec-value">21pt</span>
+                      </div>
+                    </div>
                   </div>
 
                   <div class="type-card">
-                     <div class="type-sample ios-subhead">Subhead</div>
-                     <div class="type-specs">
-                        <div class="spec">
-                           <span class="spec-label">Font</span>
-                           <span class="spec-value">SF Pro Text</span>
-                        </div>
-                        <div class="spec">
-                           <span class="spec-label">Weight</span>
-                           <span class="spec-value">Regular</span>
-                        </div>
-                        <div class="spec">
-                           <span class="spec-label">Size</span>
-                           <span class="spec-value">15pt</span>
-                        </div>
-                        <div class="spec">
-                           <span class="spec-label">Line Height</span>
-                           <span class="spec-value">20pt</span>
-                        </div>
-                     </div>
+                    <div class="type-sample ios-subhead">Subhead</div>
+                    <div class="type-specs">
+                      <div class="spec">
+                        <span class="spec-label">Font</span>
+                        <span class="spec-value">SF Pro Text</span>
+                      </div>
+                      <div class="spec">
+                        <span class="spec-label">Weight</span>
+                        <span class="spec-value">Regular</span>
+                      </div>
+                      <div class="spec">
+                        <span class="spec-label">Size</span>
+                        <span class="spec-value">15pt</span>
+                      </div>
+                      <div class="spec">
+                        <span class="spec-label">Line Height</span>
+                        <span class="spec-value">20pt</span>
+                      </div>
+                    </div>
                   </div>
 
                   <div class="type-card">
-                     <div class="type-sample ios-footnote">Footnote</div>
-                     <div class="type-specs">
-                        <div class="spec">
-                           <span class="spec-label">Font</span>
-                           <span class="spec-value">SF Pro Text</span>
-                        </div>
-                        <div class="spec">
-                           <span class="spec-label">Weight</span>
-                           <span class="spec-value">Regular</span>
-                        </div>
-                        <div class="spec">
-                           <span class="spec-label">Size</span>
-                           <span class="spec-value">13pt</span>
-                        </div>
-                        <div class="spec">
-                           <span class="spec-label">Line Height</span>
-                           <span class="spec-value">18pt</span>
-                        </div>
-                     </div>
+                    <div class="type-sample ios-footnote">Footnote</div>
+                    <div class="type-specs">
+                      <div class="spec">
+                        <span class="spec-label">Font</span>
+                        <span class="spec-value">SF Pro Text</span>
+                      </div>
+                      <div class="spec">
+                        <span class="spec-label">Weight</span>
+                        <span class="spec-value">Regular</span>
+                      </div>
+                      <div class="spec">
+                        <span class="spec-label">Size</span>
+                        <span class="spec-value">13pt</span>
+                      </div>
+                      <div class="spec">
+                        <span class="spec-label">Line Height</span>
+                        <span class="spec-value">18pt</span>
+                      </div>
+                    </div>
                   </div>
 
                   <div class="type-card">
-                     <div class="type-sample ios-caption-1">Caption 1</div>
-                     <div class="type-specs">
-                        <div class="spec">
-                           <span class="spec-label">Font</span>
-                           <span class="spec-value">SF Pro Text</span>
-                        </div>
-                        <div class="spec">
-                           <span class="spec-label">Weight</span>
-                           <span class="spec-value">Regular</span>
-                        </div>
-                        <div class="spec">
-                           <span class="spec-label">Size</span>
-                           <span class="spec-value">12pt</span>
-                        </div>
-                        <div class="spec">
-                           <span class="spec-label">Line Height</span>
-                           <span class="spec-value">16pt</span>
-                        </div>
-                     </div>
+                    <div class="type-sample ios-caption-1">Caption 1</div>
+                    <div class="type-specs">
+                      <div class="spec">
+                        <span class="spec-label">Font</span>
+                        <span class="spec-value">SF Pro Text</span>
+                      </div>
+                      <div class="spec">
+                        <span class="spec-label">Weight</span>
+                        <span class="spec-value">Regular</span>
+                      </div>
+                      <div class="spec">
+                        <span class="spec-label">Size</span>
+                        <span class="spec-value">12pt</span>
+                      </div>
+                      <div class="spec">
+                        <span class="spec-label">Line Height</span>
+                        <span class="spec-value">16pt</span>
+                      </div>
+                    </div>
                   </div>
 
                   <div class="type-card">
-                     <div class="type-sample ios-caption-2">Caption 2</div>
-                     <div class="type-specs">
-                        <div class="spec">
-                           <span class="spec-label">Font</span>
-                           <span class="spec-value">SF Pro Text</span>
-                        </div>
-                        <div class="spec">
-                           <span class="spec-label">Weight</span>
-                           <span class="spec-value">Regular</span>
-                        </div>
-                        <div class="spec">
-                           <span class="spec-label">Size</span>
-                           <span class="spec-value">11pt</span>
-                        </div>
-                        <div class="spec">
-                           <span class="spec-label">Line Height</span>
-                           <span class="spec-value">13pt</span>
-                        </div>
-                     </div>
+                    <div class="type-sample ios-caption-2">Caption 2</div>
+                    <div class="type-specs">
+                      <div class="spec">
+                        <span class="spec-label">Font</span>
+                        <span class="spec-value">SF Pro Text</span>
+                      </div>
+                      <div class="spec">
+                        <span class="spec-label">Weight</span>
+                        <span class="spec-value">Regular</span>
+                      </div>
+                      <div class="spec">
+                        <span class="spec-label">Size</span>
+                        <span class="spec-value">11pt</span>
+                      </div>
+                      <div class="spec">
+                        <span class="spec-label">Line Height</span>
+                        <span class="spec-value">13pt</span>
+                      </div>
+                    </div>
                   </div>
-               </div>
-            </div>
+                </div>
+              </div>
 
-            <div class="section">
-               <h3>Dynamic Type Demo</h3>
-               <div class="scaling-demo">
+              <div class="section" id="ios-demo">
+                <h3>Dynamic Type Demo</h3>
+                <div class="scaling-demo">
                   <div class="slider-container">
-                     <label for="ios-scale" class="slider-label">Text Size</label>
-                     <div class="slider-wrapper">
-                        <input type="range" id="ios-scale" min="0" max="11" value="3" class="slider" aria-describedby="ios-scale-value">
-                        <div class="slider-value" id="ios-scale-value">Large (Default)</div>
-                     </div>
+                    <label for="ios-scale" class="slider-label">
+                      Text Size
+                    </label>
+                    <div class="slider-wrapper">
+                      <input
+                        type="range"
+                        id="ios-scale"
+                        min="0"
+                        max="11"
+                        value="3"
+                        class="slider"
+                        aria-describedby="ios-scale-value"
+                      />
+                      <div class="slider-value" id="ios-scale-value">
+                        Large (Default)
+                      </div>
+                    </div>
                   </div>
                   <div class="scaling-examples">
-                     <div class="scaling-example">
-                        <span class="example-label">Large Title</span>
-                        <span class="example-text ios-large-title" id="ios-large-demo">The quick brown fox</span>
-                     </div>
-                     <div class="scaling-example">
-                        <span class="example-label">Title 1</span>
-                        <span class="example-text ios-title-1" id="ios-title1-demo">The quick brown fox</span>
-                     </div>
-                     <div class="scaling-example">
-                        <span class="example-label">Title 2</span>
-                        <span class="example-text ios-title-2" id="ios-title2-demo">The quick brown fox</span>
-                     </div>
-                     <div class="scaling-example">
-                        <span class="example-label">Headline</span>
-                        <span class="example-text ios-headline" id="ios-headline-demo">The quick brown fox</span>
-                     </div>
-                     <div class="scaling-example">
-                        <span class="example-label">Body</span>
-                        <span class="example-text ios-body" id="ios-body-demo">The quick brown fox</span>
-                     </div>
-                     <div class="scaling-example">
-                        <span class="example-label">Callout</span>
-                        <span class="example-text ios-callout" id="ios-callout-demo">The quick brown fox</span>
-                     </div>
-                     <div class="scaling-example">
-                        <span class="example-label">Footnote</span>
-                        <span class="example-text ios-footnote" id="ios-footnote-demo">The quick brown fox</span>
-                     </div>
-                     <div class="scaling-example">
-                        <span class="example-label">Caption 1</span>
-                        <span class="example-text ios-caption-1" id="ios-caption-demo">The quick brown fox</span>
-                     </div>
+                    <div class="scaling-example">
+                      <span class="example-label">Large Title</span>
+                      <span
+                        class="example-text ios-large-title"
+                        id="ios-large-demo"
+                      >
+                        The quick brown fox
+                      </span>
+                    </div>
+                    <div class="scaling-example">
+                      <span class="example-label">Title 1</span>
+                      <span
+                        class="example-text ios-title-1"
+                        id="ios-title1-demo"
+                      >
+                        The quick brown fox
+                      </span>
+                    </div>
+                    <div class="scaling-example">
+                      <span class="example-label">Title 2</span>
+                      <span
+                        class="example-text ios-title-2"
+                        id="ios-title2-demo"
+                      >
+                        The quick brown fox
+                      </span>
+                    </div>
+                    <div class="scaling-example">
+                      <span class="example-label">Headline</span>
+                      <span
+                        class="example-text ios-headline"
+                        id="ios-headline-demo"
+                      >
+                        The quick brown fox
+                      </span>
+                    </div>
+                    <div class="scaling-example">
+                      <span class="example-label">Body</span>
+                      <span class="example-text ios-body" id="ios-body-demo">
+                        The quick brown fox
+                      </span>
+                    </div>
+                    <div class="scaling-example">
+                      <span class="example-label">Callout</span>
+                      <span
+                        class="example-text ios-callout"
+                        id="ios-callout-demo"
+                      >
+                        The quick brown fox
+                      </span>
+                    </div>
+                    <div class="scaling-example">
+                      <span class="example-label">Footnote</span>
+                      <span
+                        class="example-text ios-footnote"
+                        id="ios-footnote-demo"
+                      >
+                        The quick brown fox
+                      </span>
+                    </div>
+                    <div class="scaling-example">
+                      <span class="example-label">Caption 1</span>
+                      <span
+                        class="example-text ios-caption-1"
+                        id="ios-caption-demo"
+                      >
+                        The quick brown fox
+                      </span>
+                    </div>
                   </div>
-               </div>
-            </div>
+                </div>
+              </div>
 
-            <div class="section">
-               <h3>Implementation Guidelines for iOS</h3>
-               <p>Here are the best practices to properly implement typography in iOS applications:</p>
-               <ul>
+              <div class="section" id="ios-impl">
+                <h3>Implementation Guidelines for iOS</h3>
+                <p>
+                  Here are the best practices to properly implement typography
+                  in iOS applications:
+                </p>
+                <ul>
                   <li>Use San Francisco font for a native iOS look and feel</li>
-                  <li>Implement Dynamic Type for accessibility compliance — iOS 18 supports <strong>7 standard sizes</strong> (xSmall, Small, Medium, Large, xLarge, xxLarge, xxxLarge) plus <strong>5 Larger Accessibility Sizes</strong> (AX1–AX5), 12 total</li>
-                  <li>Set minimum font size for body text to 17pt for readability</li>
-                  <li>For custom fonts, use <code>UIFontMetrics</code> for Dynamic Type scaling</li>
-                  <li>Test your app across <strong>all 12 Dynamic Type sizes</strong> — 7 standard (xSmall → xxxLarge) and 5 Larger Accessibility Sizes (AX1–AX5). Body text reaches approximately 310% at AX5 — design layouts to handle this</li>
-                  <li><strong>Large Content Viewer (iOS 13+):</strong> For fixed-size UI elements that cannot grow with Dynamic Type — such as tab bars, toolbars, and navigation bar icons — implement the Large Content Viewer so users can still identify them at maximum text sizes. Use <code>showsLargeContentViewer = true</code> on UIKit elements or the <code>.accessibilityShowsLargeContentViewer()</code> modifier in SwiftUI</li>
-               </ul>
-               <div class="code-block">
-                  <p class="code-source"><a href="https://developer.apple.com/documentation/uikit/scaling-fonts-automatically" target="_blank" rel="noopener noreferrer">Apple Developer — Scaling Fonts Automatically</a></p>
-                  <pre><code>// Swift: Dynamic Type with system font
+                  <li>
+                    Implement Dynamic Type for accessibility compliance — iOS 18
+                    supports
+                    <strong>7 standard sizes</strong>
+                    (xSmall, Small, Medium, Large, xLarge, xxLarge, xxxLarge)
+                    plus
+                    <strong>5 Larger Accessibility Sizes</strong>
+                    (AX1–AX5), 12 total
+                  </li>
+                  <li>
+                    Set minimum font size for body text to 17pt for readability
+                  </li>
+                  <li>
+                    For custom fonts, use
+                    <code>UIFontMetrics</code>
+                    for Dynamic Type scaling
+                  </li>
+                  <li>
+                    Test your app across
+                    <strong>all 12 Dynamic Type sizes</strong>
+                    — 7 standard (xSmall → xxxLarge) and 5 Larger Accessibility
+                    Sizes (AX1–AX5). Body text reaches approximately 310% at AX5
+                    — design layouts to handle this
+                  </li>
+                  <li>
+                    <strong>Large Content Viewer (iOS 13+):</strong>
+                    For fixed-size UI elements that cannot grow with Dynamic
+                    Type — such as tab bars, toolbars, and navigation bar icons
+                    — implement the Large Content Viewer so users can still
+                    identify them at maximum text sizes. Use
+                    <code>showsLargeContentViewer = true</code>
+                    on UIKit elements or the
+                    <code>.accessibilityShowsLargeContentViewer()</code>
+                    modifier in SwiftUI
+                  </li>
+                </ul>
+                <p class="code-source">
+                  <a
+                    href="https://developer.apple.com/documentation/uikit/scaling-fonts-automatically"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Apple Developer — Scaling Fonts Automatically
+                  </a>
+                </p>
+                <div class="code-block">
+                  <div class="code-block-header">
+                    <span class="code-block-label ios-label">UIKit</span>
+                    <button
+                      type="button"
+                      class="copy-btn"
+                      aria-label="Copy UIKit code"
+                    >
+                      Copy
+                    </button>
+                  </div>
+                  <pre
+                    class="line-numbers language-swift"
+                  ><code class="language-swift">// Dynamic Type with system font
 label.font = UIFont.preferredFont(forTextStyle: .body)
 label.adjustsFontForContentSizeCategory = true
 
-// Swift: Custom font with UIFontMetrics
-let customFont = UIFont(name: "CustomFont-Regular", size: 16)!
+// Custom font with UIFontMetrics
+let customFont = UIFont(name:"CustomFont-Regular", size: 16)!
 label.font = UIFontMetrics.default.scaledFont(for: customFont)
 label.adjustsFontForContentSizeCategory = true
 
-// SwiftUI: Restrict Dynamic Type range when layout requires it
-// (only use .accessibility1–.accessibility5 if you've tested all sizes)
+// Allow unlimited lines so text reflows at large sizes
+label.numberOfLines = 0
+
+// Large Content Viewer for fixed-size elements (tab bars, toolbars)
+myTabBarItem.showsLargeContentViewer = true
+myTabBarItem.largeContentTitle ="Home"</code></pre>
+                </div>
+                <div class="code-block">
+                  <div class="code-block-header">
+                    <span class="code-block-label ios-label">SwiftUI</span>
+                    <button
+                      type="button"
+                      class="copy-btn"
+                      aria-label="Copy SwiftUI code"
+                    >
+                      Copy
+                    </button>
+                  </div>
+                  <pre
+                    class="line-numbers language-swift"
+                  ><code class="language-swift">// Body text with full Dynamic Type range
+Text("Sample Text")
+    .font(.body)
+
+// Restrict Dynamic Type range only when layout genuinely requires it
+// (test all 12 sizes before applying this restriction)
 Text("Sample Text")
     .font(.body)
     .dynamicTypeSize(.large ... .accessibility5)
 
-// SwiftUI: Large Content Viewer for fixed-size elements
-Image(systemName: "star.fill")
+// Responsive layout — never truncate
+VStack(spacing: 8) {
+    Text("Title")
+        .font(.title)
+        .lineLimit(nil)
+}
+
+// Large Content Viewer for fixed-size elements
+Image(systemName:"star.fill")
     .accessibilityShowsLargeContentViewer()</code></pre>
-               </div>
-            </div>
-         </section>
+                </div>
+              </div>
+            </section>
 
-         <!-- ===== ANDROID PANEL ===== -->
-         <section class="panel" id="android-panel" role="tabpanel" aria-labelledby="android-tab">
-            <div class="intro-card android">
-               <h2>Android Typography System</h2>
-               <p>Android uses the Roboto font family in Material Design 3. Text sizes in <strong>sp</strong> (scalable pixels) automatically scale with user preferences. As of <strong>Android 14</strong>, the maximum font scale increased from 130% to <strong>200%</strong>, and the system now applies a <strong>non-linear scaling curve</strong> — larger text grows more slowly than smaller text to prevent oversized display text from breaking layouts. <a href="https://developer.android.com/about/versions/14/features#sp-units" target="_blank" rel="noopener noreferrer">Android 14 — Font Scaling</a></p>
-            </div>
+            <section
+              class="panel"
+              id="android-panel"
+              role="tabpanel"
+              aria-labelledby="android-tab"
+            >
+              <div class="intro-card android">
+                <h2>Android Typography System</h2>
+                <p>
+                  Android uses the Roboto font family in Material Design 3. Text
+                  sizes in
+                  <strong>sp</strong>
+                  (scalable pixels) automatically scale with user preferences.
+                  As of
+                  <strong>Android 14</strong>
+                  , the maximum font scale increased from 130% to
+                  <strong>200%</strong>
+                  , and the system now applies a
+                  <strong>non-linear scaling curve</strong>
+                  — larger text grows more slowly than smaller text to prevent
+                  oversized display text from breaking layouts.
+                  <a
+                    href="https://developer.android.com/about/versions/14/features#sp-units"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Android 14 — Font Scaling
+                  </a>
+                </p>
+              </div>
 
-            <div class="section">
-               <h3>Android Material Typography Styles</h3>
-               <div class="grid">
+              <div class="section" id="android-styles">
+                <h3>Android Material Typography Styles</h3>
+                <div class="grid">
                   <div class="type-card">
-                     <div class="type-sample android-display-large">Display Large</div>
-                     <div class="type-specs">
-                        <div class="spec">
-                           <span class="spec-label">Font</span>
-                           <span class="spec-value">Roboto</span>
-                        </div>
-                        <div class="spec">
-                           <span class="spec-label">Weight</span>
-                           <span class="spec-value">Regular</span>
-                        </div>
-                        <div class="spec">
-                           <span class="spec-label">Size</span>
-                           <span class="spec-value">57sp</span>
-                        </div>
-                        <div class="spec">
-                           <span class="spec-label">Line Height</span>
-                           <span class="spec-value">64sp</span>
-                        </div>
-                     </div>
+                    <div class="type-sample android-display-large">
+                      Display Large
+                    </div>
+                    <div class="type-specs">
+                      <div class="spec">
+                        <span class="spec-label">Font</span>
+                        <span class="spec-value">Roboto</span>
+                      </div>
+                      <div class="spec">
+                        <span class="spec-label">Weight</span>
+                        <span class="spec-value">Regular</span>
+                      </div>
+                      <div class="spec">
+                        <span class="spec-label">Size</span>
+                        <span class="spec-value">57sp</span>
+                      </div>
+                      <div class="spec">
+                        <span class="spec-label">Line Height</span>
+                        <span class="spec-value">64sp</span>
+                      </div>
+                    </div>
                   </div>
 
                   <div class="type-card">
-                     <div class="type-sample android-display-medium">Display Medium</div>
-                     <div class="type-specs">
-                        <div class="spec">
-                           <span class="spec-label">Font</span>
-                           <span class="spec-value">Roboto</span>
-                        </div>
-                        <div class="spec">
-                           <span class="spec-label">Weight</span>
-                           <span class="spec-value">Regular</span>
-                        </div>
-                        <div class="spec">
-                           <span class="spec-label">Size</span>
-                           <span class="spec-value">45sp</span>
-                        </div>
-                        <div class="spec">
-                           <span class="spec-label">Line Height</span>
-                           <span class="spec-value">52sp</span>
-                        </div>
-                     </div>
+                    <div class="type-sample android-display-medium">
+                      Display Medium
+                    </div>
+                    <div class="type-specs">
+                      <div class="spec">
+                        <span class="spec-label">Font</span>
+                        <span class="spec-value">Roboto</span>
+                      </div>
+                      <div class="spec">
+                        <span class="spec-label">Weight</span>
+                        <span class="spec-value">Regular</span>
+                      </div>
+                      <div class="spec">
+                        <span class="spec-label">Size</span>
+                        <span class="spec-value">45sp</span>
+                      </div>
+                      <div class="spec">
+                        <span class="spec-label">Line Height</span>
+                        <span class="spec-value">52sp</span>
+                      </div>
+                    </div>
                   </div>
 
                   <div class="type-card">
-                     <div class="type-sample android-display-small">Display Small</div>
-                     <div class="type-specs">
-                        <div class="spec">
-                           <span class="spec-label">Font</span>
-                           <span class="spec-value">Roboto</span>
-                        </div>
-                        <div class="spec">
-                           <span class="spec-label">Weight</span>
-                           <span class="spec-value">Regular</span>
-                        </div>
-                        <div class="spec">
-                           <span class="spec-label">Size</span>
-                           <span class="spec-value">36sp</span>
-                        </div>
-                        <div class="spec">
-                           <span class="spec-label">Line Height</span>
-                           <span class="spec-value">44sp</span>
-                        </div>
-                     </div>
+                    <div class="type-sample android-display-small">
+                      Display Small
+                    </div>
+                    <div class="type-specs">
+                      <div class="spec">
+                        <span class="spec-label">Font</span>
+                        <span class="spec-value">Roboto</span>
+                      </div>
+                      <div class="spec">
+                        <span class="spec-label">Weight</span>
+                        <span class="spec-value">Regular</span>
+                      </div>
+                      <div class="spec">
+                        <span class="spec-label">Size</span>
+                        <span class="spec-value">36sp</span>
+                      </div>
+                      <div class="spec">
+                        <span class="spec-label">Line Height</span>
+                        <span class="spec-value">44sp</span>
+                      </div>
+                    </div>
                   </div>
 
                   <div class="type-card">
-                     <div class="type-sample android-headline-large">Headline Large</div>
-                     <div class="type-specs">
-                        <div class="spec">
-                           <span class="spec-label">Font</span>
-                           <span class="spec-value">Roboto</span>
-                        </div>
-                        <div class="spec">
-                           <span class="spec-label">Weight</span>
-                           <span class="spec-value">Regular</span>
-                        </div>
-                        <div class="spec">
-                           <span class="spec-label">Size</span>
-                           <span class="spec-value">32sp</span>
-                        </div>
-                        <div class="spec">
-                           <span class="spec-label">Line Height</span>
-                           <span class="spec-value">40sp</span>
-                        </div>
-                     </div>
+                    <div class="type-sample android-headline-large">
+                      Headline Large
+                    </div>
+                    <div class="type-specs">
+                      <div class="spec">
+                        <span class="spec-label">Font</span>
+                        <span class="spec-value">Roboto</span>
+                      </div>
+                      <div class="spec">
+                        <span class="spec-label">Weight</span>
+                        <span class="spec-value">Regular</span>
+                      </div>
+                      <div class="spec">
+                        <span class="spec-label">Size</span>
+                        <span class="spec-value">32sp</span>
+                      </div>
+                      <div class="spec">
+                        <span class="spec-label">Line Height</span>
+                        <span class="spec-value">40sp</span>
+                      </div>
+                    </div>
                   </div>
 
                   <div class="type-card">
-                     <div class="type-sample android-headline-medium">Headline Medium</div>
-                     <div class="type-specs">
-                        <div class="spec">
-                           <span class="spec-label">Font</span>
-                           <span class="spec-value">Roboto</span>
-                        </div>
-                        <div class="spec">
-                           <span class="spec-label">Weight</span>
-                           <span class="spec-value">Regular</span>
-                        </div>
-                        <div class="spec">
-                           <span class="spec-label">Size</span>
-                           <span class="spec-value">28sp</span>
-                        </div>
-                        <div class="spec">
-                           <span class="spec-label">Line Height</span>
-                           <span class="spec-value">36sp</span>
-                        </div>
-                     </div>
+                    <div class="type-sample android-headline-medium">
+                      Headline Medium
+                    </div>
+                    <div class="type-specs">
+                      <div class="spec">
+                        <span class="spec-label">Font</span>
+                        <span class="spec-value">Roboto</span>
+                      </div>
+                      <div class="spec">
+                        <span class="spec-label">Weight</span>
+                        <span class="spec-value">Regular</span>
+                      </div>
+                      <div class="spec">
+                        <span class="spec-label">Size</span>
+                        <span class="spec-value">28sp</span>
+                      </div>
+                      <div class="spec">
+                        <span class="spec-label">Line Height</span>
+                        <span class="spec-value">36sp</span>
+                      </div>
+                    </div>
                   </div>
 
                   <div class="type-card">
-                     <div class="type-sample android-headline-small">Headline Small</div>
-                     <div class="type-specs">
-                        <div class="spec">
-                           <span class="spec-label">Font</span>
-                           <span class="spec-value">Roboto</span>
-                        </div>
-                        <div class="spec">
-                           <span class="spec-label">Weight</span>
-                           <span class="spec-value">Regular</span>
-                        </div>
-                        <div class="spec">
-                           <span class="spec-label">Size</span>
-                           <span class="spec-value">24sp</span>
-                        </div>
-                        <div class="spec">
-                           <span class="spec-label">Line Height</span>
-                           <span class="spec-value">32sp</span>
-                        </div>
-                     </div>
+                    <div class="type-sample android-headline-small">
+                      Headline Small
+                    </div>
+                    <div class="type-specs">
+                      <div class="spec">
+                        <span class="spec-label">Font</span>
+                        <span class="spec-value">Roboto</span>
+                      </div>
+                      <div class="spec">
+                        <span class="spec-label">Weight</span>
+                        <span class="spec-value">Regular</span>
+                      </div>
+                      <div class="spec">
+                        <span class="spec-label">Size</span>
+                        <span class="spec-value">24sp</span>
+                      </div>
+                      <div class="spec">
+                        <span class="spec-label">Line Height</span>
+                        <span class="spec-value">32sp</span>
+                      </div>
+                    </div>
                   </div>
 
                   <div class="type-card">
-                     <div class="type-sample android-title-large">Title Large</div>
-                     <div class="type-specs">
-                        <div class="spec">
-                           <span class="spec-label">Font</span>
-                           <span class="spec-value">Roboto</span>
-                        </div>
-                        <div class="spec">
-                           <span class="spec-label">Weight</span>
-                           <span class="spec-value">Regular</span>
-                        </div>
-                        <div class="spec">
-                           <span class="spec-label">Size</span>
-                           <span class="spec-value">22sp</span>
-                        </div>
-                        <div class="spec">
-                           <span class="spec-label">Line Height</span>
-                           <span class="spec-value">28sp</span>
-                        </div>
-                     </div>
+                    <div class="type-sample android-title-large">
+                      Title Large
+                    </div>
+                    <div class="type-specs">
+                      <div class="spec">
+                        <span class="spec-label">Font</span>
+                        <span class="spec-value">Roboto</span>
+                      </div>
+                      <div class="spec">
+                        <span class="spec-label">Weight</span>
+                        <span class="spec-value">Regular</span>
+                      </div>
+                      <div class="spec">
+                        <span class="spec-label">Size</span>
+                        <span class="spec-value">22sp</span>
+                      </div>
+                      <div class="spec">
+                        <span class="spec-label">Line Height</span>
+                        <span class="spec-value">28sp</span>
+                      </div>
+                    </div>
                   </div>
 
                   <div class="type-card">
-                     <div class="type-sample android-title-medium">Title Medium</div>
-                     <div class="type-specs">
-                        <div class="spec">
-                           <span class="spec-label">Font</span>
-                           <span class="spec-value">Roboto</span>
-                        </div>
-                        <div class="spec">
-                           <span class="spec-label">Weight</span>
-                           <span class="spec-value">Medium</span>
-                        </div>
-                        <div class="spec">
-                           <span class="spec-label">Size</span>
-                           <span class="spec-value">16sp</span>
-                        </div>
-                        <div class="spec">
-                           <span class="spec-label">Line Height</span>
-                           <span class="spec-value">24sp</span>
-                        </div>
-                     </div>
+                    <div class="type-sample android-title-medium">
+                      Title Medium
+                    </div>
+                    <div class="type-specs">
+                      <div class="spec">
+                        <span class="spec-label">Font</span>
+                        <span class="spec-value">Roboto</span>
+                      </div>
+                      <div class="spec">
+                        <span class="spec-label">Weight</span>
+                        <span class="spec-value">Medium</span>
+                      </div>
+                      <div class="spec">
+                        <span class="spec-label">Size</span>
+                        <span class="spec-value">16sp</span>
+                      </div>
+                      <div class="spec">
+                        <span class="spec-label">Line Height</span>
+                        <span class="spec-value">24sp</span>
+                      </div>
+                    </div>
                   </div>
 
                   <div class="type-card">
-                     <div class="type-sample android-title-small">Title Small</div>
-                     <div class="type-specs">
-                        <div class="spec">
-                           <span class="spec-label">Font</span>
-                           <span class="spec-value">Roboto</span>
-                        </div>
-                        <div class="spec">
-                           <span class="spec-label">Weight</span>
-                           <span class="spec-value">Medium</span>
-                        </div>
-                        <div class="spec">
-                           <span class="spec-label">Size</span>
-                           <span class="spec-value">14sp</span>
-                        </div>
-                        <div class="spec">
-                           <span class="spec-label">Line Height</span>
-                           <span class="spec-value">20sp</span>
-                        </div>
-                     </div>
+                    <div class="type-sample android-title-small">
+                      Title Small
+                    </div>
+                    <div class="type-specs">
+                      <div class="spec">
+                        <span class="spec-label">Font</span>
+                        <span class="spec-value">Roboto</span>
+                      </div>
+                      <div class="spec">
+                        <span class="spec-label">Weight</span>
+                        <span class="spec-value">Medium</span>
+                      </div>
+                      <div class="spec">
+                        <span class="spec-label">Size</span>
+                        <span class="spec-value">14sp</span>
+                      </div>
+                      <div class="spec">
+                        <span class="spec-label">Line Height</span>
+                        <span class="spec-value">20sp</span>
+                      </div>
+                    </div>
                   </div>
 
                   <div class="type-card">
-                     <div class="type-sample android-body-large">Body Large</div>
-                     <div class="type-specs">
-                        <div class="spec">
-                           <span class="spec-label">Font</span>
-                           <span class="spec-value">Roboto</span>
-                        </div>
-                        <div class="spec">
-                           <span class="spec-label">Weight</span>
-                           <span class="spec-value">Regular</span>
-                        </div>
-                        <div class="spec">
-                           <span class="spec-label">Size</span>
-                           <span class="spec-value">16sp</span>
-                        </div>
-                        <div class="spec">
-                           <span class="spec-label">Line Height</span>
-                           <span class="spec-value">24sp</span>
-                        </div>
-                     </div>
+                    <div class="type-sample android-body-large">Body Large</div>
+                    <div class="type-specs">
+                      <div class="spec">
+                        <span class="spec-label">Font</span>
+                        <span class="spec-value">Roboto</span>
+                      </div>
+                      <div class="spec">
+                        <span class="spec-label">Weight</span>
+                        <span class="spec-value">Regular</span>
+                      </div>
+                      <div class="spec">
+                        <span class="spec-label">Size</span>
+                        <span class="spec-value">16sp</span>
+                      </div>
+                      <div class="spec">
+                        <span class="spec-label">Line Height</span>
+                        <span class="spec-value">24sp</span>
+                      </div>
+                    </div>
                   </div>
 
                   <div class="type-card">
-                     <div class="type-sample android-body-medium">Body Medium</div>
-                     <div class="type-specs">
-                        <div class="spec">
-                           <span class="spec-label">Font</span>
-                           <span class="spec-value">Roboto</span>
-                        </div>
-                        <div class="spec">
-                           <span class="spec-label">Weight</span>
-                           <span class="spec-value">Regular</span>
-                        </div>
-                        <div class="spec">
-                           <span class="spec-label">Size</span>
-                           <span class="spec-value">14sp</span>
-                        </div>
-                        <div class="spec">
-                           <span class="spec-label">Line Height</span>
-                           <span class="spec-value">20sp</span>
-                        </div>
-                     </div>
+                    <div class="type-sample android-body-medium">
+                      Body Medium
+                    </div>
+                    <div class="type-specs">
+                      <div class="spec">
+                        <span class="spec-label">Font</span>
+                        <span class="spec-value">Roboto</span>
+                      </div>
+                      <div class="spec">
+                        <span class="spec-label">Weight</span>
+                        <span class="spec-value">Regular</span>
+                      </div>
+                      <div class="spec">
+                        <span class="spec-label">Size</span>
+                        <span class="spec-value">14sp</span>
+                      </div>
+                      <div class="spec">
+                        <span class="spec-label">Line Height</span>
+                        <span class="spec-value">20sp</span>
+                      </div>
+                    </div>
                   </div>
 
                   <div class="type-card">
-                     <div class="type-sample android-body-small">Body Small</div>
-                     <div class="type-specs">
-                        <div class="spec">
-                           <span class="spec-label">Font</span>
-                           <span class="spec-value">Roboto</span>
-                        </div>
-                        <div class="spec">
-                           <span class="spec-label">Weight</span>
-                           <span class="spec-value">Regular</span>
-                        </div>
-                        <div class="spec">
-                           <span class="spec-label">Size</span>
-                           <span class="spec-value">12sp</span>
-                        </div>
-                        <div class="spec">
-                           <span class="spec-label">Line Height</span>
-                           <span class="spec-value">16sp</span>
-                        </div>
-                     </div>
+                    <div class="type-sample android-body-small">Body Small</div>
+                    <div class="type-specs">
+                      <div class="spec">
+                        <span class="spec-label">Font</span>
+                        <span class="spec-value">Roboto</span>
+                      </div>
+                      <div class="spec">
+                        <span class="spec-label">Weight</span>
+                        <span class="spec-value">Regular</span>
+                      </div>
+                      <div class="spec">
+                        <span class="spec-label">Size</span>
+                        <span class="spec-value">12sp</span>
+                      </div>
+                      <div class="spec">
+                        <span class="spec-label">Line Height</span>
+                        <span class="spec-value">16sp</span>
+                      </div>
+                    </div>
                   </div>
 
                   <div class="type-card">
-                     <div class="type-sample android-label-large">Label Large</div>
-                     <div class="type-specs">
-                        <div class="spec">
-                           <span class="spec-label">Font</span>
-                           <span class="spec-value">Roboto</span>
-                        </div>
-                        <div class="spec">
-                           <span class="spec-label">Weight</span>
-                           <span class="spec-value">Medium</span>
-                        </div>
-                        <div class="spec">
-                           <span class="spec-label">Size</span>
-                           <span class="spec-value">14sp</span>
-                        </div>
-                        <div class="spec">
-                           <span class="spec-label">Line Height</span>
-                           <span class="spec-value">20sp</span>
-                        </div>
-                     </div>
+                    <div class="type-sample android-label-large">
+                      Label Large
+                    </div>
+                    <div class="type-specs">
+                      <div class="spec">
+                        <span class="spec-label">Font</span>
+                        <span class="spec-value">Roboto</span>
+                      </div>
+                      <div class="spec">
+                        <span class="spec-label">Weight</span>
+                        <span class="spec-value">Medium</span>
+                      </div>
+                      <div class="spec">
+                        <span class="spec-label">Size</span>
+                        <span class="spec-value">14sp</span>
+                      </div>
+                      <div class="spec">
+                        <span class="spec-label">Line Height</span>
+                        <span class="spec-value">20sp</span>
+                      </div>
+                    </div>
                   </div>
 
                   <div class="type-card">
-                     <div class="type-sample android-label-medium">Label Medium</div>
-                     <div class="type-specs">
-                        <div class="spec">
-                           <span class="spec-label">Font</span>
-                           <span class="spec-value">Roboto</span>
-                        </div>
-                        <div class="spec">
-                           <span class="spec-label">Weight</span>
-                           <span class="spec-value">Medium</span>
-                        </div>
-                        <div class="spec">
-                           <span class="spec-label">Size</span>
-                           <span class="spec-value">12sp</span>
-                        </div>
-                        <div class="spec">
-                           <span class="spec-label">Line Height</span>
-                           <span class="spec-value">16sp</span>
-                        </div>
-                     </div>
+                    <div class="type-sample android-label-medium">
+                      Label Medium
+                    </div>
+                    <div class="type-specs">
+                      <div class="spec">
+                        <span class="spec-label">Font</span>
+                        <span class="spec-value">Roboto</span>
+                      </div>
+                      <div class="spec">
+                        <span class="spec-label">Weight</span>
+                        <span class="spec-value">Medium</span>
+                      </div>
+                      <div class="spec">
+                        <span class="spec-label">Size</span>
+                        <span class="spec-value">12sp</span>
+                      </div>
+                      <div class="spec">
+                        <span class="spec-label">Line Height</span>
+                        <span class="spec-value">16sp</span>
+                      </div>
+                    </div>
                   </div>
 
                   <div class="type-card">
-                     <div class="type-sample android-label-small">Label Small</div>
-                     <div class="type-specs">
-                        <div class="spec">
-                           <span class="spec-label">Font</span>
-                           <span class="spec-value">Roboto</span>
-                        </div>
-                        <div class="spec">
-                           <span class="spec-label">Weight</span>
-                           <span class="spec-value">Medium</span>
-                        </div>
-                        <div class="spec">
-                           <span class="spec-label">Size</span>
-                           <span class="spec-value">11sp</span>
-                        </div>
-                        <div class="spec">
-                           <span class="spec-label">Line Height</span>
-                           <span class="spec-value">16sp</span>
-                        </div>
-                     </div>
+                    <div class="type-sample android-label-small">
+                      Label Small
+                    </div>
+                    <div class="type-specs">
+                      <div class="spec">
+                        <span class="spec-label">Font</span>
+                        <span class="spec-value">Roboto</span>
+                      </div>
+                      <div class="spec">
+                        <span class="spec-label">Weight</span>
+                        <span class="spec-value">Medium</span>
+                      </div>
+                      <div class="spec">
+                        <span class="spec-label">Size</span>
+                        <span class="spec-value">11sp</span>
+                      </div>
+                      <div class="spec">
+                        <span class="spec-label">Line Height</span>
+                        <span class="spec-value">16sp</span>
+                      </div>
+                    </div>
                   </div>
-               </div>
-            </div>
+                </div>
+              </div>
 
-            <div class="section">
-               <h3>Font Scaling Demo</h3>
-               <div class="scaling-demo">
+              <div class="section" id="android-demo">
+                <h3>Font Scaling Demo</h3>
+                <div class="scaling-demo">
                   <div class="slider-container">
-                     <label for="android-scale" class="slider-label">Font Scale</label>
-                     <div class="slider-wrapper">
-                        <input type="range" id="android-scale" min="0.7" max="2.0" step="0.1" value="1" class="slider" aria-describedby="android-scale-value">
-                        <div class="slider-value" id="android-scale-value">1x</div>
-                     </div>
+                    <label for="android-scale" class="slider-label">
+                      Font Scale
+                    </label>
+                    <div class="slider-wrapper">
+                      <input
+                        type="range"
+                        id="android-scale"
+                        min="0.7"
+                        max="2.0"
+                        step="0.1"
+                        value="1"
+                        class="slider"
+                        aria-describedby="android-scale-value"
+                      />
+                      <div class="slider-value" id="android-scale-value">
+                        1x
+                      </div>
+                    </div>
                   </div>
                   <div class="scaling-examples">
-                     <div class="scaling-example">
-                        <span class="example-label">Display Large</span>
-                        <span class="example-text android-display-large" id="android-display-demo">The quick brown fox</span>
-                     </div>
-                     <div class="scaling-example">
-                        <span class="example-label">Headline Large</span>
-                        <span class="example-text android-headline-large" id="android-headline-demo">The quick brown fox</span>
-                     </div>
-                     <div class="scaling-example">
-                        <span class="example-label">Title Medium</span>
-                        <span class="example-text android-title-medium" id="android-title-demo">The quick brown fox</span>
-                     </div>
-                     <div class="scaling-example">
-                        <span class="example-label">Body Large</span>
-                        <span class="example-text android-body-large" id="android-body-demo">The quick brown fox</span>
-                     </div>
-                     <div class="scaling-example">
-                        <span class="example-label">Label Small</span>
-                        <span class="example-text android-label-small" id="android-label-demo">The quick brown fox</span>
-                     </div>
+                    <div class="scaling-example">
+                      <span class="example-label">Display Large</span>
+                      <span
+                        class="example-text android-display-large"
+                        id="android-display-demo"
+                      >
+                        The quick brown fox
+                      </span>
+                    </div>
+                    <div class="scaling-example">
+                      <span class="example-label">Headline Large</span>
+                      <span
+                        class="example-text android-headline-large"
+                        id="android-headline-demo"
+                      >
+                        The quick brown fox
+                      </span>
+                    </div>
+                    <div class="scaling-example">
+                      <span class="example-label">Title Medium</span>
+                      <span
+                        class="example-text android-title-medium"
+                        id="android-title-demo"
+                      >
+                        The quick brown fox
+                      </span>
+                    </div>
+                    <div class="scaling-example">
+                      <span class="example-label">Body Large</span>
+                      <span
+                        class="example-text android-body-large"
+                        id="android-body-demo"
+                      >
+                        The quick brown fox
+                      </span>
+                    </div>
+                    <div class="scaling-example">
+                      <span class="example-label">Label Small</span>
+                      <span
+                        class="example-text android-label-small"
+                        id="android-label-demo"
+                      >
+                        The quick brown fox
+                      </span>
+                    </div>
                   </div>
-               </div>
-            </div>
+                </div>
+              </div>
 
-            <div class="section">
-               <h3>Implementation Guidelines for Android</h3>
-               <p>Here are the best practices to properly implement typography in Android applications:</p>
-               <ul>
-                  <li>Always define text sizes in scalable pixels (<strong>sp</strong>) to respect user font size preferences — never use <code>dp</code> or <code>px</code> for text</li>
-                  <li><strong>Also use sp for line heights</strong> — if you define <code>lineHeight</code> in <code>dp</code>, it will not scale with the font, causing text to overlap at larger sizes on Android 14+</li>
-                  <li>The minimum recommended size for body text is 16sp for readability (Material Design 3 minimum is 14sp)</li>
-                  <li>For dense lists or information, you can use 14sp with a slightly heavier weight</li>
-                  <li>Use dynamic layouts with <code>wrap_content</code> and <code>ConstraintLayout</code> to adapt to different text sizes</li>
-                  <li><strong>Android 14+:</strong> Test font scale from 0.85x up to <strong>2.0x</strong> — the maximum increased from 130% to 200% in Android 14. The system applies non-linear scaling, so large Display text grows more slowly than Body text</li>
-                  <li>Avoid setting fixed heights on containers that hold text — use <code>wrap_content</code> or <code>minHeight</code> instead</li>
-               </ul>
-               <div class="code-block">
-                  <p class="code-source"><a href="https://developer.android.com/training/multiscreen/screendensities#TaskUseDP" target="_blank" rel="noopener noreferrer">Android Developer — Screen Densities & sp units</a></p>
-                  <pre><code>&lt;!-- XML: use sp for both textSize AND lineHeight --&gt;
+              <div class="section" id="android-impl">
+                <h3>Implementation Guidelines for Android</h3>
+                <p>
+                  Here are the best practices to properly implement typography
+                  in Android applications:
+                </p>
+                <ul>
+                  <li>
+                    Always define text sizes in scalable pixels (
+                    <strong>sp</strong>
+                    ) to respect user font size preferences — never use
+                    <code>dp</code>
+                    or
+                    <code>px</code>
+                    for text
+                  </li>
+                  <li>
+                    <strong>Also use sp for line heights</strong>
+                    — if you define
+                    <code>lineHeight</code>
+                    in
+                    <code>dp</code>
+                    , it will not scale with the font, causing text to overlap
+                    at larger sizes on Android 14+
+                  </li>
+                  <li>
+                    The minimum recommended size for body text is 16sp for
+                    readability (Material Design 3 minimum is 14sp)
+                  </li>
+                  <li>
+                    For dense lists or information, you can use 14sp with a
+                    slightly heavier weight
+                  </li>
+                  <li>
+                    Use dynamic layouts with
+                    <code>wrap_content</code>
+                    and
+                    <code>ConstraintLayout</code>
+                    to adapt to different text sizes
+                  </li>
+                  <li>
+                    <strong>Android 14+:</strong>
+                    Test font scale from 0.85x up to
+                    <strong>2.0x</strong>
+                    — the maximum increased from 130% to 200% in Android 14. The
+                    system applies non-linear scaling, so large Display text
+                    grows more slowly than Body text
+                  </li>
+                  <li>
+                    Avoid setting fixed heights on containers that hold text —
+                    use
+                    <code>wrap_content</code>
+                    or
+                    <code>minHeight</code>
+                    instead
+                  </li>
+                </ul>
+                <p class="code-source">
+                  <a
+                    href="https://developer.android.com/training/multiscreen/screendensities#TaskUseDP"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Android Developer — Screen Densities & sp units
+                  </a>
+                </p>
+                <div class="code-block">
+                  <div class="code-block-header">
+                    <span class="code-block-label android-label">XML</span>
+                    <button
+                      type="button"
+                      class="copy-btn"
+                      aria-label="Copy XML code"
+                    >
+                      Copy
+                    </button>
+                  </div>
+                  <pre
+                    class="line-numbers language-xml"
+                  ><code class="language-xml">&lt;!-- Always use sp for BOTH textSize AND lineHeight --&gt;
 &lt;TextView
    android:layout_width="match_parent"
    android:layout_height="wrap_content"
@@ -772,575 +1180,1227 @@ Image(systemName: "star.fill")
    android:textColor="@color/textPrimary"
    android:text="@string/sample_text" /&gt;
 
-&lt;!-- Compose: MaterialTheme styles handle sp scaling automatically --&gt;
+&lt;!-- Flexible width, wrap height — never fixed heights on text containers --&gt;
+&lt;androidx.constraintlayout.widget.ConstraintLayout&gt;
+   &lt;TextView
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      app:layout_constraintWidth_percent="0.9"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintEnd_toEndOf="parent" /&gt;
+&lt;/androidx.constraintlayout.widget.ConstraintLayout&gt;</code></pre>
+                </div>
+                <div class="code-block">
+                  <div class="code-block-header">
+                    <span class="code-block-label android-label">
+                      Jetpack Compose
+                    </span>
+                    <button
+                      type="button"
+                      class="copy-btn"
+                      aria-label="Copy Jetpack Compose code"
+                    >
+                      Copy
+                    </button>
+                  </div>
+                  <pre
+                    class="line-numbers language-kotlin"
+                  ><code class="language-kotlin">// MaterialTheme styles handle sp scaling automatically
 Text(
-   text = "Sample Text",
+   text ="Sample Text",
    style = MaterialTheme.typography.bodyLarge,
    modifier = Modifier.fillMaxWidth()
 )
 
-&lt;!-- Compose: Never hardcode sp values directly — use the type scale --&gt;
-&lt;!-- MaterialTheme.typography.bodyLarge = 16sp / 24sp line height --&gt;</code></pre>
-               </div>
-            </div>
-         </section>
+// Never hardcode sp values directly — use the type scale
+// MaterialTheme.typography.bodyLarge = 16sp / 24sp line height
+Text(
+   text ="Headline",
+   style = MaterialTheme.typography.headlineLarge
+)</code></pre>
+                </div>
+              </div>
+            </section>
 
-         <!-- ===== ACCESSIBILITY PANEL ===== -->
-         <section class="panel" id="accessibility-panel" role="tabpanel" aria-labelledby="accessibility-tab">
-            <div class="intro-card">
-               <h2>Typography Accessibility Guidelines</h2>
-               <p>Creating accessible typography following <strong>WCAG 2.2 AA</strong> standards for text scaling and readability. WCAG 2.2 was published October 2023 and is the current recommended standard. <a href="https://www.w3.org/TR/WCAG22/" target="_blank" rel="noopener noreferrer">WCAG 2.2 Specification</a></p>
-            </div>
+            <section
+              class="panel"
+              id="accessibility-panel"
+              role="tabpanel"
+              aria-labelledby="accessibility-tab"
+            >
+              <div class="intro-card">
+                <h2>Typography Accessibility Guidelines</h2>
+                <p>
+                  Creating accessible typography following
+                  <strong>WCAG 2.2 AA</strong>
+                  standards for text scaling and readability. WCAG 2.2 was
+                  published October 2023 and is the current recommended
+                  standard.
+                  <a
+                    href="https://www.w3.org/TR/WCAG22/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    WCAG 2.2 Specification
+                  </a>
+                </p>
+              </div>
 
-            <div class="section">
-               <h3>WCAG 2.2 Success Criterion 1.4.3 — <a href="https://www.w3.org/TR/WCAG22/#contrast-minimum" target="_blank" rel="noopener noreferrer">Contrast (Minimum)</a></h3>
-               <div class="requirement-card">
+              <div class="section">
+                <h3 id="sc-1-4-3" class="section-anchor">
+                  WCAG 2.2 Success Criterion 1.4.3 —
+                  <a
+                    href="https://www.w3.org/TR/WCAG22/#contrast-minimum"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Contrast (Minimum)
+                  </a>
+                </h3>
+                <div class="requirement-card">
                   <div class="requirement-header">
-                     <h4>Requirement</h4>
-                     <span class="level-badge">Level AA</span>
+                    <h4>Requirement</h4>
+                    <span class="level-badge">Level AA</span>
                   </div>
-                  <p><strong>Text and images of text must have a contrast ratio of at least 4.5:1 against their background. Large text (18pt / 14pt bold or larger) requires at least 3:1.</strong></p>
-               </div>
-               <div class="subsection">
+                  <p class="requirement-spec">
+                    <strong>
+                      Text and images of text must have a contrast ratio of at
+                      least 4.5:1 against their background. Large text (18pt /
+                      14pt bold or larger) requires at least 3:1.
+                    </strong>
+                  </p>
+                  <div class="requirement-plain">
+                    <p class="requirement-plain-label">In plain English</p>
+                    <p>
+                      Small body text needs a
+                      <strong>4.5:1</strong>
+                      contrast ratio. Large text (18pt+ regular or 14pt+ bold)
+                      only needs
+                      <strong>3:1</strong>
+                      . As Dynamic Type scales text up, it may cross into
+                      the"large text" threshold — your design must pass at
+                      <em>both</em>
+                      ends of the scale.
+                    </p>
+                  </div>
+                </div>
+                <div class="subsection">
                   <h4>Typography-specific rules</h4>
                   <ul>
-                     <li><strong>Body text (≤17pt regular, ≤13pt bold):</strong> minimum 4.5:1 contrast ratio</li>
-                     <li><strong>Large text (≥18pt regular, or ≥14pt bold):</strong> minimum 3:1 contrast ratio</li>
-                     <li><strong>Placeholder text</strong> is real text — it must also meet 4.5:1, not just be "visible"</li>
-                     <li><strong>Disabled text</strong> is exempt, but use sparingly — if content is important enough to show, it should be readable</li>
-                     <li><strong>Dynamic Type interaction:</strong> as text scales up it may cross the large text threshold (18pt), meaning its required contrast ratio drops from 4.5:1 to 3:1 — your design must pass at both ends of the scale</li>
-                     <li>WCAG 2.2 AAA raises the bar further to 7:1 (body) and 4.5:1 (large text) via SC 1.4.6 — worth targeting for high-stakes content</li>
+                    <li>
+                      <strong>Body text (≤17pt regular, ≤13pt bold):</strong>
+                      minimum 4.5:1 contrast ratio
+                    </li>
+                    <li>
+                      <strong>
+                        Large text (≥18pt regular, or ≥14pt bold):
+                      </strong>
+                      minimum 3:1 contrast ratio
+                    </li>
+                    <li>
+                      <strong>Placeholder text</strong>
+                      is real text — it must also meet 4.5:1, not just
+                      be"visible"
+                    </li>
+                    <li>
+                      <strong>Disabled text</strong>
+                      is exempt, but use sparingly — if content is important
+                      enough to show, it should be readable
+                    </li>
+                    <li>
+                      <strong>Dynamic Type interaction:</strong>
+                      as text scales up it may cross the large text threshold
+                      (18pt), meaning its required contrast ratio drops from
+                      4.5:1 to 3:1 — your design must pass at both ends of the
+                      scale
+                    </li>
+                    <li>
+                      WCAG 2.2 AAA raises the bar further to 7:1 (body) and
+                      4.5:1 (large text) via SC 1.4.6 — worth targeting for
+                      high-stakes content
+                    </li>
                   </ul>
-               </div>
-               <div class="subsection">
+                </div>
+                <div class="subsection">
                   <h4>Mobile-specific considerations</h4>
                   <ul>
-                     <li>On iOS, the system Bold Text setting increases font weight — a text style that was body-weight may become bold, potentially crossing the large text threshold</li>
-                     <li>On Android, High Contrast Text mode forces system-level contrast adjustments — test that your custom text colors aren't overriding these</li>
-                     <li>Layered elements (text over images, text over gradients) must meet contrast at the worst point of the gradient — not the average</li>
+                    <li>
+                      On iOS, the system Bold Text setting increases font weight
+                      — a text style that was body-weight may become bold,
+                      potentially crossing the large text threshold
+                    </li>
+                    <li>
+                      On Android, High Contrast Text mode forces system-level
+                      contrast adjustments — test that your custom text colors
+                      aren't overriding these
+                    </li>
+                    <li>
+                      Layered elements (text over images, text over gradients)
+                      must meet contrast at the worst point of the gradient —
+                      not the average
+                    </li>
                   </ul>
-               </div>
-            </div>
+                </div>
+              </div>
 
-            <div class="section">
-               <h3>WCAG 2.2 Success Criterion 1.4.4 — <a href="https://www.w3.org/TR/WCAG22/#resize-text" target="_blank" rel="noopener noreferrer">Resize Text</a></h3>
-               <div class="requirement-card">
+              <div class="section">
+                <h3 id="sc-1-4-4" class="section-anchor">
+                  WCAG 2.2 Success Criterion 1.4.4 —
+                  <a
+                    href="https://www.w3.org/TR/WCAG22/#resize-text"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Resize Text
+                  </a>
+                </h3>
+                <div class="requirement-card">
                   <div class="requirement-header">
-                     <h4>Requirement</h4>
-                     <span class="level-badge">Level AA</span>
+                    <h4>Requirement</h4>
+                    <span class="level-badge">Level AA</span>
                   </div>
-                  <p><strong>Text can be resized without assistive technology up to 200% without loss of content or functionality.</strong></p>
-               </div>
-               <div class="subsection">
+                  <p class="requirement-spec">
+                    <strong>
+                      Text can be resized without assistive technology up to
+                      200% without loss of content or functionality.
+                    </strong>
+                  </p>
+                  <div class="requirement-plain">
+                    <p class="requirement-plain-label">In plain English</p>
+                    <p>
+                      Users must be able to make text
+                      <strong>twice as big</strong>
+                      using OS settings — without anything breaking or
+                      disappearing. On iOS use Dynamic Type; on Android use
+                      <code>sp</code>
+                      units. Magnifier zoom doesn't count.
+                    </p>
+                  </div>
+                </div>
+                <div class="subsection">
                   <h4>Mobile Implementation</h4>
                   <ul>
-                     <li>Respect OS text size preferences</li>
-                     <li>Use Dynamic Type (iOS) and sp units (Android)</li>
-                     <li>Maintain functionality at all text sizes</li>
-                     <li>Avoid horizontal scrolling</li>
+                    <li>Respect OS text size preferences</li>
+                    <li>Use Dynamic Type (iOS) and sp units (Android)</li>
+                    <li>Maintain functionality at all text sizes</li>
+                    <li>Avoid horizontal scrolling</li>
                   </ul>
-               </div>
-            </div>
+                </div>
+              </div>
 
-            <div class="section">
-               <h3>WCAG 2.2 Success Criterion 1.4.10 — <a href="https://www.w3.org/TR/WCAG22/#reflow" target="_blank" rel="noopener noreferrer">Reflow</a></h3>
-               <div class="requirement-card">
+              <div class="section">
+                <h3 id="sc-1-4-10" class="section-anchor">
+                  WCAG 2.2 Success Criterion 1.4.10 —
+                  <a
+                    href="https://www.w3.org/TR/WCAG22/#reflow"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Reflow
+                  </a>
+                </h3>
+                <div class="requirement-card">
                   <div class="requirement-header">
-                     <h4>Requirement</h4>
-                     <span class="level-badge">Level AA</span>
+                    <h4>Requirement</h4>
+                    <span class="level-badge">Level AA</span>
                   </div>
-                  <p><strong>Content can be presented without loss of information or functionality, and without requiring scrolling in two dimensions at a viewport width equivalent to 320 CSS pixels.</strong></p>
-               </div>
-               <div class="subsection">
+                  <p class="requirement-spec">
+                    <strong>
+                      Content can be presented without loss of information or
+                      functionality, and without requiring scrolling in two
+                      dimensions at a viewport width equivalent to 320 CSS
+                      pixels.
+                    </strong>
+                  </p>
+                  <div class="requirement-plain">
+                    <p class="requirement-plain-label">In plain English</p>
+                    <p>
+                      At 400% browser zoom (≡ 320px viewport), everything must
+                      reflow into
+                      <strong>one column</strong>
+                      — no horizontal scrollbar. Think: your UI must work on a
+                      very narrow screen with very big text.
+                    </p>
+                  </div>
+                </div>
+                <div class="subsection">
                   <h4>What this means for mobile typography</h4>
                   <ul>
-                     <li>At 400% browser zoom (equivalent to a 320px-wide viewport), all text content must reflow into a single column — no horizontal scrolling</li>
-                     <li>Exception: content that requires two-dimensional layout for usage (data tables, maps, certain diagrams)</li>
-                     <li>On native mobile: design single-column layouts that handle the largest text sizes without overflow</li>
-                     <li>Avoid fixed-width containers with <code>overflow: hidden</code> — text will be clipped rather than reflowing</li>
+                    <li>
+                      At 400% browser zoom (equivalent to a 320px-wide
+                      viewport), all text content must reflow into a single
+                      column — no horizontal scrolling
+                    </li>
+                    <li>
+                      Exception: content that requires two-dimensional layout
+                      for usage (data tables, maps, certain diagrams)
+                    </li>
+                    <li>
+                      On native mobile: design single-column layouts that handle
+                      the largest text sizes without overflow
+                    </li>
+                    <li>
+                      Avoid fixed-width containers with
+                      <code>overflow: hidden</code>
+                      — text will be clipped rather than reflowing
+                    </li>
                   </ul>
-               </div>
-            </div>
+                </div>
+              </div>
 
-            <div class="section">
-               <h3>WCAG 2.2 Success Criterion 1.4.12 — <a href="https://www.w3.org/TR/WCAG22/#text-spacing" target="_blank" rel="noopener noreferrer">Text Spacing</a></h3>
-               <div class="requirement-card">
+              <div class="section">
+                <h3 id="sc-1-4-12" class="section-anchor">
+                  WCAG 2.2 Success Criterion 1.4.12 —
+                  <a
+                    href="https://www.w3.org/TR/WCAG22/#text-spacing"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Text Spacing
+                  </a>
+                </h3>
+                <div class="requirement-card">
                   <div class="requirement-header">
-                     <h4>Requirement</h4>
-                     <span class="level-badge">Level AA</span>
+                    <h4>Requirement</h4>
+                    <span class="level-badge">Level AA</span>
                   </div>
-                  <p><strong>No loss of content or functionality occurs when users set all of the following: line height to at least 1.5× the font size, paragraph spacing to at least 2× the font size, letter spacing to at least 0.12× the font size, and word spacing to at least 0.16× the font size.</strong></p>
-               </div>
-               <div class="subsection">
+                  <p class="requirement-spec">
+                    <strong>
+                      No loss of content or functionality occurs when users set
+                      all of the following: line height to at least 1.5× the
+                      font size, paragraph spacing to at least 2× the font size,
+                      letter spacing to at least 0.12× the font size, and word
+                      spacing to at least 0.16× the font size.
+                    </strong>
+                  </p>
+                  <div class="requirement-plain">
+                    <p class="requirement-plain-label">In plain English</p>
+                    <p>
+                      When users override spacing (via OS settings or browser
+                      extensions), nothing should overlap or get clipped.
+                      <strong>Avoid fixed-height containers</strong>
+                      on any element that contains text.
+                    </p>
+                  </div>
+                </div>
+                <div class="subsection">
                   <h4>What this means for mobile typography</h4>
                   <ul>
-                     <li>Your layouts must not break when users apply custom text spacing via accessibility settings or browser extensions</li>
-                     <li>Avoid fixed-height containers that clip text when line height is increased</li>
-                     <li>iOS Bold Text setting increases font weight without affecting spacing — test this separately</li>
-                     <li>On Android, the system does not expose direct letter-spacing or word-spacing overrides, but your code should not hard-code tight spacing that would conflict with OS-level adjustments</li>
-               
+                    <li>
+                      Your layouts must not break when users apply custom text
+                      spacing via accessibility settings or browser extensions
+                    </li>
+                    <li>
+                      Avoid fixed-height containers that clip text when line
+                      height is increased
+                    </li>
+                    <li>
+                      iOS Bold Text setting increases font weight without
+                      affecting spacing — test this separately
+                    </li>
+                    <li>
+                      On Android, the system does not expose direct
+                      letter-spacing or word-spacing overrides, but your code
+                      should not hard-code tight spacing that would conflict
+                      with OS-level adjustments
+                    </li>
                   </ul>
-               </div>
-            </div>
+                </div>
+              </div>
 
-            <div class="section">
-               <h3>WCAG 2.2 Success Criterion 2.5.8 — <a href="https://www.w3.org/TR/WCAG22/#target-size-minimum" target="_blank" rel="noopener noreferrer">Target Size (Minimum)</a></h3>
-               <div class="requirement-card">
+              <div class="section">
+                <h3 id="sc-2-5-8" class="section-anchor">
+                  WCAG 2.2 Success Criterion 2.5.8 —
+                  <a
+                    href="https://www.w3.org/TR/WCAG22/#target-size-minimum"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Target Size (Minimum)
+                  </a>
+                </h3>
+                <div class="requirement-card">
                   <div class="requirement-header">
-                     <h4>Requirement</h4>
-                     <span class="level-badge">Level AA — New in WCAG 2.2</span>
+                    <h4>Requirement</h4>
+                    <span class="level-badge">Level AA — New in WCAG 2.2</span>
                   </div>
-                  <p><strong>The size of the target for pointer inputs is at least 24×24 CSS pixels, except where spacing is sufficient or the target is inline text.</strong></p>
-               </div>
-               <div class="subsection">
+                  <p class="requirement-spec">
+                    <strong>
+                      The size of the target for pointer inputs is at least
+                      24×24 CSS pixels, except where spacing is sufficient or
+                      the target is inline text.
+                    </strong>
+                  </p>
+                  <div class="requirement-plain">
+                    <p class="requirement-plain-label">In plain English</p>
+                    <p>
+                      Every tappable element needs at least a
+                      <strong>24×24px tap target</strong>
+                      (WCAG minimum). iOS HIG recommends
+                      <strong>44×44pt</strong>
+                      ; Android MD3 recommends
+                      <strong>48×48dp</strong>
+                      . At large font sizes, button labels may shrink the touch
+                      area — test at AX5 and 2.0x scale.
+                    </p>
+                  </div>
+                </div>
+                <div class="subsection">
                   <h4>Why this matters for typography</h4>
                   <ul>
-                     <li>At large text sizes, button labels wrap or shrink — the <em>visual</em> label may remain readable but the <em>tap target</em> can fall below 24×24px</li>
-                     <li>iOS HIG recommends 44×44pt minimum touch targets — significantly stricter than WCAG's minimum</li>
-                     <li>Android Material Design 3 recommends 48×48dp minimum touch targets</li>
-                     <li>Use <code>minHeight</code> / <code>minWidth</code> constraints rather than wrapping content tightly</li>
-                     <li>Test tap targets at AX5 (iOS) and 2.0x font scale (Android) — this is when they are most likely to fail</li>
+                    <li>
+                      At large text sizes, button labels wrap or shrink — the
+                      <em>visual</em>
+                      label may remain readable but the
+                      <em>tap target</em>
+                      can fall below 24×24px
+                    </li>
+                    <li>
+                      iOS HIG recommends 44×44pt minimum touch targets —
+                      significantly stricter than WCAG's minimum
+                    </li>
+                    <li>
+                      Android Material Design 3 recommends 48×48dp minimum touch
+                      targets
+                    </li>
+                    <li>
+                      Use
+                      <code>minHeight</code>
+                      /
+                      <code>minWidth</code>
+                      constraints rather than wrapping content tightly
+                    </li>
+                    <li>
+                      Test tap targets at AX5 (iOS) and 2.0x font scale
+                      (Android) — this is when they are most likely to fail
+                    </li>
                   </ul>
-               </div>
-            </div>
+                </div>
+              </div>
 
-            <div class="section">
-               <h3>Assistive Technology vs. Accessibility Features</h3>
-               <div class="compliance-grid">
+              <div class="section">
+                <h3>Assistive Technology vs. Accessibility Features</h3>
+                <div class="compliance-grid">
                   <div class="compliance-card acceptable">
-                     <h4>✅ Acceptable (Accessibility Features)</h4>
-                     <ul>
-                        <li><strong>iOS:</strong> Dynamic Type size adjustments in Settings</li>
-                        <li><strong>Android:</strong> Font size scaling in Display settings</li>
-                        <li><strong>Both:</strong> Bold text system preferences</li>
-                        <li><strong>WebViews:</strong> Built-in browser zoom functionality</li>
-                     </ul>
+                    <h4>Acceptable (Accessibility Features)</h4>
+                    <ul>
+                      <li>
+                        <strong>iOS:</strong>
+                        Dynamic Type size adjustments in Settings
+                      </li>
+                      <li>
+                        <strong>Android:</strong>
+                        Font size scaling in Display settings
+                      </li>
+                      <li>
+                        <strong>Both:</strong>
+                        Bold text system preferences
+                      </li>
+                      <li>
+                        <strong>WebViews:</strong>
+                        Built-in browser zoom functionality
+                      </li>
+                    </ul>
                   </div>
                   <div class="compliance-card insufficient">
-                     <h4>⚠️ Not Sufficient Alone (Assistive Technology)</h4>
-                     <ul>
-                        <li><strong>iOS:</strong> Magnifier or 3-finger zoom</li>
-                        <li><strong>Android:</strong> Magnification gestures</li>
-                        <li><strong>Both:</strong> External screen reader zoom features</li>
-                     </ul>
-                     <p class="note">Note: While these are valuable, they should supplement, not replace, proper text scaling support.</p>
+                    <h4>Not Sufficient Alone (Assistive Technology)</h4>
+                    <ul>
+                      <li>
+                        <strong>iOS:</strong>
+                        Magnifier or 3-finger zoom
+                      </li>
+                      <li>
+                        <strong>Android:</strong>
+                        Magnification gestures
+                      </li>
+                      <li>
+                        <strong>Both:</strong>
+                        External screen reader zoom features
+                      </li>
+                    </ul>
+                    <p class="note">
+                      Note: While these are valuable, they should supplement,
+                      not replace, proper text scaling support.
+                    </p>
                   </div>
-               </div>
-            </div>
+                </div>
+              </div>
 
-            <div class="section">
-               <h3>Implementation Requirements for WCAG 1.4.4 Compliance</h3>
-               <div class="implementation-requirements">
+              <div class="section">
+                <h3>Implementation Requirements for WCAG 1.4.4 Compliance</h3>
+                <div class="implementation-requirements">
                   <div class="requirement-item">
-                     <h5>1. Implement Native Text Scaling</h5>
-                     <p>Use platform-specific APIs to ensure text scales with system settings:</p>
-                     <div class="code-block">
-                        <pre><code>// iOS - UIKit
-label.font = UIFont.preferredFont(forTextStyle: .body)
-label.adjustsFontForContentSizeCategory = true
-
-// iOS - SwiftUI
-Text("Sample Text")
+                    <h4>1. Implement Native Text Scaling</h4>
+                    <p>
+                      Use platform-specific APIs to ensure text scales with
+                      system settings:
+                    </p>
+                    <div class="code-block">
+                      <div class="code-block-header">
+                        <span class="code-block-label ios-label">UIKit</span>
+                        <button
+                          type="button"
+                          class="copy-btn"
+                          aria-label="Copy UIKit code"
+                        >
+                          Copy
+                        </button>
+                      </div>
+                      <pre
+                        class="line-numbers language-swift"
+                      ><code class="language-swift">label.font = UIFont.preferredFont(forTextStyle: .body)
+label.adjustsFontForContentSizeCategory = true</code></pre>
+                    </div>
+                    <div class="code-block">
+                      <div class="code-block-header">
+                        <span class="code-block-label ios-label">SwiftUI</span>
+                        <button
+                          type="button"
+                          class="copy-btn"
+                          aria-label="Copy SwiftUI code"
+                        >
+                          Copy
+                        </button>
+                      </div>
+                      <pre
+                        class="line-numbers language-swift"
+                      ><code class="language-swift">Text("Sample Text")
     .font(.body)
     .dynamicTypeSize(.large ... .accessibility5)</code></pre>
-                     </div>
-                     <div class="code-block">
-                        <pre><code>&lt;!-- Android XML --&gt;
-&lt;TextView
+                    </div>
+                    <div class="code-block">
+                      <div class="code-block-header">
+                        <span class="code-block-label android-label">XML</span>
+                        <button
+                          type="button"
+                          class="copy-btn"
+                          aria-label="Copy XML code"
+                        >
+                          Copy
+                        </button>
+                      </div>
+                      <pre
+                        class="line-numbers language-xml"
+                      ><code class="language-xml">&lt;TextView
     android:textSize="16sp"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content" /&gt;
-
-// Android Compose
-Text(
-    text = "Sample Text",
+    android:layout_height="wrap_content" /&gt;</code></pre>
+                    </div>
+                    <div class="code-block">
+                      <div class="code-block-header">
+                        <span class="code-block-label android-label">
+                          Jetpack Compose
+                        </span>
+                        <button
+                          type="button"
+                          class="copy-btn"
+                          aria-label="Copy Jetpack Compose code"
+                        >
+                          Copy
+                        </button>
+                      </div>
+                      <pre
+                        class="line-numbers language-kotlin"
+                      ><code class="language-kotlin">Text(
+    text ="Sample Text",
     style = MaterialTheme.typography.bodyLarge
 )</code></pre>
-                     </div>
+                    </div>
                   </div>
 
                   <div class="requirement-item">
-                     <h5>2. Responsive Layout Design</h5>
-                     <p>Ensure layouts adapt to larger text without breaking:</p>
-                     <div class="code-block">
-                        <pre><code>// iOS - Auto Layout
+                    <h4>2. Responsive Layout Design</h4>
+                    <p>Ensure layouts adapt to larger text without breaking:</p>
+                    <div class="code-block">
+                      <div class="code-block-header">
+                        <span class="code-block-label ios-label">UIKit</span>
+                        <button
+                          type="button"
+                          class="copy-btn"
+                          aria-label="Copy UIKit code"
+                        >
+                          Copy
+                        </button>
+                      </div>
+                      <pre
+                        class="line-numbers language-swift"
+                      ><code class="language-swift">// Auto Layout — allow unlimited lines
 stackView.axis = .vertical
 stackView.spacing = 8
-label.numberOfLines = 0
-
-// SwiftUI
-VStack(spacing: 8) {
+label.numberOfLines = 0</code></pre>
+                    </div>
+                    <div class="code-block">
+                      <div class="code-block-header">
+                        <span class="code-block-label ios-label">SwiftUI</span>
+                        <button
+                          type="button"
+                          class="copy-btn"
+                          aria-label="Copy SwiftUI code"
+                        >
+                          Copy
+                        </button>
+                      </div>
+                      <pre
+                        class="line-numbers language-swift"
+                      ><code class="language-swift">VStack(spacing: 8) {
     Text("Title")
         .lineLimit(nil)
 }</code></pre>
-                     </div>
-                     <div class="code-block">
-                        <pre><code>&lt;!-- Android ConstraintLayout --&gt;
+                    </div>
+                    <div class="code-block">
+                      <div class="code-block-header">
+                        <span class="code-block-label android-label">XML</span>
+                        <button
+                          type="button"
+                          class="copy-btn"
+                          aria-label="Copy XML code"
+                        >
+                          Copy
+                        </button>
+                      </div>
+                      <pre
+                        class="line-numbers language-xml"
+                      ><code class="language-xml">&lt;!-- ConstraintLayout: 0dp width + percent constraint = flexible text --&gt;
 &lt;androidx.constraintlayout.widget.ConstraintLayout&gt;
     &lt;TextView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintWidth_percent="0.8" /&gt;
 &lt;/androidx.constraintlayout.widget.ConstraintLayout&gt;</code></pre>
-                     </div>
+                    </div>
+                    <div class="code-block">
+                      <div class="code-block-header">
+                        <span class="code-block-label android-label">
+                          Jetpack Compose
+                        </span>
+                        <button
+                          type="button"
+                          class="copy-btn"
+                          aria-label="Copy Jetpack Compose code"
+                        >
+                          Copy
+                        </button>
+                      </div>
+                      <pre
+                        class="line-numbers language-kotlin"
+                      ><code class="language-kotlin">// Compose reflows automatically — avoid fixed height modifiers
+Text(
+    text ="Title",
+    style = MaterialTheme.typography.headlineLarge,
+    modifier = Modifier.fillMaxWidth()
+)</code></pre>
+                    </div>
                   </div>
 
                   <div class="requirement-item">
-                     <h5>3. Handle Dynamic Changes</h5>
-                     <p>Respond to font size changes at runtime:</p>
-                     <div class="code-block">
-                        <pre><code>// iOS - Notification handling
+                    <h4>3. Handle Dynamic Changes</h4>
+                    <p>Respond to font size changes at runtime:</p>
+                    <div class="code-block">
+                      <div class="code-block-header">
+                        <span class="code-block-label ios-label">UIKit</span>
+                        <button
+                          type="button"
+                          class="copy-btn"
+                          aria-label="Copy UIKit code"
+                        >
+                          Copy
+                        </button>
+                      </div>
+                      <pre
+                        class="line-numbers language-swift"
+                      ><code class="language-swift">// Notification handling
 NotificationCenter.default.addObserver(
     self,
     selector: #selector(contentSizeCategoryDidChange),
     name: UIContentSizeCategory.didChangeNotification,
     object: nil
 )</code></pre>
-                     </div>
-                     <div class="code-block">
-                        <pre><code>// Android - Configuration changes
+                    </div>
+                    <div class="code-block">
+                      <div class="code-block-header">
+                        <span class="code-block-label android-label">
+                          Jetpack Compose
+                        </span>
+                        <button
+                          type="button"
+                          class="copy-btn"
+                          aria-label="Copy Jetpack Compose code"
+                        >
+                          Copy
+                        </button>
+                      </div>
+                      <pre
+                        class="line-numbers language-kotlin"
+                      ><code class="language-kotlin">// Configuration changes — refresh UI to reflect new font scale
 override fun onConfigurationChanged(newConfig: Configuration) {
     super.onConfigurationChanged(newConfig)
-    // Refresh UI to reflect new font scale
     recreateViews()
 }</code></pre>
-                     </div>
+                    </div>
                   </div>
-               </div>
-            </div>
+                </div>
+              </div>
 
-            <div class="section">
-               <h3>Understanding Non-Linear Text Scaling</h3>
-               <p>Both iOS and Android use non-linear scaling curves, meaning different text styles scale at different rates to maintain readability.</p>
+              <div class="section">
+                <h3>Understanding Non-Linear Text Scaling</h3>
+                <p>
+                  Both iOS and Android use non-linear scaling curves, meaning
+                  different text styles scale at different rates to maintain
+                  readability.
+                </p>
 
-               <div class="scaling-table-container">
+                <div class="scaling-table-container">
                   <table class="scaling-table">
-                     <caption>iOS Non-Linear Scaling — Approximate measured values at AX5 (Apple does not publish official percentages)</caption>
-                     <thead>
-                        <tr>
-                           <th>Text Style</th>
-                           <th>Default (Large)</th>
-                           <th>AX5 (approx.)</th>
-                           <th>Scale Factor (approx.)</th>
-                           <th>Reaches 200%?</th>
-                        </tr>
-                     </thead>
-                     <tbody>
-                        <tr>
-                           <td>Large Title</td>
-                           <td>34pt</td>
-                           <td>~76pt</td>
-                           <td>~2.24x (~224%)</td>
-                           <td><span class="status-yes">✅ Yes</span></td>
-                        </tr>
-                        <tr>
-                           <td>Title 1</td>
-                           <td>28pt</td>
-                           <td>~60pt</td>
-                           <td>~2.14x (~214%)</td>
-                           <td><span class="status-yes">✅ Yes</span></td>
-                        </tr>
-                        <tr>
-                           <td>Body</td>
-                           <td>17pt</td>
-                           <td>~53pt</td>
-                           <td>~3.12x (~312%)</td>
-                           <td><span class="status-yes">✅ Yes</span></td>
-                        </tr>
-                        <tr>
-                           <td>Caption 1</td>
-                           <td>12pt</td>
-                           <td>~38pt</td>
-                           <td>~3.17x (~317%)</td>
-                           <td><span class="status-yes">✅ Yes</span></td>
-                        </tr>
-                     </tbody>
+                    <caption>
+                      iOS Non-Linear Scaling — Approximate measured values at
+                      AX5 (Apple does not publish official percentages)
+                    </caption>
+                    <thead>
+                      <tr>
+                        <th>Text Style</th>
+                        <th>Default (Large)</th>
+                        <th>AX5 (approx.)</th>
+                        <th>Scale Factor (approx.)</th>
+                        <th>Reaches 200%?</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Large Title</td>
+                        <td>34pt</td>
+                        <td>~76pt</td>
+                        <td>~2.24x (~224%)</td>
+                        <td><span class="status-yes">Yes</span></td>
+                      </tr>
+                      <tr>
+                        <td>Title 1</td>
+                        <td>28pt</td>
+                        <td>~60pt</td>
+                        <td>~2.14x (~214%)</td>
+                        <td><span class="status-yes">Yes</span></td>
+                      </tr>
+                      <tr>
+                        <td>Body</td>
+                        <td>17pt</td>
+                        <td>~53pt</td>
+                        <td>~3.12x (~312%)</td>
+                        <td><span class="status-yes">Yes</span></td>
+                      </tr>
+                      <tr>
+                        <td>Caption 1</td>
+                        <td>12pt</td>
+                        <td>~38pt</td>
+                        <td>~3.17x (~317%)</td>
+                        <td><span class="status-yes">Yes</span></td>
+                      </tr>
+                    </tbody>
                   </table>
-               </div>
+                </div>
 
-               <div class="scaling-table-container">
+                <div class="scaling-table-container">
                   <table class="scaling-table">
-                     <caption>Android Non-Linear Scaling — Real measured values at 2.0x setting (Android 14+)</caption>
-                     <thead>
-                        <tr>
-                           <th>Base Size</th>
-                           <th>Default (1.0x)</th>
-                           <th>At 2.0x setting</th>
-                           <th>Actual Scale Factor</th>
-                           <th>Reaches 200%?</th>
-                        </tr>
-                     </thead>
-                     <tbody>
-                        <tr>
-                           <td>8sp <small>(small label)</small></td>
-                           <td>8sp</td>
-                           <td>~17sp</td>
-                           <td>~2.1x (210%)</td>
-                           <td><span class="status-yes">✅ Yes</span></td>
-                        </tr>
-                        <tr>
-                           <td>12sp <small>(caption)</small></td>
-                           <td>12sp</td>
-                           <td>~21sp</td>
-                           <td>~1.75x (175%)</td>
-                           <td><span class="status-no">❌ No</span></td>
-                        </tr>
-                        <tr>
-                           <td>14sp <small>(body medium)</small></td>
-                           <td>14sp</td>
-                           <td>~23sp</td>
-                           <td>~1.64x (164%)</td>
-                           <td><span class="status-no">❌ No</span></td>
-                        </tr>
-                        <tr>
-                           <td>16sp <small>(body large)</small></td>
-                           <td>16sp</td>
-                           <td>~25sp</td>
-                           <td>~1.56x (156%)</td>
-                           <td><span class="status-no">❌ No</span></td>
-                        </tr>
-                        <tr>
-                           <td>24sp <small>(headline)</small></td>
-                           <td>24sp</td>
-                           <td>~34sp</td>
-                           <td>~1.42x (142%)</td>
-                           <td><span class="status-no">❌ No</span></td>
-                        </tr>
-                        <tr>
-                           <td>57sp <small>(display large)</small></td>
-                           <td>57sp</td>
-                           <td>~64sp</td>
-                           <td>~1.12x (112%)</td>
-                           <td><span class="status-no">❌ No</span></td>
-                        </tr>
-                     </tbody>
+                    <caption>
+                      Android Non-Linear Scaling — Real measured values at 2.0x
+                      setting (Android 14+)
+                    </caption>
+                    <thead>
+                      <tr>
+                        <th>Base Size</th>
+                        <th>Default (1.0x)</th>
+                        <th>At 2.0x setting</th>
+                        <th>Actual Scale Factor</th>
+                        <th>Reaches 200%?</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          8sp
+                          <small>(small label)</small>
+                        </td>
+                        <td>8sp</td>
+                        <td>~17sp</td>
+                        <td>~2.1x (210%)</td>
+                        <td><span class="status-yes">Yes</span></td>
+                      </tr>
+                      <tr>
+                        <td>
+                          12sp
+                          <small>(caption)</small>
+                        </td>
+                        <td>12sp</td>
+                        <td>~21sp</td>
+                        <td>~1.75x (175%)</td>
+                        <td><span class="status-no">No</span></td>
+                      </tr>
+                      <tr>
+                        <td>
+                          14sp
+                          <small>(body medium)</small>
+                        </td>
+                        <td>14sp</td>
+                        <td>~23sp</td>
+                        <td>~1.64x (164%)</td>
+                        <td><span class="status-no">No</span></td>
+                      </tr>
+                      <tr>
+                        <td>
+                          16sp
+                          <small>(body large)</small>
+                        </td>
+                        <td>16sp</td>
+                        <td>~25sp</td>
+                        <td>~1.56x (156%)</td>
+                        <td><span class="status-no">No</span></td>
+                      </tr>
+                      <tr>
+                        <td>
+                          24sp
+                          <small>(headline)</small>
+                        </td>
+                        <td>24sp</td>
+                        <td>~34sp</td>
+                        <td>~1.42x (142%)</td>
+                        <td><span class="status-no">No</span></td>
+                      </tr>
+                      <tr>
+                        <td>
+                          57sp
+                          <small>(display large)</small>
+                        </td>
+                        <td>57sp</td>
+                        <td>~64sp</td>
+                        <td>~1.12x (112%)</td>
+                        <td><span class="status-no">No</span></td>
+                      </tr>
+                    </tbody>
                   </table>
-               </div>
+                </div>
 
-               <div class="insight-box">
-                  <h5>Key Insight — Android 14 Non-Linear Curve</h5>
-                  <p>Android 14's <code>FontScaleConverter</code> applies an intentionally non-linear curve: <strong>small text scales aggressively</strong> (8sp can exceed 200%) while <strong>large display text barely grows</strong> (57sp only reaches ~112% at the 2.0x setting). This prevents display-size text from becoming unusably large while ensuring small text remains readable. Only very small text reaches the 200% WCAG threshold — but this is still considered compliant because the platform provides the maximum available scaling, and the curve is designed to optimise legibility across the full type scale.</p>
-               </div>
-            </div>
+                <div class="insight-box">
+                  <h4>Key Insight — Android 14 Non-Linear Curve</h4>
+                  <p>
+                    Android 14's
+                    <code>FontScaleConverter</code>
+                    applies an intentionally non-linear curve:
+                    <strong>small text scales aggressively</strong>
+                    (8sp can exceed 200%) while
+                    <strong>large display text barely grows</strong>
+                    (57sp only reaches ~112% at the 2.0x setting). This prevents
+                    display-size text from becoming unusably large while
+                    ensuring small text remains readable. Only very small text
+                    reaches the 200% WCAG threshold — but this is still
+                    considered compliant because the platform provides the
+                    maximum available scaling, and the curve is designed to
+                    optimise legibility across the full type scale.
+                  </p>
+                </div>
+              </div>
 
-            <div class="section">
-               <h3>Testing for WCAG 1.4.4 Compliance</h3>
-               <div class="testing-guidelines">
+              <div class="section">
+                <h3 id="sc-testing" class="section-anchor">
+                  Testing for WCAG 1.4.4 Compliance
+                </h3>
+                <div class="testing-guidelines">
                   <h4>Complete Testing Process</h4>
 
                   <div class="subsection">
-                     <h5>Step 1: Platform Setup</h5>
-                     <div class="testing-steps">
-                        <div class="testing-step">
-                           <h6>📱 iOS Setup</h6>
-                           <ol>
-                              <li>Open <strong>Settings</strong> → <strong>Accessibility</strong></li>
-                              <li>Tap <strong>Display & Text Size</strong></li>
-                              <li>Select <strong>Larger Text</strong></li>
-                              <li>Enable <strong>Larger Accessibility Sizes</strong></li>
-                              <li>Test all sizes from xSmall to AX5</li>
-                           </ol>
-                        </div>
+                    <h5>Step 1: Platform Setup</h5>
+                    <div class="testing-steps">
+                      <div class="testing-step">
+                        <h6>iOS Setup</h6>
+                        <ol>
+                          <li>
+                            Open
+                            <strong>Settings</strong>
+                            →
+                            <strong>Accessibility</strong>
+                          </li>
+                          <li>
+                            Tap
+                            <strong>Display & Text Size</strong>
+                          </li>
+                          <li>
+                            Select
+                            <strong>Larger Text</strong>
+                          </li>
+                          <li>
+                            Enable
+                            <strong>Larger Accessibility Sizes</strong>
+                          </li>
+                          <li>Test all sizes from xSmall to AX5</li>
+                        </ol>
+                      </div>
 
-                        <div class="testing-step">
-                           <h6>🤖 Android Setup</h6>
-                           <ol>
-                              <li>Open <strong>Settings</strong> → <strong>Display</strong></li>
-                              <li>Tap <strong>Font size and style</strong></li>
-                              <li>Test all sizes (Small to Huge)</li>
-                              <li>For extreme testing, use ADB:<br>
-                                 <code>adb shell settings put system font_scale 2.0</code>
-                              </li>
-                           </ol>
-                        </div>
-                     </div>
+                      <div class="testing-step">
+                        <h6>Android Setup</h6>
+                        <ol>
+                          <li>
+                            Open
+                            <strong>Settings</strong>
+                            →
+                            <strong>Display</strong>
+                          </li>
+                          <li>
+                            Tap
+                            <strong>Font size and style</strong>
+                          </li>
+                          <li>Test all sizes (Small to Huge)</li>
+                          <li>
+                            For extreme testing, use ADB:
+                            <br />
+                            <code>
+                              adb shell settings put system font_scale 2.0
+                            </code>
+                          </li>
+                        </ol>
+                      </div>
+                    </div>
                   </div>
 
                   <div class="subsection">
-                     <h5>Step 2: Validation Criteria</h5>
-                     <div class="validation-criteria">
-                        <div class="criteria-group">
-                           <h6>✅ Pass Requirements</h6>
-                           <ul>
-                              <li>All text scales using OS accessibility features</li>
-                              <li>Content remains accessible at all sizes</li>
-                              <li>No functionality lost when text enlarged</li>
-                              <li>No horizontal scrolling required</li>
-                              <li>Interactive elements remain usable</li>
-                           </ul>
-                        </div>
-                     </div>
-                  </div>
-
-                  <div class="subsection">
-                     <h5>Step 3: Common Issues Checklist</h5>
-                     <div class="issues-checklist">
-                        <div class="issue-category">
-                           <h6>🔍 Layout Issues</h6>
-                           <ul>
-                              <li><strong>Fixed containers:</strong> Text overflow in fixed-height containers</li>
-                              <li><strong>Overlapping elements:</strong> Scaled text overlaps other UI elements</li>
-                              <li><strong>Cut-off text:</strong> Text clipped in constrained spaces</li>
-                           </ul>
-                        </div>
-
-                        <div class="issue-category">
-                           <h6>✂️ Truncation Issues</h6>
-                           <p>Most large text failures come from truncation that was never designed for scale. Watch for:</p>
-                           <ul>
-                              <li><strong>line-clamp / lineLimit:</strong> Hard caps that silently hide content at large sizes — use <code>nil</code> / <code>0</code> for unlimited lines unless layout genuinely requires it</li>
-                              <li><strong>ellipsize / truncationMode:</strong> Ellipsis hides content rather than reflowing — prefer scrollable containers or adaptive layouts</li>
-                              <li><strong>Fixed heights:</strong> <code>frame(height:)</code> in SwiftUI or <code>layout_height="48dp"</code> clips text — use <code>wrap_content</code> or no fixed height</li>
-                              <li><strong>Fallback rule:</strong> If truncation is unavoidable, put the most important words first — they survive the cut. Never truncate at the start or middle</li>
-                           </ul>
-                        </div>
-
-                        <div class="issue-category">
-                           <h6>🎯 Interaction Issues</h6>
-                           <ul>
-                              <li><strong>Button labels:</strong> Action buttons become unusable if text doesn't fit</li>
-                              <li><strong>Navigation:</strong> Tab bars and menus lose functionality</li>
-                              <li><strong>Form inputs:</strong> Labels and inputs misalign or overlap</li>
-                           </ul>
-                        </div>
-                     </div>
-                  </div>
-
-                  <div class="subsection">
-                     <h5>Step 4: Documentation</h5>
-                     <div class="documentation-guide">
+                    <h5>Step 2: Validation Criteria</h5>
+                    <div class="validation-criteria">
+                      <div class="criteria-group">
+                        <h6>Pass Requirements</h6>
                         <ul>
-                           <li>📋 Record test results for each text size</li>
-                           <li>📸 Screenshot any layout issues</li>
-                           <li>📝 Document workarounds for identified problems</li>
-                           <li>✅ Create compliance checklist for future releases</li>
+                          <li>
+                            All text scales using OS accessibility features
+                          </li>
+                          <li>Content remains accessible at all sizes</li>
+                          <li>No functionality lost when text enlarged</li>
+                          <li>No horizontal scrolling required</li>
+                          <li>Interactive elements remain usable</li>
                         </ul>
-                     </div>
+                      </div>
+                    </div>
                   </div>
-               </div>
-            </div>
 
-            <div class="section">
-               <h3>Testing Checklist</h3>
-               <div class="checklist-grid">
+                  <div class="subsection">
+                    <h5>Step 3: Common Issues Checklist</h5>
+                    <div class="issues-checklist">
+                      <div class="issue-category">
+                        <h6>Layout Issues</h6>
+                        <ul>
+                          <li>
+                            <strong>Fixed containers:</strong>
+                            Text overflow in fixed-height containers
+                          </li>
+                          <li>
+                            <strong>Overlapping elements:</strong>
+                            Scaled text overlaps other UI elements
+                          </li>
+                          <li>
+                            <strong>Cut-off text:</strong>
+                            Text clipped in constrained spaces
+                          </li>
+                        </ul>
+                      </div>
+
+                      <div class="issue-category">
+                        <h6>Truncation Issues</h6>
+                        <ul>
+                          <li>
+                            <strong>Single-line truncation:</strong>
+                            text cut off with ellipsis when it should wrap
+                          </li>
+                          <li>
+                            <strong>Multi-line clamps:</strong>
+                            <code>line-clamp</code>
+                            hiding content at large sizes
+                          </li>
+                          <li>
+                            <strong>Hidden overflow:</strong>
+                            <code>overflow: hidden</code>
+                            clipping resized text
+                          </li>
+                        </ul>
+                      </div>
+
+                      <div class="issue-category">
+                        <h6>Interaction Issues</h6>
+                        <ul>
+                          <li>
+                            <strong>Tap targets:</strong>
+                            buttons that shrink as their text labels grow
+                          </li>
+                          <li>
+                            <strong>Touch areas:</strong>
+                            targets that fall below the 24×24 CSS px minimum
+                          </li>
+                          <li>
+                            <strong>Focus rings:</strong>
+                            outlines clipped by tightly-fitted containers
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="subsection">
+                    <h5>Step 4: Documentation</h5>
+                    <div class="documentation-guide">
+                      <ul>
+                        <li>Record test results for each text size</li>
+                        <li>Screenshot any layout issues</li>
+                        <li>Document workarounds for identified problems</li>
+                        <li>Create compliance checklist for future releases</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="section">
+                <h3 id="sc-checklist" class="section-anchor">
+                  Testing Checklist
+                </h3>
+                <div class="checklist-grid">
                   <div class="checklist-card">
-                     <h5>iOS Testing</h5>
-                     <div class="checklist">
-                        <label class="checklist-item">
-                           <input type="checkbox">
-                           Test all 12 Dynamic Type sizes — 7 standard (xSmall → xxxLarge) + 5 accessibility (AX1 → AX5)
-                        </label>
-                        <label class="checklist-item">
-                           <input type="checkbox">
-                           Verify layout adapts without breaks at AX5 (body ~310%)
-                        </label>
-                        <label class="checklist-item">
-                           <input type="checkbox">
-                           Test with Bold Text enabled
-                        </label>
-                        <label class="checklist-item">
-                           <input type="checkbox">
-                           Test Large Content Viewer on fixed-size elements
-                        </label>
-                        <label class="checklist-item">
-                           <input type="checkbox">
-                           Test with VoiceOver
-                        </label>
-                     </div>
+                    <h4>iOS Testing</h4>
+                    <div class="checklist">
+                      <label class="checklist-item">
+                        <input type="checkbox" />
+                        Test all 12 Dynamic Type sizes — 7 standard (xSmall →
+                        xxxLarge) + 5 accessibility (AX1 → AX5)
+                      </label>
+                      <label class="checklist-item">
+                        <input type="checkbox" />
+                        Verify layout adapts without breaks at AX5 (body ~310%)
+                      </label>
+                      <label class="checklist-item">
+                        <input type="checkbox" />
+                        Test with Bold Text enabled
+                      </label>
+                      <label class="checklist-item">
+                        <input type="checkbox" />
+                        Test Large Content Viewer on fixed-size elements
+                      </label>
+                      <label class="checklist-item">
+                        <input type="checkbox" />
+                        Test with VoiceOver
+                      </label>
+                    </div>
                   </div>
 
                   <div class="checklist-card">
-                     <h5>Android Testing</h5>
-                     <div class="checklist">
-                        <label class="checklist-item">
-                           <input type="checkbox">
-                           Test font scale 0.85x to 2.0x (Android 14+ max)
-                        </label>
-                        <label class="checklist-item">
-                           <input type="checkbox">
-                           Verify sp units used for both text size AND line height
-                        </label>
-                        <label class="checklist-item">
-                           <input type="checkbox">
-                           Test layout at 2.0x with ADB: <code>adb shell settings put system font_scale 2.0</code>
-                        </label>
-                        <label class="checklist-item">
-                           <input type="checkbox">
-                           Test with TalkBack enabled
-                        </label>
-                        <label class="checklist-item">
-                           <input type="checkbox">
-                           Test with High Contrast Text
-                        </label>
-                     </div>
+                    <h4>Android Testing</h4>
+                    <div class="checklist">
+                      <label class="checklist-item">
+                        <input type="checkbox" />
+                        Test font scale 0.85x to 2.0x (Android 14+ max)
+                      </label>
+                      <label class="checklist-item">
+                        <input type="checkbox" />
+                        Verify sp units used for both text size AND line height
+                      </label>
+                      <label class="checklist-item">
+                        <input type="checkbox" />
+                        Test layout at 2.0x with ADB:
+                        <code>
+                          adb shell settings put system font_scale 2.0
+                        </code>
+                      </label>
+                      <label class="checklist-item">
+                        <input type="checkbox" />
+                        Test with TalkBack enabled
+                      </label>
+                      <label class="checklist-item">
+                        <input type="checkbox" />
+                        Test with High Contrast Text
+                      </label>
+                    </div>
                   </div>
-               </div>
-            </div>
+                </div>
+              </div>
 
-            <div class="section">
-               <h3>Best Practices</h3>
-               <div class="best-practices-grid">
+              <div class="section">
+                <h3>Best Practices</h3>
+                <div class="best-practices-grid">
                   <div class="practice-card">
-                     <h4>Design</h4>
-                     <ul>
-                        <li>Plan for 200%+ text scaling</li>
-                        <li>Use minimum 16sp/17pt for body text</li>
-                        <li>Ensure WCAG AA color contrast</li>
-                        <li>Design flexible layouts</li>
-                     </ul>
+                    <h4>Design</h4>
+                    <ul>
+                      <li>Plan for 200%+ text scaling</li>
+                      <li>Use minimum 16sp/17pt for body text</li>
+                      <li>Ensure WCAG AA color contrast</li>
+                      <li>Design flexible layouts</li>
+                    </ul>
                   </div>
                   <div class="practice-card">
-                     <h4>Development</h4>
-                     <ul>
-                        <li>Implement Dynamic Type/sp units</li>
-                        <li>Use flexible layout systems</li>
-                        <li>Test with max accessibility settings</li>
-                        <li>Handle font size notifications</li>
-                     </ul>
+                    <h4>Development</h4>
+                    <ul>
+                      <li>Implement Dynamic Type/sp units</li>
+                      <li>Use flexible layout systems</li>
+                      <li>Test with max accessibility settings</li>
+                      <li>Handle font size notifications</li>
+                    </ul>
                   </div>
                   <div class="practice-card">
-                     <h4>Testing</h4>
-                     <ul>
-                        <li>Test with real users</li>
-                        <li>Use accessibility testing tools</li>
-                        <li>Verify all functionality works</li>
-                        <li>Document any limitations</li>
-                     </ul>
+                    <h4>Testing</h4>
+                    <ul>
+                      <li>Test with real users</li>
+                      <li>Use accessibility testing tools</li>
+                      <li>Verify all functionality works</li>
+                      <li>Document any limitations</li>
+                    </ul>
                   </div>
-               </div>
-            </div>
+                </div>
+              </div>
 
-            <div class="section">
-               <div class="recommendations">
-                  <h3>W3C MATF Recommendations Implementation</h3>
-                  <p>The W3C Mobile Accessibility Task Force (MATF) has been working to clarify how WCAG applies to native mobile apps. <strong>WCAG 2.2 was published October 2023</strong> and is the current recommended standard, superseding WCAG 2.1. The MATF publishes <a href="https://www.w3.org/TR/wcag2mobile-22/" target="_blank" rel="noopener noreferrer">WCAG2Mobile</a> (W3C Group Note, updated May 2025), which explains how WCAG 2.2 applies to native, web, and hybrid mobile apps. It is <strong>informative guidance only</strong> — not a normative W3C standard — but it is the most current official mobile accessibility reference from W3C:</p>
+              <div class="section">
+                <div class="recommendations">
+                  <h3 id="sc-matf" class="section-anchor">
+                    W3C MATF Recommendations Implementation
+                  </h3>
+                  <p>
+                    The W3C Mobile Accessibility Task Force (MATF) has been
+                    working to clarify how WCAG applies to native mobile apps.
+                    <strong>WCAG 2.2 was published October 2023</strong>
+                    and is the current recommended standard, superseding WCAG
+                    2.1. The MATF publishes
+                    <a
+                      href="https://www.w3.org/TR/wcag2mobile-22/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      WCAG2Mobile
+                    </a>
+                    (W3C Group Draft Note, published 6 May 2025), which explains
+                    how WCAG 2.2 applies to native, web, and hybrid mobile apps.
+                    It is
+                    <strong>informative guidance only</strong>
+                    — not a normative W3C standard — but it is the most current
+                    official mobile accessibility reference from W3C. Note that
+                    wearables and laptops are explicitly out of scope; the
+                    conformance unit is a
+                    <strong>screen</strong>
+                    , not a web page:
+                  </p>
                   <ul>
-                     <li><strong>Assistive Technology vs Accessibility Features:</strong> Distinguishes between zoom and magnification (assistive technologies) and system text scaling features.</li>
-                     <li><strong>Non-linear text scaling:</strong> Documents real scaling behavior on iOS and Android to help teams test typography under extreme settings.</li>
-                     <li><strong>Platform-specific implementation guidance:</strong> Explains how platform APIs such as Dynamic Type and sp units support accessible text scaling.</li>
-                     <li><strong>WebView considerations:</strong> Highlights that WCAG success criteria apply directly to web content rendered within native apps.</li>
-                     <li><strong>Testing methodologies:</strong> Provides practical testing steps for validating text scaling and layout resilience across accessibility settings.</li>
+                    <li>
+                      <strong>
+                        Assistive Technology vs Accessibility Features:
+                      </strong>
+                      Distinguishes between zoom and magnification (assistive
+                      technologies) and system text scaling features.
+                    </li>
+                    <li>
+                      <strong>Non-linear text scaling:</strong>
+                      Documents real scaling behavior on iOS and Android to help
+                      teams test typography under extreme settings.
+                    </li>
+                    <li>
+                      <strong>
+                        Platform-specific implementation guidance:
+                      </strong>
+                      Explains how platform APIs such as Dynamic Type and sp
+                      units support accessible text scaling.
+                    </li>
+                    <li>
+                      <strong>WebView considerations:</strong>
+                      Highlights that WCAG success criteria apply directly to
+                      web content rendered within native apps.
+                    </li>
+                    <li>
+                      <strong>Testing methodologies:</strong>
+                      Provides practical testing steps for validating text
+                      scaling and layout resilience across accessibility
+                      settings.
+                    </li>
                   </ul>
-                  <p style="font-size: 0.875rem; color: var(--color-text-tertiary); margin-top: 1rem;">Last reviewed against WCAG 2.2 (October 2023), iOS 18, and Android 14. WCAG2Mobile is a W3C Group Note — informative guidance only, not a normative standard.</p>
-               </div>
-            </div>
-         </section>
+                  <p
+                    style="
+                      font-size: 0.875rem;
+                      color: var(--color-text-tertiary);
+                      margin-top: 1rem;
+                    "
+                  >
+                    Last reviewed against WCAG 2.2 (October 2023), iOS 18, and
+                    Android 14. WCAG2Mobile is a W3C Group Draft Note (published
+                    6 May 2025) — informative guidance only, not a normative
+                    standard.
+                  </p>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
       </div>
-   </main>
+    </main>
 
-   <!-- ===== FOOTER ===== -->
-   <footer class="footer">
+    <button
+      type="button"
+      class="back-to-top"
+      id="back-to-top"
+      aria-label="Back to top"
+      title="Back to top"
+    >
+      ↑
+    </button>
+
+    <footer class="footer">
       <div class="container">
-         <p>&copy; 2026 Typography System Guide. Created by <strong>Jules Mendonca</strong></p>
-         <p class="footer-links">
-            <a href="https://www.linkedin.com/in/julesfermen/" target="_blank" rel="noopener noreferrer">LinkedIn</a>            
-                 <span aria-hidden="true">·</span>
-            <a href="https://github.com/Alansdead">Github</a>
-         </p>
+        <p>
+          &copy; 2026 Typography System Guide. Created by
+          <strong>Jules Mendonca</strong>
+        </p>
+        <p class="footer-links">
+          <a
+            href="https://www.linkedin.com/in/julesfermen/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            LinkedIn
+          </a>
+          <span aria-hidden="true">·</span>
+          <a href="https://github.com/Alansdead">Github</a>
+        </p>
       </div>
-   </footer>
+    </footer>
 
-   <!-- ===== JAVASCRIPT ===== -->
-   <script src="script.js"></script>
-</body>
+    <script src="script.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-swift.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-kotlin.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-xml-doc.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+
+    <script>
+      document.querySelectorAll(".copy-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const block = btn.closest(".code-block");
+          const code = block ? block.querySelector("code") : null;
+          if (!code) return;
+          const text = code.innerText || code.textContent;
+          navigator.clipboard
+            .writeText(text)
+            .then(() => {
+              btn.textContent = "Copied!";
+              btn.classList.add("copied");
+              setTimeout(() => {
+                btn.textContent = "Copy";
+                btn.classList.remove("copied");
+              }, 2000);
+            })
+            .catch(() => {
+              const ta = document.createElement("textarea");
+              ta.value = text;
+              ta.style.position = "fixed";
+              ta.style.opacity = "0";
+              document.body.appendChild(ta);
+              ta.select();
+              document.execCommand("copy");
+              document.body.removeChild(ta);
+              btn.textContent = "Copied!";
+              btn.classList.add("copied");
+              setTimeout(() => {
+                btn.textContent = "Copy";
+                btn.classList.remove("copied");
+              }, 2000);
+            });
+        });
+      });
+    </script>
+  </body>
 </html>
