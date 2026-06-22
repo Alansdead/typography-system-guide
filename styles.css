@@ -1,5 +1,4 @@
 :root {
-
   --color-primary: #60a5fa;
   --color-primary-hover: #93c5fd;
   --color-primary-glow: rgba(96, 165, 250, 0.15);
@@ -1218,7 +1217,7 @@ a:focus-visible {
 
 .recommendations h3::after {
   display: none;
-} 
+}
 
 .recommendations ul {
   margin-bottom: var(--space-4);
@@ -1451,7 +1450,7 @@ h3 > a[target="_blank"]:hover {
 }
 
 .subsection > h4 {
-  font-size: 1.125rem; 
+  font-size: 1.125rem;
   font-weight: 700;
   color: var(--color-text-primary);
   letter-spacing: -0.01em;
@@ -1470,20 +1469,20 @@ h3 > a[target="_blank"]:hover {
   background: transparent;
   border: none;
   padding: 0;
-  margin-top: 2.5rem; 
+  margin-top: 2.5rem;
   margin-bottom: 2.5rem;
 }
 
 .issues-checklist {
-  gap: 2rem; 
+  gap: 2rem;
 }
 
 .scaling-table th {
   font-size: 0.875rem;
-} 
+}
 .scaling-table td {
   font-size: 0.875rem;
-} 
+}
 
 .requirement-card {
   border-radius: 16px;
@@ -2047,14 +2046,13 @@ h3 > a[target="_blank"]:hover {
 }
 
 @media (max-width: 768px) {
-
   .tabs {
     overflow-x: visible;
   }
   .tab {
     white-space: normal;
     line-height: 1.25;
-    min-height: 44px;          
+    min-height: 44px;
     display: flex;
     align-items: center;
     justify-content: center;
