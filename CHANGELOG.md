@@ -66,7 +66,6 @@
 ## [2026-03-06]
 
 **HTML Structure**
-
 - Removed duplicate `<html>`, `<head>`, `<body>` tags — the outer broken shell had the wrong title, missing viewport meta, wrong CSS filename, and a duplicate script tag
 - Fixed `<title>` to single clean version
 - Removed duplicate `<script src="./script.js">` tag at the bottom
@@ -74,7 +73,6 @@
 ---
 
 **iOS Section**
-
 - Updated intro card to mention iOS 18 by name and clarify Dynamic Type as "12 sizes total — 7 standard (xSmall → xxxLarge) + 5 Larger Accessibility Sizes (AX1–AX5)"
 - Changed all instances of "12 sizes" to "7 standard + 5 accessibility sizes" for accuracy (4 places)
 - Replaced "XS to AX5" with "xSmall to AX5" in the testing step to match Apple's official naming
@@ -87,7 +85,6 @@
 ---
 
 **iOS Scaling Table**
-
 - Updated caption to "Approximate measured values — Apple does not publish official percentages"
 - Added `~` prefix to all AX5 values and scale factors
 - Column header changed from "AX5 (Largest)" to "AX5 (approx.)"
@@ -95,7 +92,6 @@
 ---
 
 **Android Section**
-
 - Updated intro card to mention Android 14 by name, 200% maximum font scale, and non-linear scaling curve
 - Updated implementation guidelines: test ceiling changed from "1.3x" to "2.0x"
 - Added explicit warning to use `sp` for line heights, not `dp`, with explanation of why it breaks on Android 14+
@@ -106,7 +102,6 @@
 ---
 
 **Android Scaling Table**
-
 - Replaced entirely — old table was linear extrapolation (`base × 2.0`), which is wrong for Android 14's non-linear curve
 - New table uses real measured values from Android 14's `FontScaleConverter`
 - Added Display Large (57sp) row showing it only reaches ~112% at 2.0x — the most important data point for designers
@@ -116,7 +111,6 @@
 ---
 
 **Accessibility Tab — New Sections Added**
-
 - **SC 1.4.3 Contrast (Minimum)** — added as a full new section, covering 4.5:1 body / 3:1 large text split, placeholder text, disabled text, the Dynamic Type threshold interaction, Bold Text on iOS, High Contrast Text on Android, and text over gradients
 - **SC 1.4.10 Reflow** — added, covering 320px viewport requirement and mobile-specific guidance
 - **SC 1.4.12 Text Spacing** — added, covering line height, paragraph spacing, letter spacing, word spacing, iOS Bold Text, Android overrides, and WebView testing
@@ -125,7 +119,6 @@
 ---
 
 **Accessibility Tab — Existing Content Updated**
-
 - Intro card updated from "WCAG 2.1 AA" to "WCAG 2.2 AA" with publication date note
 - SC 1.4.4 heading dash style normalized
 - iOS testing checklist expanded from 4 to 5 items — added Large Content Viewer item
@@ -135,7 +128,6 @@
 ---
 
 **W3C MATF Section**
-
 - Replaced "ongoing W3C MATF discussions" framing with accurate status: WCAG 2.2 published October 2023, now the current standard
 - All five bullet points rewritten to your exact wording
 - Added dated footnote: "Last reviewed against WCAG 2.2 (October 2023), iOS 18, and Android 14"
@@ -143,7 +135,6 @@
 ---
 
 **JavaScript (script.js)**
-
 - Fixed critical bug: 11 instances of `$()` (returns first element only) replaced with `$$()` across 7 managers — `ChecklistManager`, `AnalyticsManager`, `FormManager`, `AccessibilityManager`, `PerformanceManager`, `ResponsiveManager`, `SmoothScrollManager` were all silently broken
 - Fixed `window.TypographyGuide.utils` export — `$` was exported twice, `$$` was never exported
 - `TabManager.handleKeydown` now handles `Home` (first tab) and `End` (last tab) keys — required by ARIA tabs pattern
@@ -153,8 +144,7 @@
 ---
 
 **CSS (styles.css)**
-
-- `-color-text-tertiary` raised from `#a1a1aa` (3.9:1 contrast — fails AA) to `#b4b4be` (4.6:1 — passes AA)
+- `--color-text-tertiary` raised from `#a1a1aa` (3.9:1 contrast — fails AA) to `#b4b4be` (4.6:1 — passes AA)
 - Panel `fadeIn` animation wrapped in `@media (prefers-reduced-motion: no-preference)` so it respects the OS reduced motion setting
 - Checked checklist items changed from `opacity: 0.7` (effective contrast ~3.5:1, fails AA) to `text-decoration: line-through` + `color: var(--color-text-tertiary)` for proper visual treatment without contrast failure
 
@@ -172,7 +162,6 @@ Added Missing Accessibility Content
 
 Assistive Technology vs. Accessibility Features section with color-coded comparison cards
 Implementation Requirements for WCAG 1.4.4 Compliance with 3 detailed requirements:
-
 - Implement Native Text Scaling (iOS UIKit/SwiftUI + Android XML/Compose code)
 - Responsive Layout Design (Auto Layout + ConstraintLayout examples)
 - Handle Dynamic Changes (Notification handling + Configuration changes)
